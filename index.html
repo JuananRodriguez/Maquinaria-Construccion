@@ -1,0 +1,385 @@
+ <!DOCTYPE html>
+ <html>
+ <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+	<!-- <link rel="stylesheet" href="css/estilo.css"> -->
+ 	<title>Gestión de Maquinaria Agrícola</title>
+ </head>
+ <body>
+
+ 	 <nav class="navbar navbar-expand-sm bg-dark navbar-dark mb-5">
+	  <!-- Brand -->
+	  <a class="navbar-brand" href="#">Gestión de Maquinaria</a>
+
+	  <!-- Links -->
+	  <ul class="navbar-nav">
+	  	<!--Gestión de Clientes-->
+	    <li class="nav-item dropdown" id="menuCliente">
+	      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+	        Clientes
+	      </a>
+	      <div class="dropdown-menu">
+	        <a class="dropdown-item" href="#" name="Alta">Alta</a>
+	        <a class="dropdown-item" href="#" name="Baja">Baja</a>
+	        <a class="dropdown-item" href="#" name="Modificar">Modificar</a>
+	        <a class="dropdown-item" href="#" name="Listar">Listar</a>
+	      </div>
+	    </li>
+
+	    <!--Gestión de Maquinaria-->
+	    <li class="nav-item dropdown" id="menuMaquinaria">
+	      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+	        Maquinaria
+	      </a>
+	      <div class="dropdown-menu">
+	        <a class="dropdown-item" href="#" name="Alta">Alta</a>
+	        <a class="dropdown-item" href="#" name="Baja">Baja</a>
+	        <a class="dropdown-item" href="#" name="Modificar">Modificar</a>
+	        <a class="dropdown-item" href="#" name="Listar">Listar</a>
+	      </div>
+	    </li>
+
+	    <!--Gestión de Alquileres-->
+	    <li class="nav-item dropdown" id="menuAlquileres">
+	      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+	        Alquileres
+	      </a>
+	      <div class="dropdown-menu">
+	        <a class="dropdown-item" href="#" name="Alta">Registrar</a>
+	        <a class="dropdown-item" href="#" name="Listar">Listar</a>
+	      </div>
+	    </li>
+		
+		<!--Gestión de Devoluciones-->
+	    <li class="nav-item dropdown" id="menuDevoluciones">
+	      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+	        Devoluciones
+	      </a>
+	      <div class="dropdown-menu">
+	        <a class="dropdown-item" href="#" name="Devolver">Devolver</a>
+	        <a class="dropdown-item" href="#" name="Listar">Listar</a>
+	      </div>
+	    </li>
+
+	    <!--Gestión de Alquileres-->
+	    <li class="nav-item dropdown" id="menuPagos">
+	      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+	        Pagos
+	      </a>
+	      <div class="dropdown-menu">
+	        <a class="dropdown-item" href="#" name="Alta">Pago</a>
+	        <a class="dropdown-item" href="#" name="Listar">Listar</a>
+	      </div>
+	    </li>
+
+	    <!--Gestión de Balances-->
+	     <li class="nav-item">
+     		 <a class="nav-link" href="#" id="btnBalance">Balance</a>
+   		 </li>
+
+	  </ul>
+	</nav> 
+
+	<div class="row">
+	  <div class="col-md-2 d-none d-sm-block"></div>
+	  <div class="col-12 col-md-8">
+ 
+
+	<!--****************************** Formularios Cliente ******************************-->
+	<!--Alta-->
+	 <form action="#" id="frmAltaCliente" name="frmAltaCliente" class="pr-5 pl-5">
+	 <h1>Formulario de alta para Nuevos Clientes</h1>
+
+	  <div class="form-group">
+	    <label for="txtDNICliente">DNI:</label>
+	    <input type="text" class="form-control" id="txtDNICliente">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtNombreCliente">Nombre:</label>
+	    <input type="text" class="form-control" id="txtNombreCliente">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtApellidoCliente">Apellido:</label>
+	    <input type="text" class="form-control" id="txtApellidoCliente">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtTelefonoCliente">Teléfono:</label>
+	    <input type="text" class="form-control" id="txtTelefonoCliente">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtDireccionCliente">Dirección:</label>
+	    <input type="text" class="form-control" id="txtDireccionCliente">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtLocalidadCliente">Localidad:</label>
+	    <input type="text" class="form-control" id="txtLocalidadCliente">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtCPostalCliente">C.Postal:</label>
+	    <input type="text" class="form-control" id="txtCPostalCliente">
+	  </div>
+
+	    <button type="submit" class="btn btn-primary" id="btnAnadirCliente" name="btnAnadirCliente">Submit</button>
+	</form> 
+
+	<!--Baja-->
+	<form action="#" id="frmBajaCliente" name="frmBajaCliente" class="pr-5 pl-5">
+		<h1>Formulario de baja para Clientes Regitrados</h1>
+
+		<label for="txtCliente">Selecciona un cliente del listado:</label>
+	      <br>
+	      <div id="selectEliminarCliente" class="sep-inf"></div><br>
+	    <div class="form-group">
+	    <button type="button" name="btnEliminarCliente" id="btnEliminarCliente" class="btn btn-primary">Aceptar</button>
+        </div>
+		
+	</form>
+
+	<!--Modificar-->
+	<form action="#" id="frmModCliente"  class="pr-5 pl-5">
+		<h1>Modificación de Clientes Registrados</h1>
+
+		<label for="txtCliente">Selecciona un cliente del listado:</label>
+	      <select class="form-control" id="txtCliente">
+	        <option>1</option>
+	        <option>2</option>
+	        <option>3</option>
+	        <option>4</option>
+	      </select>
+
+	      <br>
+		
+	    <button type="submit" class="btn btn-primary">Submit</button>
+	</form>
+
+	<!--Listar-->
+
+	<form action="#" id="frmListarCliente"  class="pr-5 pl-5">
+		<h1>Listado de todos los Clientes Registrados</h1>
+		
+	</form>
+
+	<!--****************************** Formularios Maquinaria ******************************-->
+	<!--Alta-->
+	 <form action="#" id="frmAltaMaquina"  name="frmAltaMaquina" class="pr-5 pl-5">
+		<h1>Formulario de alta para Nuevas Máquinas</h1>
+	  <div class="form-group">
+	    <label for="txtModeloMaquina">Modelo:</label>
+	    <input type="text" class="form-control" id="txtModeloMaquina">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtIDMaquina">ID Maquina:</label>
+	    <input type="text" class="form-control" id="txtIDMaquina">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtNombreMaquina">Nombre:</label>
+	    <input type="text" class="form-control" id="txtNombreMaquina">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtDecMaquina">Descripción:</label>
+	    <input type="text" class="form-control" id="txtDecMaquina">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtPrecioMaquina">Precio del Alquiler:</label>
+	    <input type="text" class="form-control" id="txtPrecioMaquina">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtAveriaMaquina">Avería:</label>
+	    <input type="text" class="form-control" id="txtAveriaMaquina">
+	  </div>
+
+	    <button type="submit" name="btnAltaMaquina" id="btnAltaMaquina" class="btn btn-primary">Submit</button>
+	</form> 
+
+	<!--Baja-->
+	<form action="#" id="frmBajaMaquina" name="frmBajaMaquina"  class="pr-5 pl-5">
+	<h1>Formulario de baja para Máquinas Registradas</h1>
+	    <label for="txtMaquina">Selecciona un ID de Máquina del listado:</label>
+	    <br>
+	    <div id="selectEliminarMaquina" class="sep-inf"></div><br>
+	    <div class="form-group">
+	 	<button type="button" name="btnEliminarMaquina" id="btnEliminarMaquina" class="btn btn-primary">Submit</button>
+		</div>
+	</form>
+
+	<!--Modificar-->
+	<form action="#" id="frmModMaquina" class="pr-5 pl-5">
+	<h1>Formulario de modificación para Máquinas Registradas</h1>	
+	    
+		 <label for="txtMaquina">Selecciona un ID de Máquina del listado:</label>
+	      <select class="form-control" id="txtMaquina">
+	        <option>1</option>
+	        <option>2</option>
+	        <option>3</option>
+	        <option>4</option>
+	      </select>
+
+	      <br>
+	<button type="submit" class="btn btn-primary">Submit</button>
+	</form>
+
+	<!--Listar-->
+	<form action="#" id="frmListarMaquina">
+	<h1>Listado de todas las máquinas</h1>	
+
+	</form>
+
+	
+
+	<!--****************************** Formularios Alquileres ******************************-->
+	<!--Alta-->
+	<form action="#" id="frmAltaAlquiler" class="pr-5 pl-5">
+	<h1>Formulario de Alta de Alquiler</h1>
+	  <div class="form-group">
+	    <label for="txtIDAlquiler">ID del Alquiler</label>
+	    <input type="text" class="form-control" id="txtIDAlquiler">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtFechaIniAlquiler">Fecha de Inicio del Alquiler</label>
+	    <input type="date" class="form-control" id="txtFechaIniAlquiler">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtFechaFinAlquiler">Fecha de Fin del Alquiler</label>
+	    <input type="date" class="form-control" id="txtFechaFinAlquiler">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtImporteAlquiler">Importe</label>
+	    <input type="text" class="form-control" id="txtImporteAlquiler">
+	  </div>
+
+	  <label for="txtDNICliAlquiler">DNI del Cliente (debe existir previamente)</label>
+	      <select class="form-control" id="txtDNICliAlquiler">
+	        <option>1</option>
+	        <option>2</option>
+	        <option>3</option>
+	        <option>4</option>
+	      </select>
+	   <br>
+
+	  <label for="txtIDMaqAlquiler">ID de la Máquina (debe existir previamente)</label>
+	      <select class="form-control" id="txtIDMaqAlquiler">
+	        <option>1</option>
+	        <option>2</option>
+	        <option>3</option>
+	        <option>4</option>
+	      </select>
+	   <br>
+
+	  <label for="txtDNIEmpAlquiler">DNI del empleado (debe existir previamente)</label>
+	      <select class="form-control" id="txtDNIEmpAlquiler">
+	        <option>1</option>
+	        <option>2</option>
+	        <option>3</option>
+	        <option>4</option>
+	      </select>
+	   <br>
+
+	    <button type="submit" class="btn btn-primary">Submit</button>
+	</form> 
+
+	<!--Listar-->
+	<form action="#" id="frmListarAlquiler" class="pr-5 pl-5">
+	<h1>Listado de todos los alquileres acaecidos</h1>	
+
+	</form>
+
+	<!--****************************** Formularios Devoluciones ******************************-->
+	<!--Baja-->
+	<form action="#" id="frmDevolucion" class="pr-5 pl-5">
+	<h1>Formulario de Devolución</h1>
+
+		<label for="txtIDAlquiler">ID del Alquiler (debe existir previamente)</label>
+	      <select class="form-control" id="txtIDAlquiler">
+	        <option>1</option>
+	        <option>2</option>
+	        <option>3</option>
+	        <option>4</option>
+	      </select>
+	   <br>
+
+	  <div class="form-group">
+	    <label for="txtFechaDevolucion">Fecha de Devolución</label>
+	    <input type="text" class="form-control" id="txtFechaDevolucion">
+	  </div>
+
+	    <button type="submit" class="btn btn-primary">Submit</button>
+	</form> 
+
+	<!--Listar-->
+	<form action="#" id="frmListarDevolucion" class="pr-5 pl-5">
+	<h1>Listado de todos los alquileres devueltos</h1>	
+
+	</form>
+
+
+	<!--****************************** Formularios Seguro ******************************-->
+	<!--Alta-->
+	<form action="#" id="frmAltaPago" class="pr-5 pl-5">
+	<h1>Ni puta idea de lo que hay que poner aquí</h1>
+
+	  <div class="form-group">
+	    <label for="txtŃumSeguro">Número de Pago:</label>
+	    <input type="text" class="form-control" id="txtŃumSeguro">
+	  </div>
+
+	    <button type="submit" class="btn btn-primary">Submit</button>
+	</form> 
+
+	<!--Listar-->
+	<form action="#" id="frmListarPago" class="pr-5 pl-5">
+	<h1>Listado de todos los pagos</h1>	
+
+	</form>
+
+
+	<!--****************************** Formularios Empleados ******************************-->
+	<!--Listar-->
+	<form action="#" id="frmListarBalance" class="pr-5 pl-5">
+	<h1>Balance de los Pagos/Alquileres</h1>
+	<h2>Filtrar por positivo,negativo o neutro?</h2>	
+
+	</form>
+
+	</div>
+	  <div class="col-md-2 d-none d-sm-block"></div>
+	</div>
+
+	<!--****************************** Archvos JS de Bootstrap ******************************-->
+	<script src="js/objetos/gestion.js"></script>
+	<script src="js/objetos/cliente.js"></script>
+	<script src="js/objetos/maquinaria.js"></script>
+	<script src="js/clientes.js"></script>
+	<script src="js/maquinarias.js"></script>
+	<script src="js/funciones.js"></script>
+	<script src="js/codigo.js"></script>
+
+	 <!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<!-- Popper JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script> 
+
+ </body>
+ </html>
+
+
+
