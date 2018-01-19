@@ -11,4 +11,17 @@ function Cliente(dniCliente,nombreCliente, apellidoCliente, telClientes, dirClie
     this.cpCliente = cpCliente;
 }
 
-//METODOS: 
+//METODOS:
+Cliente.prototype.sRowHTML = function() 
+{ 
+	var sRow = "";
+	sRow +="<td>"+this.dniCliente+"</td>";
+	sRow +="<td>"+this.nombreCliente+"</td>";
+	sRow +="<td>"+this.apellidoCliente+"</td>";
+	sRow +="<td>"+this.telClientes+"</td>";
+	sRow +="<td>"+this.dirCliente+"</td>";
+	sRow +="<td>"+this.localidadCliente+"</td>";
+	sRow +="<td>"+this.cpCliente+"</td>";
+
+	return sRow;
+}

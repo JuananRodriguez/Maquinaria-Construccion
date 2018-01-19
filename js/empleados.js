@@ -1,24 +1,27 @@
 //Validamos el formulario una vez rellenado
 
-var oBtnAnadirCliente = document.frmAltaCliente.btnAnadirCliente;
-oBtnAnadirCliente.addEventListener("click", anadirCliente, false);
+var oBtnAnadirEmpleado = document.frmAltaEmpleado.btnAnadirEmpleado;
+oBtnAnadirEmpleado.addEventListener("click", anadirEmpleado, false);
 
-var oBtnEliminarCliente = document.frmBajaCliente.btnEliminarCliente;
-oBtnEliminarCliente.addEventListener("click", eliminarCliente, false);
+var oBtnEliminarEmpleado = document.frmBajaEmpleado.btnEliminarEmpleado;
+oBtnEliminarEmpleado.addEventListener("click", eliminarEmpleado, false);
 
-function validarClientes(formulario)
+function validarEmpleados(formulario)
 {
-	var bCliente = true;
+	var bEmpleado = true;
 	var sError = ""; 
 
+	//CODIGO
+
+
 	//DNI
-	var dniCliente = formulario.txtDNICliente.value.trim();
-	if(oExpRegValidarDni.test(dniCliente) == false)
+	var dniEmpleado = formulario.txtDNIEmpleado.value.trim();
+	if(oExpRegValidarDni.test(dniEmpleado) == false)
 	{
-		if(bCliente)
+		if(bEmpleado)
 		{
-			bCliente = false;
-			formulario.txtDNICliente.focus();
+			bEmpleado = false;
+			formulario.txtDNIEmpleado.focus();
 		}
 		claseError(formulario, 0);
 		sError += "DNI incorrecto<br>";
@@ -29,13 +32,13 @@ function validarClientes(formulario)
 	}
 
 	//NOMBRE
-	var nombreCliente = formulario.txtNombreCliente.value.trim();
-	if(oExpRegValidarNombre.test(nombreCliente) == false)
+	var nombreEmpleado = formulario.txtNombreEmpleado.value.trim();
+	if(oExpRegValidarNombre.test(nombreEmpleado) == false)
 	{
-		if(bCliente)
+		if(bEmpleado)
 		{
-			bCliente = false;
-			formulario.txtNombreCliente.focus();
+			bEmpleado = false;
+			formulario.txtNombreEmpleado.focus();
 		}
 		claseError(formulario, 1);
 		sError += "Nombre incorrecto<br>";
@@ -46,13 +49,13 @@ function validarClientes(formulario)
 	}
 
 	//APELLIDOS
-	var apellidoCliente = formulario.txtApellidoCliente.value.trim();
-	if(oExpRegValidarApellidos.test(apellidoCliente) == false)
+	var apellidoEmpleado = formulario.txtApellidoEmpleado.value.trim();
+	if(oExpRegValidarApellidos.test(apellidoEmpleado) == false)
 	{
-		if(bCliente)
+		if(bEmpleado)
 		{
-			bCliente = false;
-			formulario.txtApellidoCliente.focus();
+			bEmpleado = false;
+			formulario.txtApellidoEmpleado.focus();
 		}
 		claseError(formulario, 2);
 		sError += "Apellidos incorrectos<br>";
@@ -63,13 +66,13 @@ function validarClientes(formulario)
 	}
 
 	//TELEFONO
-	var telClientes = formulario.txtTelefonoCliente.value.trim();
-	if(oExpRegValidarTelefono.test(telClientes) == false)
+	var telEmpleado = formulario.txtTelefonoEmpleado.value.trim();
+	if(oExpRegValidarTelefono.test(telEmpleado) == false)
 	{
-		if(bCliente)
+		if(bEmpleado)
 		{
 			bCliente = false;
-			formulario.txtTelefonoCliente.focus();
+			formulario.txtTelefonoEmpleado.focus();
 		}
 		claseError(formulario, 3);
 		sError += "Teléfono incorrecto<br>";
@@ -80,13 +83,13 @@ function validarClientes(formulario)
 	}
 
 	//CP
-	var cpCliente = formulario.txtCPostalCliente.value.trim();
-	if(oExpRegValidarCP.test(cpCliente) == false)
+	var cpEmpleado = formulario.txtCPostalEmpleado.value.trim();
+	if(oExpRegValidarCP.test(cpEmpleado) == false)
 	{
-		if(bCliente)
+		if(bEmpleado)
 		{
-			bCliente = false;
-			formulario.txtCPostalCliente.focus();
+			bEmpleado = false;
+			formulario.txtCPostalEmpleado.focus();
 		}
 		claseError(formulario, 6);
 		sError += "Código postal incorrecto<br>";
@@ -95,59 +98,59 @@ function validarClientes(formulario)
 	{
 		quitarError(formulario, 6);
 	}
-	return bCliente;
+	return bEmpleado;
 }
 
-function anadirCliente() 
+function anadirEmpleado() 
 {
 	var sMensaje = "";
-	formulario = document.frmAltaCliente;
+	formulario = document.frmAltaEmpleado;
 
-	if(validarClientes(formulario))
+	if(validarEmpleados(formulario))
 	{
-		var dniCliente = document.frmAltaCliente.txtDNICliente.value.trim();
-		var nombreCliente = document.frmAltaCliente.txtNombreCliente.value.trim();
-		var apellidoCliente = document.frmAltaCliente.txtApellidoCliente.value.trim();
-		var telClientes = document.frmAltaCliente.txtTelefonoCliente.value.trim();
-		var dirCliente = document.frmAltaCliente.txtDireccionCliente.value.trim();
-		var localidadCliente = document.frmAltaCliente.txtLocalidadCliente.value.trim();
-		var cpCliente = document.frmAltaCliente.txtCPostalCliente.value.trim();
+		var codEmpleado = document.frmAltaEmpleado.txtCodEmpleado.value.trim();
+		var dniEmpleado = document.frmAltaEmpleado.txtDNIEmpleado.value.trim();
+		var nombreEmpleado = document.frmAltaEmpleado.txtNombreEmpleado.value.trim();
+		var apellidoEmpleado = document.frmAltaEmpleado.txtApellidoEmpleado.value.trim();
+		var telEmpleado = document.frmAltaEmpleado.txtTelefonoEmpleado.value.trim();
+		var dirEmpleado = document.frmAltaEmpleado.txtDireccionEmpleado.value.trim();
+		var localidadEmpleado = document.frmAltaEmpleado.txtLocalidadEmpleado.value.trim();
+		var cpEmpleado = document.frmAltaEmpleado.txtCPostalEmpleado.value.trim();
 
-		var oCliente = new Cliente(dniCliente,nombreCliente, apellidoCliente, telClientes, dirCliente, localidadCliente, cpCliente);
+		var oEmpleado = new Empleado(codEmpleado, dniEmpleado, nombreEmpleado, apellidoEmpleado, telEmpleado, dirEmpleado, localidadEmpleado, cpEmpleado);
 
-		var bAltaCliente = oGestion.altaCliente(oCliente);
+		var bAltaEmpleado = oGestion.altaEmpleado(oEmpleado);
 
-		if (bAltaCliente) 
+		if (bAltaEmpleado) 
 		{
-			actualizaCombos("clientes");
-			sMensaje = "Cliente dado de alta";
+			actualizaCombos("empleados");
+			sMensaje = "Empleado dado de alta";
 			mostrarMensaje(sMensaje);
-			document.frmAltaCliente.reset();			
+			document.frmAltaEmpleado.reset();			
 		}
-
 		else
 		{
-			sMensaje = "Cliente ya existente";
+			sMensaje = "Empleado ya existente";
 			mostrarMensaje(sMensaje);
-			claseError(document.frmAltaCliente, 0);
+			claseError(document.frmAltaEmpleado, 0);
 		}
 	} 
 }
 
-function eliminarCliente()
+function eliminarEmpleado()
 {
-    var clienteEliminar = document.getElementById("selectCliente").value;
-    alert(clienteEliminar);
+    var empleadoEliminar = document.getElementById("selectEmpleado").value;
 
-    if(oGestion.eliminarCliente(clienteEliminar)){
-    	actualizaCombos("clientes");
-    	mostrarMensaje("Cliente eliminado");
+    if(oGestion.eliminarEmpleado(empleadoEliminar))
+    {
+    	actualizaCombos("empleados");
+    	mostrarMensaje("Empleado eliminado");
     }
     else
-    	mostrarMensaje("Cliente no existe");
+    	mostrarMensaje("Empleado no existe");
 }
 
-function camposFormModificarCliente()
+function camposFormModificarEmpleado()
 {
 	var dniClienteModificar = document.getElementById("selectModificarCliente").firstChild.value;
 	var antiguoCliente = oGestion.buscarCliente(dniClienteModificar);
@@ -164,7 +167,7 @@ function camposFormModificarCliente()
 
 }
 
-function modificarCliente()
+function modificarEmpleado()
 {	
 	formulario=document.frmModClienteSeleccionado;
 	if(validarClientes(formulario)){
@@ -187,7 +190,7 @@ function modificarCliente()
 	}
 }
 
-function tablaClientes()
+function tablaEmpleados()
 {	
 	// var oTabla = document.createElement("TABLE");
 	// oTabla.setAttribute("table", "table-striped");
@@ -207,11 +210,10 @@ function tablaClientes()
     "</thead>"+
     "<tbody>";
 
-    sTabla += oGestion.sRowHTMLClientes();
+    sTabla += oGestion.sRowHTMLEmpleados();
 
     sTabla += "</tbody>"+
   "</table>"+
 "</div>";
 	return sTabla;
 }
-
