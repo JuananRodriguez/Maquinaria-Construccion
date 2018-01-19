@@ -1,13 +1,12 @@
 var oGestion = new Gestion();
 
 resetForms();
-datosDePueba();
+datosDePrueba();
 
 /************* Añade Datos de Prueba **************/
-function datosDePueba(){
-	var oEmpleado = new Empleado("1","48954566V","DOS", "Rodriguez Martinez", 685097696, "C/Paris", "Montequinto", "41089");
+function datosDePrueba(){
+	oGestion.altaEmpleado(new Empleado("1","48954566V","DOS", "Rodriguez Martinez", 685097696, "C/Paris", "Montequinto", "41089"));
 
-	oGestion.altaEmpleado(oEmpleado);
 	oGestion.altaCliente(new Cliente("48959266V","UNO", "Rodriguez Martinez", 685097696, "C/Paris", "Montequinto", "41089"));
 	oGestion.altaCliente(new Cliente("48954566V","DOS", "Rodriguez Martinez", 685097696, "C/Paris", "Montequinto", "41089"));
 	oGestion.altaCliente(new Cliente("48955436V","TRES", "Rodriguez Martinez", 685097696, "C/Paris", "Montequinto", "41089"));
@@ -23,7 +22,13 @@ function resetForms(){
 	for (var i = 0; i < AformsSel.length; i++) {
    		AformsSel[i].style.display="none";
    		AformsSel[i].reset();
-    }  
+    }
+
+    var aClases = document.querySelectorAll(".is-invalid");
+
+    for(var i=0;i<aClases.length;i++){
+    	aClases[i].classList.remove("is-invalid");
+    }
 }
 
 /************* Selección de botones ***************/

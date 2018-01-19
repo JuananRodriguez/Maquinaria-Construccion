@@ -9,7 +9,7 @@ oBtnEliminarCliente.addEventListener("click", eliminarCliente, false);
 function validarClientes(formulario)
 {
 	var bCliente = true;
-	var sError = ""; 
+	var aError = []; 
 
 	//DNI
 	var dniCliente = formulario.txtDNICliente.value.trim();
@@ -21,7 +21,7 @@ function validarClientes(formulario)
 			formulario.txtDNICliente.focus();
 		}
 		claseError(formulario, 0);
-		sError += "DNI incorrecto<br>";
+		aError.push("DNI incorrecto");
 	}
 	else
 	{
@@ -38,7 +38,7 @@ function validarClientes(formulario)
 			formulario.txtNombreCliente.focus();
 		}
 		claseError(formulario, 1);
-		sError += "Nombre incorrecto<br>";
+		aError.push("Nombre incorrecto");
 	}
 	else
 	{
@@ -55,7 +55,7 @@ function validarClientes(formulario)
 			formulario.txtApellidoCliente.focus();
 		}
 		claseError(formulario, 2);
-		sError += "Apellidos incorrectos<br>";
+		aError.push("Apellidos incorrectos");
 	}
 	else
 	{
@@ -72,7 +72,7 @@ function validarClientes(formulario)
 			formulario.txtTelefonoCliente.focus();
 		}
 		claseError(formulario, 3);
-		sError += "Teléfono incorrecto<br>";
+		aError.push("Teléfono incorrecto");
 	}
 	else
 	{
@@ -89,11 +89,15 @@ function validarClientes(formulario)
 			formulario.txtCPostalCliente.focus();
 		}
 		claseError(formulario, 6);
-		sError += "Código postal incorrecto<br>";
+		aError.push("Código postal incorrecto");
 	}
 	else
 	{
 		quitarError(formulario, 6);
+	}
+	if(aError.length>0){ // Este If muestra los mensajes de error de la validación. 
+						 //	Los mete en un Div y los manda a MostrarMensaje
+		DeMensajesADiv(aError);
 	}
 	return bCliente;
 }
@@ -121,14 +125,14 @@ function anadirCliente()
 		{
 			actualizaCombos("clientes");
 			sMensaje = "Cliente dado de alta";
-			mostrarMensaje(sMensaje);
+			mostrarMensaje(sMensaje,true);
 			document.frmAltaCliente.reset();			
 		}
 
 		else
 		{
 			sMensaje = "Cliente ya existente";
-			mostrarMensaje(sMensaje);
+			mostrarMensaje(sMensaje,false);
 			claseError(document.frmAltaCliente, 0);
 		}
 	} 
@@ -137,14 +141,14 @@ function anadirCliente()
 function eliminarCliente()
 {
     var clienteEliminar = document.getElementById("selectCliente").value;
-    alert(clienteEliminar);
+    //alert(clienteEliminar);
 
     if(oGestion.eliminarCliente(clienteEliminar)){
     	actualizaCombos("clientes");
-    	mostrarMensaje("Cliente eliminado");
+    	mostrarMensaje("Cliente eliminado",true);
     }
     else
-    	mostrarMensaje("Cliente no existe");
+    	mostrarMensaje("Cliente no existe",false);
 }
 
 function camposFormModificarCliente()

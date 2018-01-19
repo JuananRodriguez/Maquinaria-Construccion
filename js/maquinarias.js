@@ -9,7 +9,7 @@ oBtnEliminarMaquinaria.addEventListener("click", eliminarMaquinaria, false);
 function validarMaquina(formulario)
 {
 	var bMaquina = true;
-	var sError = ""; 
+	var aError = []; 
 
 	//MODELO
 	var modMaquina = formulario.txtModeloMaquina.value.trim();
@@ -21,7 +21,7 @@ function validarMaquina(formulario)
 			formulario.txtModeloMaquina.focus();
 		}
 		claseError(formulario, 0);
-		sError += "Modelo incorrecto<br>";
+		aError.push("Modelo incorrecto");
 	}
 	else
 	{
@@ -38,7 +38,7 @@ function validarMaquina(formulario)
 			formulario.txtIDMaquina.focus();
 		}
 		claseError(formulario, 1);
-		sError += "ID incorrecta<br>";
+		aError.push("ID incorrecta");
 	}
 	else
 	{
@@ -55,7 +55,7 @@ function validarMaquina(formulario)
 			formulario.txtNombreMaquina.focus();
 		}
 		claseError(formulario, 2);
-		sError += "El nombre no es válido<br>";
+		aError.push("El nombre no es válido");
 	}
 	else
 	{
@@ -72,7 +72,7 @@ function validarMaquina(formulario)
 			formulario.txtDecMaquina.focus();
 		}
 		claseError(formulario, 3);
-		sError += "La descripción no es válida<br>";
+		aError.push("La descripción no es válida");
 	}
 	else
 	{
@@ -89,11 +89,16 @@ function validarMaquina(formulario)
 			formulario.txtPrecioMaquina.focus();
 		}
 		claseError(formulario, 4);
-		sError += "No es un precio válido<br>";
+		aError.push("No es un precio válido");
 	}
 	else
 	{
 		quitarError(formulario, 4);
+	}
+
+	if(aError.length>0){ // Este If muestra los mensajes de error de la validación. 
+						 //	Los mete en un Div y los manda a MostrarMensaje
+		DeMensajesADiv(aError);
 	}
 	return bMaquina;
 }
@@ -135,9 +140,9 @@ function eliminarMaquinaria()
 {
     var maquinaEliminar = document.getElementById("selectMaquina").value;
     if(oGestion.eliminarMaquina(maquinaEliminar))
-    	mostrarMensaje("Maquina eliminada");
+    	mostrarMensaje("Maquina eliminada",true);
     else
-    	mostrarMensaje("Maquina no existe");
+    	mostrarMensaje("Maquina no existe",false);
     actualizaCombos("maquinas");
 }
 
