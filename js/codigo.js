@@ -1,6 +1,20 @@
 var oGestion = new Gestion();
 
 resetForms();
+datosDePueba();
+
+/************* Añade Datos de Prueba **************/
+function datosDePueba(){
+	var oEmpleado = new Empleado("1","48954566V","DOS", "Rodriguez Martinez", 685097696, "C/Paris", "Montequinto", "41089");
+
+	oGestion.altaEmpleado(oEmpleado);
+	oGestion.altaCliente(new Cliente("48959266V","UNO", "Rodriguez Martinez", 685097696, "C/Paris", "Montequinto", "41089"));
+	oGestion.altaCliente(new Cliente("48954566V","DOS", "Rodriguez Martinez", 685097696, "C/Paris", "Montequinto", "41089"));
+	oGestion.altaCliente(new Cliente("48955436V","TRES", "Rodriguez Martinez", 685097696, "C/Paris", "Montequinto", "41089"));
+
+	oGestion.altaMaquina(new Maquina("ROBOCOCA","200", "ROBOCOCA 2000", "oh blanca navidad", 75, "ninguna"));
+}
+
 
 /************* Pone los formularios invisibles y resetea campos **************/
 function resetForms(){
@@ -14,6 +28,66 @@ function resetForms(){
 
 /************* Selección de botones ***************/
 
+/**Empleados**/
+var menuEmpleados = document.getElementById("menuEmpleado").children[1];
+
+for (var i = 0; i < menuEmpleados.children.length; i++) {
+   		menuEmpleados.children[i].addEventListener('click',mostrarEnEmpleados);
+}
+
+function mostrarEnEmpleados(oEvento){
+	var oE = oEvento || window.event;
+	resetForms();
+
+	switch(oE.target.name) 
+	{
+	    case "Alta":
+	        document.getElementById('frmAltaEmpleado').style.display="block";
+	        break;
+	    case "Baja":
+	        actualizaCombos("empleados");
+	        document.getElementById('frmBajaEmpleado').style.display="block";
+	        break;
+	    case "Modificar":
+	        actualizaCombos("empleados");
+	        document.getElementById('frmModEmpleado').style.display="block";
+	        break;
+	    default:
+	        document.getElementById('frmListarEmpleado').style.display="block";
+	        listarEmpleados();
+    }
+}
+
+/*** Empleado --> MODIFICAR ****/
+var oSelectModificarEmpleado = document.getElementById("selectModificarEmpleado");
+oSelectModificarEmpleado.addEventListener("change", mostrarModificarEmpleado, false);
+
+var oBtnModificarEmpleado = document.getElementById("btnModificarEmpleado");
+oBtnModificarEmpleado.addEventListener("click", modificarEmpleado, false);
+
+function mostrarModificarEmpleado(){
+	var index = oSelectModificarEmpleado.firstChild.selectedIndex;
+	if(index!=0){
+		document.getElementById('frmModEmpleadoSeleccionado').style.display="block";
+		camposFormModificarEmpleado();
+	}
+	else
+		document.getElementById('frmModEmpleadoSeleccionado').style.display="none";
+}
+
+
+/***Empleado --> LISTAR ****/
+function listarEmpleados(){
+	var formListar = document.getElementById("frmListarEmpleado");
+	var tablaPrevia = document.getElementById("tablaListada");
+
+	if(tablaPrevia!=null)
+		tablaPrevia.remove();
+	
+	formListar.innerHTML += tablaEmpleados();
+}
+
+
 /**Clientes**/
 var menuClientes = document.getElementById("menuCliente").children[1];
 
@@ -23,27 +97,55 @@ for (var i = 0; i < menuClientes.children.length; i++) {
 
 function mostrarEnClientes(oEvento){
 	var oE = oEvento || window.event;
-	actualizaCombos("clientes");
+	resetForms();
 
 	switch(oE.target.name) 
 	{
 	    case "Alta":
-	        resetForms();
 	        document.getElementById('frmAltaCliente').style.display="block";
 	        break;
 	    case "Baja":
-	        resetForms();
+	        actualizaCombos("clientes");
 	        document.getElementById('frmBajaCliente').style.display="block";
 	        break;
 	    case "Modificar":
-	        resetForms();
+	        actualizaCombos("clientes");
 	        document.getElementById('frmModCliente').style.display="block";
 	        break;
 	    default:
-	        resetForms();
 	        document.getElementById('frmListarCliente').style.display="block";
+	        listarClientes();
     }
 
+}
+
+/*** Cliente --> MODIFICAR ****/
+var oSelectModificarCliente = document.getElementById("selectModificarCliente");
+oSelectModificarCliente.addEventListener("change", mostrarModificarCliente, false);
+
+var oBtnModificarCliente = document.getElementById("btnModificarCliente");
+oBtnModificarCliente.addEventListener("click", modificarCliente, false);
+
+function mostrarModificarCliente(){
+	var index = oSelectModificarCliente.firstChild.selectedIndex;
+	if(index!=0){
+		document.getElementById('frmModClienteSeleccionado').style.display="block";
+		camposFormModificarCliente();
+	}
+	else
+		document.getElementById('frmModClienteSeleccionado').style.display="none";
+}
+
+
+/***Cliente --> LISTAR ****/
+function listarClientes(){
+	var formListar = document.getElementById("frmListarCliente");
+	var tablaPrevia = document.getElementById("tablaListada");
+
+	if(tablaPrevia!=null)
+		tablaPrevia.remove();
+	
+	formListar.innerHTML += tablaClientes();
 }
 
 
@@ -56,26 +158,55 @@ for (var i = 1; i < menuMaquinaria.children.length; i++) {
 
 function mostrarEnMaquinaria(oEvento){
 	var oE = oEvento || window.event;
+	resetForms();
 
 	switch(oE.target.name) 
-	{
+	{		
 	    case "Alta":
-	        resetForms();
 	        document.getElementById('frmAltaMaquina').style.display="block";
 	        break;
 	    case "Baja":
-	        resetForms();
+	        actualizaCombos("maquinas");
 	        document.getElementById('frmBajaMaquina').style.display="block";
 	        break;
 	    case "Modificar":
-	        resetForms();
+	    	actualizaCombos("maquinas");
 	        document.getElementById('frmModMaquina').style.display="block";
 	        break;
 	    default:
-	        resetForms();
 	        document.getElementById('frmListarMaquina').style.display="block";
+	        listarMaquinas();
     }
 
+}
+
+/*** Maquina --> MODIFICAR ****/
+var oSelectModificarMaquina = document.getElementById("selectModificarMaquina");
+oSelectModificarMaquina.addEventListener("change", mostrarModificarMaquina, false);
+
+var oBtnModificarMaquina = document.getElementById("btnModificarMaquina");
+oBtnModificarMaquina.addEventListener("click", modificarMaquina, false);
+
+function mostrarModificarMaquina(){
+	var index = oSelectModificarMaquina.firstChild.selectedIndex;
+	if(index!=0){
+		document.getElementById('frmModMaquinaSeleccionada').style.display="block";
+		camposFormModificarMaquina();
+	}
+	else
+		document.getElementById('frmModMaquinaSeleccionada').style.display="none";
+}
+
+
+/***Maquina --> LISTAR ****/
+function listarMaquinas(){
+	var formListar = document.getElementById("frmListarMaquina");
+	var tablaPrevia = document.getElementById("tablaListadaMaq");
+
+	if(tablaPrevia!=null)
+		tablaPrevia.remove();
+	
+	formListar.innerHTML += tablaMaquinas();
 }
 
 /**Alquiler**/

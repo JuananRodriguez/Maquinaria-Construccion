@@ -23,15 +23,14 @@ function quitarError(oForm, iDiv)
 function mostrarMensaje(sTexto) 
 {
   
-  alert(sTexto);
-    /*if (iCodigoError == 0) {
-        toastr.success(sTexto);
-    }
-    else {
-        toastr.error(sTexto);
-    }
-
-   */
+  // alert(sTexto);
+  //   if (iCodigoError == 0) {
+  //       toastr.success(sTexto);
+  //   }
+  //   else {
+  //       toastr.error(sTexto);
+  //   }
+   
 }
 
 //RELLENAR COMBOS
@@ -44,13 +43,18 @@ function actualizaCombos(sTipo)
 
     switch(sTipo) 
     {
+        case "empleados":
+            capaSelect = "selectDivEmpleado";
+            idSelect = "selectEmpleado";
+            arrayDatos = oGestion.empleados;
+            break;
         case "clientes":
-            capaSelect = "selectEliminarCliente";
+            capaSelect = "selectDivCliente";
             idSelect = "selectCliente";
             arrayDatos = oGestion.clientes;
             break;
         case "maquinas":
-            capaSelect = "selectEliminarMaquina";
+            capaSelect = "selectDivMaquina";
             idSelect = "selectMaquina";
             arrayDatos = oGestion.maquinas;
             break;
@@ -61,6 +65,11 @@ function actualizaCombos(sTipo)
         var oValores = [];
         switch(tipo) 
         {
+            case "empleados":
+                oValores[0] = array[i].dniEmpleado;
+                oValores[1] = array[i].nombreEmpleado;
+                oValores[2] = array[i].apellidoEmpleado;
+                break;
             case "clientes":
                 oValores[0] = array[i].dniCliente;
                 oValores[1] = array[i].nombreCliente;
@@ -77,8 +86,9 @@ function actualizaCombos(sTipo)
 
     if (document.getElementById(idSelect) != null) 
     {
-        var oCapaSelect = document.getElementById(capaSelect);
-        oCapaSelect.removeChild(oCapaSelect.firstChild);
+        var oCapaSelect = document.getElementsByClassName(capaSelect);
+        for (var i=0; i<oCapaSelect.length; i++)
+                oCapaSelect[i].firstChild.remove();
     }
 
     var oSelect = document.createElement("select");
@@ -93,13 +103,18 @@ function actualizaCombos(sTipo)
         oSelect.appendChild(oOption);
     }
     else 
-    {
+    {   
+        var oOption = document.createElement("option");
+        var oTextNode = document.createTextNode("Selecciona un elemento del listado...");
+        oOption.appendChild(oTextNode);
+        oSelect.appendChild(oOption);
+
         for (var i = 0; i < arrayDatos.length; i++) 
         {
             var arrayValores = devolverValue(arrayDatos,i,sTipo);
             var oOption = document.createElement("option");
             oOption.value = arrayValores[0];
-            if(sTipo=="clientes")
+            if(sTipo=="clientes"||sTipo=="empleados")
             {
                 var oTextNode = document.createTextNode(arrayValores[0] + " - " + arrayValores[1] +" "+ arrayValores[2]);
             }
@@ -110,6 +125,10 @@ function actualizaCombos(sTipo)
             oSelect.appendChild(oOption);
         }
     }
-    oCapaSelect = document.getElementById(capaSelect);
-    oCapaSelect.appendChild(oSelect);
+    var oCapaSelect = document.getElementsByClassName(capaSelect);
+
+    for (var i=0; i<oCapaSelect.length; i++){
+        oSelectClonado=oSelect.cloneNode(true);
+        oCapaSelect[i].appendChild(oSelectClonado);
+    }
 }
