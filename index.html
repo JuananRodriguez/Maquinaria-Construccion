@@ -15,6 +15,20 @@
 
 	  <!-- Links -->
 	  <ul class="navbar-nav">
+
+		<!--Gestión de Empleados-->
+	    <li class="nav-item dropdown" id="menuEmpleado">
+	      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+	        Empleados
+	      </a>
+	      <div class="dropdown-menu">
+	        <a class="dropdown-item" href="#" name="Alta">Alta</a>
+	        <a class="dropdown-item" href="#" name="Baja">Baja</a>
+	        <a class="dropdown-item" href="#" name="Modificar">Modificar</a>
+	        <a class="dropdown-item" href="#" name="Listar">Listar</a>
+	      </div>
+	    </li>
+
 	  	<!--Gestión de Clientes-->
 	    <li class="nav-item dropdown" id="menuCliente">
 	      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
@@ -85,7 +99,124 @@
 	<div class="row">
 	  <div class="col-md-2 d-none d-sm-block"></div>
 	  <div class="col-12 col-md-8">
- 
+	  <div id="mensajes"></div>
+
+	<!--****************************** Formularios Empleados ******************************-->
+	<!--Alta-->
+	 <form action="#" id="frmAltaEmpleado" name="frmAltaEmpleado" class="pr-5 pl-5">
+	 <h1>Formulario de alta para Nuevos Empleados</h1>
+
+	 <div class="form-group">
+	    <label for="txtCodEmpleado">Código:</label>
+	    <input type="text" class="form-control" id="txtCodEmpleado">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtDNIEmpleado">DNI:</label>
+	    <input type="text" class="form-control" id="txtDNIEmpleado">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtNombreEmpleado">Nombre:</label>
+	    <input type="text" class="form-control" id="txtNombreEmpleado">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtApellidoEmpleado">Apellido:</label>
+	    <input type="text" class="form-control" id="txtApellidoEmpleado">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtTelefonoEmpleado">Teléfono:</label>
+	    <input type="text" class="form-control" id="txtTelefonoEmpleado">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtDireccionEmpleado">Dirección:</label>
+	    <input type="text" class="form-control" id="txtDireccionEmpleado">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtLocalidadEmpleado">Localidad:</label>
+	    <input type="text" class="form-control" id="txtLocalidadEmpleado">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtCPostalEmpleado">C.Postal:</label>
+	    <input type="text" class="form-control" id="txtCPostalEmpleado">
+	  </div>
+
+	    <button type="button" class="btn btn-primary" id="btnAnadirEmpleado" name="btnAnadirEmpleado">Dar de Alta</button>
+	</form> 
+
+	<!--Baja-->
+	<form action="#" id="frmBajaEmpleado" name="frmBajaEmpleado" class="pr-5 pl-5">
+		<h1>Formulario de baja para Clientes Regitrados</h1>
+	      <div id="selectEliminarEmpleado" class="selectDivEmpleado sep-inf"></div><br>
+	    <div class="form-group">
+	    <button type="button" name="btnEliminarEmpleado" id="btnEliminarEmpleado" class="btn btn-primary">Aceptar</button>
+        </div>
+		
+	</form>
+
+	<!--Modificar-->
+	<form action="#" id="frmModEmpleado"  class="pr-5 pl-5">
+		<h1>Modificación de Empleados Registrados</h1>
+	       <div id="selectModificarEmpleado" class="selectDivEmpleado sep-inf"></div><br>
+	</form>
+
+	<!--Modificar-->
+	 <form action="#" id="frmModEmpleadoSeleccionado" name="frmModEmpleadoSeleccionado" class="pr-5 pl-5">
+	 <h1>Formulario de modificación de Empleados</h1>
+
+	 <div class="form-group">
+	    <label for="txtCodEmpleado">Código:</label>
+	    <input type="text" class="form-control" id="txtCodEmpleado">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtDNIEmpleado">DNI:</label>
+	    <input type="text" class="form-control" id="txtDNIEmpleado">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtNombreEmpleado">Nombre:</label>
+	    <input type="text" class="form-control" id="txtNombreEmpleado">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtApellidoEmpleado">Apellido:</label>
+	    <input type="text" class="form-control" id="txtApellidoEmpleado">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtTelefonoEmpleado">Teléfono:</label>
+	    <input type="text" class="form-control" id="txtTelefonoEmpleado">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtDireccionEmpleado">Dirección:</label>
+	    <input type="text" class="form-control" id="txtDireccionEmpleado">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtLocalidadEmpleado">Localidad:</label>
+	    <input type="text" class="form-control" id="txtLocalidadEmpleado">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtCPostalEmpleado">C.Postal:</label>
+	    <input type="text" class="form-control" id="txtCPostalEmpleado">
+	  </div>
+	      <button type="button" id="btnModificarEmpleado" class="btn btn-primary">Actualizar</button>
+	</form> 
+
+	<!--Listar-->
+
+	<form action="#" id="frmListarEmpleado"  class="pr-5 pl-5">
+		<h1>Listado de todos los Empleados Registrados</h1>
+		<br>	
+	</form>
 
 	<!--****************************** Formularios Cliente ******************************-->
 	<!--Alta-->
@@ -127,16 +258,13 @@
 	    <input type="text" class="form-control" id="txtCPostalCliente">
 	  </div>
 
-	    <button type="submit" class="btn btn-primary" id="btnAnadirCliente" name="btnAnadirCliente">Submit</button>
+	    <button type="button" class="btn btn-primary" id="btnAnadirCliente" name="btnAnadirCliente">Dar de Alta</button>
 	</form> 
 
 	<!--Baja-->
 	<form action="#" id="frmBajaCliente" name="frmBajaCliente" class="pr-5 pl-5">
 		<h1>Formulario de baja para Clientes Regitrados</h1>
-
-		<label for="txtCliente">Selecciona un cliente del listado:</label>
-	      <br>
-	      <div id="selectEliminarCliente" class="sep-inf"></div><br>
+	      <div id="selectEliminarCliente" class="selectDivCliente sep-inf"></div><br>
 	    <div class="form-group">
 	    <button type="button" name="btnEliminarCliente" id="btnEliminarCliente" class="btn btn-primary">Aceptar</button>
         </div>
@@ -146,24 +274,55 @@
 	<!--Modificar-->
 	<form action="#" id="frmModCliente"  class="pr-5 pl-5">
 		<h1>Modificación de Clientes Registrados</h1>
-
-		<label for="txtCliente">Selecciona un cliente del listado:</label>
-	      <select class="form-control" id="txtCliente">
-	        <option>1</option>
-	        <option>2</option>
-	        <option>3</option>
-	        <option>4</option>
-	      </select>
-
-	      <br>
-		
-	    <button type="submit" class="btn btn-primary">Submit</button>
+	       <div id="selectModificarCliente" class="selectDivCliente sep-inf"></div><br>
 	</form>
+
+	<!--Modificar-->
+	 <form action="#" id="frmModClienteSeleccionado" name="frmModClienteSeleccionado" class="pr-5 pl-5">
+	 <h1>Formulario de modificación de Clientes</h1>
+
+	  <div class="form-group">
+	    <label for="txtDNICliente">DNI:</label>
+	    <input type="text" class="form-control" id="txtDNICliente">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtNombreCliente">Nombre:</label>
+	    <input type="text" class="form-control" id="txtNombreCliente">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtApellidoCliente">Apellido:</label>
+	    <input type="text" class="form-control" id="txtApellidoCliente">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtTelefonoCliente">Teléfono:</label>
+	    <input type="text" class="form-control" id="txtTelefonoCliente">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtDireccionCliente">Dirección:</label>
+	    <input type="text" class="form-control" id="txtDireccionCliente">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtLocalidadCliente">Localidad:</label>
+	    <input type="text" class="form-control" id="txtLocalidadCliente">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtCPostalCliente">C.Postal:</label>
+	    <input type="text" class="form-control" id="txtCPostalCliente">
+	  </div>
+	      <button type="button" id="btnModificarCliente" class="btn btn-primary">Actualizar</button>
+	</form> 
 
 	<!--Listar-->
 
 	<form action="#" id="frmListarCliente"  class="pr-5 pl-5">
 		<h1>Listado de todos los Clientes Registrados</h1>
+		<br>
 		
 	</form>
 
@@ -201,39 +360,63 @@
 	    <input type="text" class="form-control" id="txtAveriaMaquina">
 	  </div>
 
-	    <button type="submit" name="btnAltaMaquina" id="btnAltaMaquina" class="btn btn-primary">Submit</button>
+	    <button type="button" name="btnAltaMaquina" id="btnAltaMaquina" class="btn btn-primary">Aceptar</button>
 	</form> 
 
 	<!--Baja-->
 	<form action="#" id="frmBajaMaquina" name="frmBajaMaquina"  class="pr-5 pl-5">
 	<h1>Formulario de baja para Máquinas Registradas</h1>
-	    <label for="txtMaquina">Selecciona un ID de Máquina del listado:</label>
-	    <br>
-	    <div id="selectEliminarMaquina" class="sep-inf"></div><br>
+	    <div id="selectEliminarMaquina" class="selectDivMaquina sep-inf"></div><br>
 	    <div class="form-group">
-	 	<button type="button" name="btnEliminarMaquina" id="btnEliminarMaquina" class="btn btn-primary">Submit</button>
+	 	<button type="button" name="btnEliminarMaquina" id="btnEliminarMaquina" class="btn btn-primary">Aceptar</button>
 		</div>
 	</form>
 
 	<!--Modificar-->
 	<form action="#" id="frmModMaquina" class="pr-5 pl-5">
 	<h1>Formulario de modificación para Máquinas Registradas</h1>	
-	    
-		 <label for="txtMaquina">Selecciona un ID de Máquina del listado:</label>
-	      <select class="form-control" id="txtMaquina">
-	        <option>1</option>
-	        <option>2</option>
-	        <option>3</option>
-	        <option>4</option>
-	      </select>
-
-	      <br>
-	<button type="submit" class="btn btn-primary">Submit</button>
+		 <div id="selectModificarMaquina" class="selectDivMaquina sep-inf"></div><br>
 	</form>
+
+	<form action="#" id="frmModMaquinaSeleccionada"  name="frmModMaquinaSeleccionada" class="pr-5 pl-5">
+		<h1>Formulario de alta para Nuevas Máquinas</h1>
+	  <div class="form-group">
+	    <label for="txtModeloMaquina">Modelo:</label>
+	    <input type="text" class="form-control" id="txtModeloMaquina">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtIDMaquina">ID Maquina:</label>
+	    <input type="text" class="form-control" id="txtIDMaquina">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtNombreMaquina">Nombre:</label>
+	    <input type="text" class="form-control" id="txtNombreMaquina">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtDecMaquina">Descripción:</label>
+	    <input type="text" class="form-control" id="txtDecMaquina">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtPrecioMaquina">Precio del Alquiler:</label>
+	    <input type="text" class="form-control" id="txtPrecioMaquina">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtAveriaMaquina">Avería:</label>
+	    <input type="text" class="form-control" id="txtAveriaMaquina">
+	  </div>
+
+	    <button type="button" name="btnModificarMaquina" id="btnModificarMaquina" class="btn btn-primary">Actualizar</button>
+	</form> 
 
 	<!--Listar-->
 	<form action="#" id="frmListarMaquina">
 	<h1>Listado de todas las máquinas</h1>	
+	<br>
 
 	</form>
 
@@ -290,7 +473,7 @@
 	      </select>
 	   <br>
 
-	    <button type="submit" class="btn btn-primary">Submit</button>
+	    <button type="button" class="btn btn-primary">button</button>
 	</form> 
 
 	<!--Listar-->
@@ -318,7 +501,7 @@
 	    <input type="text" class="form-control" id="txtFechaDevolucion">
 	  </div>
 
-	    <button type="submit" class="btn btn-primary">Submit</button>
+	    <button type="button" class="btn btn-primary">button</button>
 	</form> 
 
 	<!--Listar-->
@@ -338,7 +521,7 @@
 	    <input type="text" class="form-control" id="txtŃumSeguro">
 	  </div>
 
-	    <button type="submit" class="btn btn-primary">Submit</button>
+	    <button type="button" class="btn btn-primary">button</button>
 	</form> 
 
 	<!--Listar-->
@@ -362,8 +545,10 @@
 
 	<!--****************************** Archvos JS de Bootstrap ******************************-->
 	<script src="js/objetos/gestion.js"></script>
+	<script src="js/objetos/empleado.js"></script>
 	<script src="js/objetos/cliente.js"></script>
 	<script src="js/objetos/maquinaria.js"></script>
+	<script src="js/empleados.js"></script>
 	<script src="js/clientes.js"></script>
 	<script src="js/maquinarias.js"></script>
 	<script src="js/funciones.js"></script>
@@ -380,6 +565,3 @@
 
  </body>
  </html>
-
-
-
