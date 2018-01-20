@@ -29,6 +29,19 @@
 	        <a class="dropdown-item" href="#" name="Listar">Listar</a>
 	      </div>
 	    </li>
+		
+		<!--Gestión de Proveedores-->
+	    <li class="nav-item dropdown" id="menuProveedor">
+	      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+	        Proveedores
+	      </a>
+	      <div class="dropdown-menu">
+	        <a class="dropdown-item" href="#" name="Alta">Alta</a>
+	        <a class="dropdown-item" href="#" name="Baja">Baja</a>
+	        <a class="dropdown-item" href="#" name="Modificar">Modificar</a>
+	        <a class="dropdown-item" href="#" name="Listar">Listar</a>
+	      </div>
+	    </li>
 
 	  	<!--Gestión de Clientes-->
 	    <li class="nav-item dropdown" id="menuCliente">
@@ -101,6 +114,129 @@
 	  <div class="col-md-2 d-none d-sm-block"></div>
 	  <div class="col-12 col-md-8">
 	  
+	<!--****************************** Formularios Proveedores ******************************-->
+	<!--Alta-->
+	 <form action="#" id="frmAltaProveedor" name="frmAltaProveedor" class="pr-5 pl-5">
+	 <h1>Formulario de alta para Nuevos Proveedores</h1>
+
+	 <div class="form-group">
+	    <label for="txtCodProveedor">Código:</label>
+	    <input type="text" class="form-control" id="txtCodProveedor">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtDNIProveedor">DNI:</label>
+	    <input type="text" class="form-control" id="txtDNIProveedor">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtNombreProveedor">Nombre:</label>
+	    <input type="text" class="form-control" id="txtNombreProveedor">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtApellidoProveedor">Apellido:</label>
+	    <input type="text" class="form-control" id="txtApellidoProveedor">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtEmpresa">Empresa:</label>
+	    <input type="text" class="form-control" id="txtEmpresa">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtTelefonoProveedor">Teléfono:</label>
+	    <input type="text" class="form-control" id="txtTelefonoProveedor">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtDireccionProveedor">Dirección:</label>
+	    <input type="text" class="form-control" id="txtDireccionProveedor">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtLocalidadProveedor">Localidad:</label>
+	    <input type="text" class="form-control" id="txtLocalidadProveedor">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtCPostalProveedor">C.Postal:</label>
+	    <input type="text" class="form-control" id="txtCPostalProveedor">
+	  </div>
+
+	    <button type="button" class="btn btn-primary" id="btnAnadirProveedor" name="btnAnadirProveedor">Dar de Alta</button>
+	</form> 
+
+	<!--Baja-->
+	<form action="#" id="frmBajaProveedor" name="frmBajaProveedor" class="pr-5 pl-5">
+		<h1>Formulario de baja para Proveedores Regitrados</h1>
+	      <div id="selectEliminarProveedor" class="selectDivProveedor sep-inf"></div><br>
+	    <div class="form-group">
+	    <button type="button" name="btnEliminarProveedor" id="btnEliminarProveedor" class="btn btn-primary">Aceptar</button>
+        </div>
+		
+	</form>
+
+	<!--Modificar-->
+	<form action="#" id="frmModProveedor"  class="pr-5 pl-5">
+		<h1>Modificación de Proveedores Registrados</h1>
+	       <div id="selectModificarProveedor" class="selectDivProveedor sep-inf"></div><br>
+	</form>
+
+	<!--Modificar-->
+	 <form action="#" id="frmModProveedorSeleccionado" name="frmModProveedorSeleccionado" class="pr-5 pl-5">
+	 <h1>Formulario de modificación de Proveedores</h1>
+
+	 <div class="form-group">
+	    <label for="txtCodProveedor">Código:</label>
+	    <input type="text" class="form-control" id="txtCodProveedor">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtDNIProveedor">DNI:</label>
+	    <input type="text" class="form-control" id="txtDNIProveedor">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtNombreProveedor">Nombre:</label>
+	    <input type="text" class="form-control" id="txtNombreProveedor">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtApellidoProveedor">Apellido:</label>
+	    <input type="text" class="form-control" id="txtApellidoProveedor">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtTelefonoProveedor">Teléfono:</label>
+	    <input type="text" class="form-control" id="txtTelefonoProveedor">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtDireccionProveedor">Dirección:</label>
+	    <input type="text" class="form-control" id="txtDireccionProveedor">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtLocalidadProveedor">Localidad:</label>
+	    <input type="text" class="form-control" id="txtLocalidadProveedor">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtCPostalProveedor">C.Postal:</label>
+	    <input type="text" class="form-control" id="txtCPostalProveedor">
+	  </div>
+	      <button type="button" id="btnModificarProveedor" class="btn btn-primary">Actualizar</button>
+	</form> 
+
+	<!--Listar-->
+
+	<form action="#" id="frmListarProveedor"  class="pr-5 pl-5">
+		<h1>Listado de todos los Proveedores Registrados</h1>
+		<br>	
+	</form>
+
+
 
 	<!--****************************** Formularios Empleados ******************************-->
 	<!--Alta-->
@@ -546,9 +682,11 @@
 
 	<!--****************************** Archvos JS de Bootstrap ******************************-->
 	<script src="js/objetos/gestion.js"></script>
+	<script src="js/objetos/proveedor.js"></script>
 	<script src="js/objetos/empleado.js"></script>
 	<script src="js/objetos/cliente.js"></script>
 	<script src="js/objetos/maquinaria.js"></script>
+	<script src="js/proveedores.js"></script>
 	<script src="js/empleados.js"></script>
 	<script src="js/clientes.js"></script>
 	<script src="js/maquinarias.js"></script>

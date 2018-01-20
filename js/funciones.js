@@ -53,16 +53,8 @@ function mostrarMensaje(sTexto,boolean) //El primer parámetro puede ser un Stri
     }
     oMensaje.insertBefore(oAlerta, oMensaje.firstChild);
     setTimeout(function(){oAlerta.classList.add("transicionAlerta");},100);
-
-
-
-    setTimeout(function(){oMensaje.firstChild.classList.remove("transicionAlerta");},3500);
-
-
-    /*setTimeout(function(){
-        oMensaje.lastChild.remove("transicionAlerta");
-        setTimeout(function(){oMensaje.removeChild(oMensaje.firstChild);},500);
-        },3500);*/
+    setTimeout(function(){oMensaje.lastChild.classList.remove("transicionAlerta");},4450);
+    setTimeout(function(){oMensaje.removeChild(oMensaje.lastChild);},4500);
 }
 
 //RELLENAR COMBOS
@@ -75,6 +67,11 @@ function actualizaCombos(sTipo)
 
     switch(sTipo) 
     {
+        case "proveedores":
+            capaSelect = "selectDivProveedor";
+            idSelect = "selectProveedor";
+            arrayDatos = oGestion.proveedores;
+            break;
         case "empleados":
             capaSelect = "selectDivEmpleado";
             idSelect = "selectEmpleado";
@@ -96,7 +93,12 @@ function actualizaCombos(sTipo)
     {
         var oValores = [];
         switch(tipo) 
-        {
+        {   
+            case "proveedor":
+                oValores[0] = array[i].empresa;
+                oValores[1] = array[i].nombre;
+                oValores[2] = array[i].apellido;
+                break;
             case "empleados":
                 oValores[0] = array[i].dniEmpleado;
                 oValores[1] = array[i].nombreEmpleado;
@@ -146,7 +148,7 @@ function actualizaCombos(sTipo)
             var arrayValores = devolverValue(arrayDatos,i,sTipo);
             var oOption = document.createElement("option");
             oOption.value = arrayValores[0];
-            if(sTipo=="clientes"||sTipo=="empleados")
+            if(sTipo=="clientes"|| sTipo=="empleados"|| sTipo=="proveedores")
             {
                 var oTextNode = document.createTextNode(arrayValores[0] + " - " + arrayValores[1] +" "+ arrayValores[2]);
             }

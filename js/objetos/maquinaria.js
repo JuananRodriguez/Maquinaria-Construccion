@@ -14,13 +14,14 @@ function Maquina(sModelo,iIdMaquina, sNombreMaquina, sDescMaquina, iAlquiler, sA
 
 Maquina.prototype.sRowHTML = function() 
 { 
-	var sRow = "";
-	sRow +="<td>"+this.sModelo+"</td>";
-	sRow +="<td>"+this.iIdMaquina+"</td>";
-	sRow +="<td>"+this.sNombreMaquina+"</td>";
-	sRow +="<td>"+this.sDescMaquina+"</td>";
-	sRow +="<td>"+this.iAlquiler+"</td>";
-	sRow +="<td>"+this.sAveria+"</td>";
+	var fila = document.createElement("TR");
 
-	return sRow;
+	fila.insertCell(-1).appendChild(document.createTextNode(this.sModelo));
+	fila.insertCell(-1).appendChild(document.createTextNode(this.iIdMaquina));
+	fila.insertCell(-1).appendChild(document.createTextNode(this.sNombreMaquina));
+	fila.insertCell(-1).appendChild(document.createTextNode(this.sDescMaquina));
+	fila.insertCell(-1).appendChild(document.createTextNode(this.iAlquiler));
+	fila.insertCell(-1).appendChild(document.createTextNode(this.sAveria));
+
+	return fila;
 }

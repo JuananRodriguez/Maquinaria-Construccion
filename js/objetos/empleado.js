@@ -11,19 +11,19 @@ function Empleado(codEmpleado, dniEmpleado, nombreEmpleado, apellidoEmpleado, te
 }
 
 //METODOS:
-Empleado.prototype.sRowHTML = function() 
-{ 
-	var sRow = "";
-		sRow +="<td>"+this.codEmpleado+"</td>";
-		sRow +="<td>"+this.dniEmpleado+"</td>";
-		sRow +="<td>"+this.nombreEmpleado+"</td>";
-		sRow +="<td>"+this.apellidoEmpleado+"</td>";
-		sRow +="<td>"+this.telEmpleado+"</td>";
-		sRow +="<td>"+this.dirEmpleado+"</td>";
-		sRow +="<td>"+this.localidadEmpleado+"</td>";
-		sRow +="<td>"+this.cpEmpleado+"</td>";
+Empleado.prototype.sRowHTML = function() {
 
-		return sRow;
+	var fila = document.createElement("TR");
+
+	fila.insertCell(-1).appendChild(document.createTextNode(this.dniEmpleado));
+	fila.insertCell(-1).appendChild(document.createTextNode(this.nombreEmpleado));
+	fila.insertCell(-1).appendChild(document.createTextNode(this.apellidoEmpleado));
+	fila.insertCell(-1).appendChild(document.createTextNode(this.telEmpleado));
+	fila.insertCell(-1).appendChild(document.createTextNode(this.dirEmpleado));
+	fila.insertCell(-1).appendChild(document.createTextNode(this.localidadEmpleado));
+	fila.insertCell(-1).appendChild(document.createTextNode(this.cpEmpleado));
+
+	return fila;
 }
 
 

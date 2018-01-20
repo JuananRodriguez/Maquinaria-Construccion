@@ -185,28 +185,21 @@ function modificarMaquina()
 }
 
 function tablaMaquinas()
-{	
-	// var oTabla = document.createElement("TABLE");
-	// oTabla.setAttribute("table", "table-striped");
-	// oTabla.id = "tablaListadaMaq";
+{		
+	var oTabla = document.createElement("TABLE");
+	oTabla.setAttribute("class", "table table-striped");
+	oTabla.id = "tablaListada";
 
-	var sTabla = "<table id='tablaListadaMaq' class='table table-striped'>"+
-    "<thead>"+
-      "<tr>"+
-        "<th>Modelo</th>"+
-        "<th>Id. Maquina</th>"+
-        "<th>Nombre</th>"+
-        "<th>Descripción</th>"+
-        "<th>Precio del Alquiler</th>"+
-        "<th>Avería</th>"+
-      "</tr>"+
-    "</thead>"+
-    "<tbody>";
+	var header = oTabla.createTHead();
+	var fila = header.insertRow(0);
+	fila.insertCell(-1).appendChild(document.createTextNode("Modelo"));
+	fila.insertCell(-1).appendChild(document.createTextNode("Id. Maquina"));
+	fila.insertCell(-1).appendChild(document.createTextNode("Nombre"));
+	fila.insertCell(-1).appendChild(document.createTextNode("Descripción"));
+	fila.insertCell(-1).appendChild(document.createTextNode("Precio del Alquiler"));
+	fila.insertCell(-1).appendChild(document.createTextNode("Avería"));
 
-    sTabla += oGestion.sRowHTMLMaquinas();
+	var body = oTabla.appendChild(oGestion.sRowHTMLMaquinas());
 
-    sTabla += "</tbody>"+
-  "</table>"+
-"</div>";
-	return sTabla;
+	return oTabla;	
 }

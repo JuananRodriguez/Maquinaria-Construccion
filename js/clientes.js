@@ -186,36 +186,29 @@ function modificarCliente()
 
 		if(oGestion.modificarCliente(clienteaModificar,oCliente)){
 	    	actualizaCombos("clientes");
-	    	mostrarMensaje("Cliente actualizado");
+	    	mostrarMensaje("Cliente actualizado",true);
 	   }
 	}
 }
 
 function tablaClientes()
 {	
-	// var oTabla = document.createElement("TABLE");
-	// oTabla.setAttribute("table", "table-striped");
-	// oTabla.id = "tablaListada";
+	var oTabla = document.createElement("TABLE");
+	oTabla.setAttribute("class", "table table-striped");
+	oTabla.id = "tablaListada";
 
-	var sTabla = "<table id='tablaListada' class='table table-striped'>"+
-    "<thead>"+
-      "<tr>"+
-        "<th>DNI</th>"+
-        "<th>Nombre</th>"+
-        "<th>Apellidos</th>"+
-        "<th>Teléfono</th>"+
-        "<th>Direccion</th>"+
-        "<th>Localidad</th>"+
-        "<th>C.Postal</th>"+
-      "</tr>"+
-    "</thead>"+
-    "<tbody>";
+	var header = oTabla.createTHead();
+	var fila = header.insertRow(0);
+	fila.insertCell(-1).appendChild(document.createTextNode("DNI"));
+	fila.insertCell(-1).appendChild(document.createTextNode("Nombre"));
+	fila.insertCell(-1).appendChild(document.createTextNode("Apellidos"));
+	fila.insertCell(-1).appendChild(document.createTextNode("Teléfono"));
+	fila.insertCell(-1).appendChild(document.createTextNode("Direccion"));
+	fila.insertCell(-1).appendChild(document.createTextNode("Localidad"));
+	fila.insertCell(-1).appendChild(document.createTextNode("C.Postal"));
 
-    sTabla += oGestion.sRowHTMLClientes();
+	var body = oTabla.appendChild(oGestion.sRowHTMLClientes());
 
-    sTabla += "</tbody>"+
-  "</table>"+
-"</div>";
-	return sTabla;
+	return oTabla;	
 }
 

@@ -5,6 +5,75 @@ function Gestion()
 	this.empleados = [];
     this.clientes = [];
     this.maquinas = [];
+    this.proveedores = [];
+}
+
+//MÉTODOS SOBRE PROVEEDORES
+Gestion.prototype.altaProveedor = function(oProveedor) 
+{
+	var bInsertado = false;
+		if (this.buscarProveedor(oProveedor.dni)==null)
+		{
+			bInsertado = true;
+			this.proveedores.push(oProveedor);
+		}
+	return bInsertado;
+};
+
+Gestion.prototype.buscarProveedor = function(sNif) 
+{
+		var oProveedor = null;
+		var i = 0;
+		
+		while (i < this.proveedores.length && oProveedor == null)
+		{
+			if (this.proveedores[i].dni == sNif)
+			{
+				oProveedor = this.proveedores[i];
+			}
+			i++;
+		}
+		return oProveedor;
+};
+
+Gestion.prototype.eliminarProveedor = function(sNif) 
+{
+	var bEliminado = false;
+		
+	if (this.buscarProveedor(sNif)!=null)
+	{
+		oProveedor = this.buscarProveedor(sNif);
+		var pos = this.proveedores.indexOf(oProveedor);
+		this.proveedores.splice(pos, 1);
+		bEliminado = true;
+	}
+	return bEliminado;
+};
+
+Gestion.prototype.modificarProveedor = function(sNif,oProveedorActualizado) 
+{
+	var bActualizado = false;
+		
+	if (this.buscarProveedor(sNif)!=null)
+	{
+		oProveedor = this.buscarCliente(sNif);
+		var pos = this.proveedores.indexOf(oProveedor);
+		if(sNif == oProveedorActualizado.dni || this.buscarProveedor(oProveedorActualizado.dni)==null){
+			this.proveedores.splice(pos, 1, oProveedorActualizado);
+			bActualizado = true;
+		 }
+	}
+	return bActualizado;
+};
+
+Gestion.prototype.sRowHTMLProveedores = function() 
+{	
+	var oBody = document.createElement("TBODY");
+
+	for (var i=0; i<this.proveedores.length;i++)
+		oBody.appendChild(this.proveedores[i].sRowHTML());
+
+	return oBody;
 }
 
 //MÉTODOS SOBRE EMPLEADOS
@@ -67,14 +136,12 @@ Gestion.prototype.modificarEmpleado = function(sNif,oEmpleadoActualizado)
 
 Gestion.prototype.sRowHTMLEmpleados = function() 
 {	
-	var sRow = "";
+	var oBody = document.createElement("TBODY");
 
-	for (var i=0; i<this.empleados.length;i++){
-		sRow += "<tr>";
-		sRow += this.empleados[i].sRowHTML();
-		sRow += "</tr>";
-	}	
-	return sRow;
+	for (var i=0; i<this.empleados.length;i++)
+		oBody.appendChild(this.empleados[i].sRowHTML());
+
+	return oBody;
 }
 
 
@@ -139,14 +206,12 @@ Gestion.prototype.modificarCliente = function(sNif,oClienteActualizado)
 
 Gestion.prototype.sRowHTMLClientes = function() 
 {	
-	var sRow = "";
+	var oBody = document.createElement("TBODY");
 
-	for (var i=0; i<this.clientes.length;i++){
-		sRow += "<tr>";
-		sRow += this.clientes[i].sRowHTML();
-		sRow += "</tr>";
-	}	
-	return sRow;
+	for (var i=0; i<this.clientes.length;i++)
+		oBody.appendChild(this.clientes[i].sRowHTML());
+
+	return oBody;
 }
 
 
@@ -208,12 +273,10 @@ Gestion.prototype.modificarMaquina = function(iId,oMaquinaActualizada)
 
 Gestion.prototype.sRowHTMLMaquinas = function() 
 {	
-	var sRow = "";
+	var oBody = document.createElement("TBODY");
 
-	for (var i=0; i<this.maquinas.length;i++){
-		sRow += "<tr>";
-		sRow += this.maquinas[i].sRowHTML();
-		sRow += "</tr>";
-	}	
-	return sRow;
+	for (var i=0; i<this.maquinas.length;i++)
+		oBody.appendChild(this.maquinas[i].sRowHTML());
+
+	return oBody;
 }
