@@ -183,8 +183,9 @@ Gestion.prototype.eliminarCliente = function(sNif)
 	if (this.buscarCliente(sNif)!=null)
 	{
 		oCliente = this.buscarCliente(sNif);
-		var pos = this.clientes.indexOf(oCliente);
-		this.clientes.splice(pos, 1);
+		oCliente.estado=false;
+		//var pos = this.clientes.indexOf(oCliente);
+		//this.clientes.splice(pos, 1);
 		bEliminado = true;
 	}
 	return bEliminado;

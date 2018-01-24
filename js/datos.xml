@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gestion>
+	<clientes>
+		<cliente>
+	        <dni>12345678A</dni>
+	        <nombre>Aabraham</nombre>
+	        <apellidos>Arriola</apellidos>
+	        <tlf>688452541</tlf>
+	        <direccion>Correo001@gmail.com</direccion>
+	        <localidad>09898767654534322110</localidad>
+	        <codPostal>Masculino</codPostal>
+	    </cliente>
+
+	    <cliente>
+	        <dni>12345678A</dni>
+	        <nombre>Aabraham</nombre>
+	        <apellidos>Arriola</apellidos>
+	        <tlf>688452541</tlf>
+	        <direccion>Correo001@gmail.com</direccion>
+	        <localidad>09898767654534322110</localidad>
+	        <codPostal>Masculino</codPostal>
+	    </cliente>
+
+	    <cliente>
+	        <dni>12345678A</dni>
+	        <nombre>Aabraham</nombre>
+	        <apellidos>Arriola</apellidos>
+	        <tlf>688452541</tlf>
+	        <direccion>Correo001@gmail.com</direccion>
+	        <localidad>09898767654534322110</localidad>
+	        <codPostal>Masculino</codPostal>
+	    </cliente>
+
+	    <cliente>
+	        <dni>12345678A</dni>
+	        <nombre>Aabraham</nombre>
+	        <apellidos>Arriola</apellidos>
+	        <tlf>688452541</tlf>
+	        <direccion>Correo001@gmail.com</direccion>
+	        <localidad>09898767654534322110</localidad>
+	        <codPostal>Masculino</codPostal>
+	    </cliente>
+
+	    <cliente>
+	        <dni>12345678A</dni>
+	        <nombre>Aabraham</nombre>
+	        <apellidos>Arriola</apellidos>
+	        <tlf>688452541</tlf>
+	        <direccion>Correo001@gmail.com</direccion>
+	        <localidad>09898767654534322110</localidad>
+	        <codPostal>Masculino</codPostal>
+	    </cliente>
+
+	    <cliente>
+	        <dni>12345678A</dni>
+	        <nombre>Aabraham</nombre>
+	        <apellidos>Arriola</apellidos>
+	        <tlf>688452541</tlf>
+	        <direccion>Correo001@gmail.com</direccion>
+	        <localidad>09898767654534322110</localidad>
+	        <codPostal>Masculino</codPostal>
+	    </cliente>
+
+	    <cliente>
+	        <dni>12345678A</dni>
+	        <nombre>Aabraham</nombre>
+	        <apellidos>Arriola</apellidos>
+	        <tlf>688452541</tlf>
+	        <direccion>Correo001@gmail.com</direccion>
+	        <localidad>09898767654534322110</localidad>
+	        <codPostal>Masculino</codPostal>
+	    </cliente>
+
+	    <cliente>
+	        <dni>12345678A</dni>
+	        <nombre>Aabraham</nombre>
+	        <apellidos>Arriola</apellidos>
+	        <tlf>688452541</tlf>
+	        <direccion>Correo001@gmail.com</direccion>
+	        <localidad>09898767654534322110</localidad>
+	        <codPostal>Masculino</codPostal>
+	    </cliente>
+	</clientes>
+</gestion>

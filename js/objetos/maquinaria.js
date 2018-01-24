@@ -8,6 +8,7 @@ function Maquina(sModelo,iIdMaquina, sNombreMaquina, sDescMaquina, iAlquiler, sA
     this.sDescMaquina = sDescMaquina;
     this.iAlquiler =  iAlquiler;
     this.sAveria = sAveria;
+    this.estado = true;
 }
 
 //METODOS: 
