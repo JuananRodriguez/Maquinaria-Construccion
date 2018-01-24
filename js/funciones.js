@@ -94,8 +94,8 @@ function actualizaCombos(sTipo)
         var oValores = [];
         switch(tipo) 
         {   
-            case "proveedor":
-                oValores[0] = array[i].empresa;
+            case "proveedores":
+                oValores[0] = array[i].dni;
                 oValores[1] = array[i].nombre;
                 oValores[2] = array[i].apellido;
                 break;

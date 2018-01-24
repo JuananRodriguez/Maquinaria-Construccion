@@ -155,18 +155,19 @@ function eliminarProveedor()
 
 function camposFormModificarProveedor()
 {
-	var dniClienteModificar = document.getElementById("selectModificarCliente").firstChild.value;
-	var antiguoCliente = oGestion.buscarCliente(dniClienteModificar);
+	var dniProveedorModificar = document.getElementById("selectModificarProveedor").firstChild.value;
+	var antiguoProveedor = oGestion.buscarProveedor(dniProveedorModificar);
 
-	CamposFormulario = document.getElementById("frmModClienteSeleccionado").getElementsByTagName("input");
+	CamposFormulario = document.getElementById("frmModProveedorSeleccionado").getElementsByTagName("input");
 
-	CamposFormulario[0].value = antiguoCliente.dniCliente;
-    CamposFormulario[1].value = antiguoCliente.nombreCliente;
-    CamposFormulario[2].value = antiguoCliente.apellidoCliente;
-    CamposFormulario[3].value = antiguoCliente.telClientes;
-    CamposFormulario[4].value = antiguoCliente.dirCliente;
-    CamposFormulario[5].value = antiguoCliente.localidadCliente;
-    CamposFormulario[6].value = antiguoCliente.cpCliente;
+	CamposFormulario[0].value = antiguoProveedor.dni;
+    CamposFormulario[1].value = antiguoProveedor.nombre;
+    CamposFormulario[2].value = antiguoProveedor.apellido;
+    CamposFormulario[3].value = antiguoProveedor.empresa;
+    CamposFormulario[4].value = antiguoProveedor.telefono;
+    CamposFormulario[5].value = antiguoProveedor.direccion;
+    CamposFormulario[6].value = antiguoProveedor.localidad;
+    CamposFormulario[7].value = antiguoProveedor.cPostal;
 
 }
 
@@ -205,12 +206,14 @@ function tablaProveedores()
 	fila.insertCell(-1).appendChild(document.createTextNode("DNI"));
 	fila.insertCell(-1).appendChild(document.createTextNode("Nombre"));
 	fila.insertCell(-1).appendChild(document.createTextNode("Apellidos"));
+	fila.insertCell(-1).appendChild(document.createTextNode("Empresa"));
 	fila.insertCell(-1).appendChild(document.createTextNode("Teléfono"));
 	fila.insertCell(-1).appendChild(document.createTextNode("Direccion"));
 	fila.insertCell(-1).appendChild(document.createTextNode("Localidad"));
 	fila.insertCell(-1).appendChild(document.createTextNode("C.Postal"));
+	fila.insertCell(-1).appendChild(document.createTextNode("Estado"));
 
-	var body = oTabla.appendChild(oGestion.sRowHTMLClientes());
+	var body = oTabla.appendChild(oGestion.sRowHTMLProveedores());
 
 	return oTabla;	
 }
