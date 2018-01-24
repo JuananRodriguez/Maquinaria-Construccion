@@ -43,8 +43,9 @@ Gestion.prototype.eliminarProveedor = function(sNif)
 	if (this.buscarProveedor(sNif)!=null)
 	{
 		oProveedor = this.buscarProveedor(sNif);
-		var pos = this.proveedores.indexOf(oProveedor);
-		this.proveedores.splice(pos, 1);
+		oProveedor.estado=false;
+		// var pos = this.proveedores.indexOf(oProveedor);
+		// this.proveedores.splice(pos, 1);
 		bEliminado = true;
 	}
 	return bEliminado;
@@ -111,8 +112,9 @@ Gestion.prototype.eliminarEmpleado = function(sNif)
 	if (this.buscarEmpleado(sNif)!=null)
 	{
 		oEmpleado = this.buscarEmpleado(sNif);
-		var pos = this.empleados.indexOf(oEmpleado);
-		this.empleados.splice(pos, 1);
+		oEmpleado.estado=false;
+		//var pos = this.empleados.indexOf(oEmpleado);
+		//this.empleados.splice(pos, 1);
 		bEliminado = true;
 	}
 	return bEliminado;

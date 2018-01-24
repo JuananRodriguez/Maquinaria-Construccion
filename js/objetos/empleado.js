@@ -1,6 +1,5 @@
-function Empleado(codEmpleado, dniEmpleado, nombreEmpleado, apellidoEmpleado, telEmpleado, dirEmpleado, localidadEmpleado, cpEmpleado)
+function Empleado(dniEmpleado, nombreEmpleado, apellidoEmpleado, telEmpleado, dirEmpleado, localidadEmpleado, cpEmpleado)
 {
-    this.codEmpleado = codEmpleado;
 		this.dniEmpleado = dniEmpleado;
 		this.nombreEmpleado = nombreEmpleado;
 		this.apellidoEmpleado = apellidoEmpleado;
@@ -8,6 +7,7 @@ function Empleado(codEmpleado, dniEmpleado, nombreEmpleado, apellidoEmpleado, te
 		this.dirEmpleado = dirEmpleado;
 		this.localidadEmpleado = localidadEmpleado;
 		this.cpEmpleado = cpEmpleado;
+		this.estado = true;
 }
 
 //METODOS:
@@ -22,6 +22,10 @@ Empleado.prototype.sRowHTML = function() {
 	fila.insertCell(-1).appendChild(document.createTextNode(this.dirEmpleado));
 	fila.insertCell(-1).appendChild(document.createTextNode(this.localidadEmpleado));
 	fila.insertCell(-1).appendChild(document.createTextNode(this.cpEmpleado));
+	if(this.estado)
+		fila.insertCell(-1).appendChild(document.createTextNode("Activo"));
+	else
+		fila.insertCell(-1).appendChild(document.createTextNode("Inactivo"));
 
 	return fila;
 }

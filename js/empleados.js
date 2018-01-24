@@ -11,9 +11,6 @@ function validarEmpleados(formulario)
 	var bEmpleado = true;
 	var aError = [];  
 
-	//CODIGO
-
-
 	//DNI
 	var dniEmpleado = formulario.txtDNIEmpleado.value.trim();
 	if(oExpRegValidarDni.test(dniEmpleado) == false)
@@ -113,7 +110,6 @@ function anadirEmpleado()
 
 	if(validarEmpleados(formulario))
 	{
-		var codEmpleado = document.frmAltaEmpleado.txtCodEmpleado.value.trim();
 		var dniEmpleado = document.frmAltaEmpleado.txtDNIEmpleado.value.trim();
 		var nombreEmpleado = document.frmAltaEmpleado.txtNombreEmpleado.value.trim();
 		var apellidoEmpleado = document.frmAltaEmpleado.txtApellidoEmpleado.value.trim();
@@ -122,7 +118,7 @@ function anadirEmpleado()
 		var localidadEmpleado = document.frmAltaEmpleado.txtLocalidadEmpleado.value.trim();
 		var cpEmpleado = document.frmAltaEmpleado.txtCPostalEmpleado.value.trim();
 
-		var oEmpleado = new Empleado(codEmpleado, dniEmpleado, nombreEmpleado, apellidoEmpleado, telEmpleado, dirEmpleado, localidadEmpleado, cpEmpleado);
+		var oEmpleado = new Empleado(dniEmpleado, nombreEmpleado, apellidoEmpleado, telEmpleado, dirEmpleado, localidadEmpleado, cpEmpleado);
 
 		var bAltaEmpleado = oGestion.altaEmpleado(oEmpleado);
 
@@ -157,40 +153,40 @@ function eliminarEmpleado()
 
 function camposFormModificarEmpleado()
 {
-	var dniClienteModificar = document.getElementById("selectModificarCliente").firstChild.value;
-	var antiguoCliente = oGestion.buscarCliente(dniClienteModificar);
+	var dniEmpleadoModificar = document.getElementById("selectModificarEmpleado").firstChild.value;
+	var antiguoEmpleado = oGestion.buscarEmpleado(dniEmpleadoModificar);
 
-	CamposFormulario = document.getElementById("frmModClienteSeleccionado").getElementsByTagName("input");
+	CamposFormulario = document.getElementById("frmModEmpleadoSeleccionado").getElementsByTagName("input");
 
-	CamposFormulario[0].value = antiguoCliente.dniCliente;
-    CamposFormulario[1].value = antiguoCliente.nombreCliente;
-    CamposFormulario[2].value = antiguoCliente.apellidoCliente;
-    CamposFormulario[3].value = antiguoCliente.telClientes;
-    CamposFormulario[4].value = antiguoCliente.dirCliente;
-    CamposFormulario[5].value = antiguoCliente.localidadCliente;
-    CamposFormulario[6].value = antiguoCliente.cpCliente;
+	CamposFormulario[0].value = antiguoEmpleado.dniEmpleado;
+    CamposFormulario[1].value = antiguoEmpleado.nombreEmpleado;
+    CamposFormulario[2].value = antiguoEmpleado.apellidoEmpleado;
+    CamposFormulario[3].value = antiguoEmpleado.telEmpleado;
+    CamposFormulario[4].value = antiguoEmpleado.dirEmpleado;
+    CamposFormulario[5].value = antiguoEmpleado.localidadEmpleado;
+    CamposFormulario[6].value = antiguoEmpleado.cpEmpleado;
 
 }
 
 function modificarEmpleado()
 {	
-	formulario=document.frmModClienteSeleccionado;
-	if(validarClientes(formulario)){
-		var dniCliente = formulario.txtDNICliente.value.trim();
-		var nombreCliente = formulario.txtNombreCliente.value.trim();
-		var apellidoCliente = formulario.txtApellidoCliente.value.trim();
-		var telClientes = formulario.txtTelefonoCliente.value.trim();
-		var dirCliente = formulario.txtDireccionCliente.value.trim();
-		var localidadCliente = formulario.txtLocalidadCliente.value.trim();
-		var cpCliente = formulario.txtCPostalCliente.value.trim();
+	formulario=document.frmModEmpleadoSeleccionado;
+	if(validarEmpleados(formulario)){
+		var dniEmpleado = formulario.txtDNIEmpleado.value.trim();
+		var nombreEmpleado = formulario.txtNombreEmpleado.value.trim();
+		var apellidoEmpleado = formulario.txtApellidoEmpleado.value.trim();
+		var telEmpleados = formulario.txtTelefonoEmpleado.value.trim();
+		var dirEmpleado = formulario.txtDireccionEmpleado.value.trim();
+		var localidadEmpleado = formulario.txtLocalidadEmpleado.value.trim();
+		var cpEmpleado = formulario.txtCPostalEmpleado.value.trim();
 
-		var oCliente = new Cliente(dniCliente,nombreCliente, apellidoCliente, telClientes, dirCliente, localidadCliente, cpCliente);
+		var oEmpleado = new Empleado(dniEmpleado,nombreEmpleado, apellidoEmpleado, telEmpleados, dirEmpleado, localidadEmpleado, cpEmpleado);
 
-		var clienteaModificar = document.getElementById("selectModificarCliente").firstChild.value;
+		var EmpleadoaModificar = document.getElementById("selectModificarEmpleado").firstChild.value;
 
-		if(oGestion.modificarCliente(clienteaModificar,oCliente)){
-	    	actualizaCombos("clientes");
-	    	mostrarMensaje("Cliente actualizado");
+		if(oGestion.modificarEmpleado(EmpleadoaModificar,oEmpleado)){
+	    	actualizaCombos("empleados");
+	    	mostrarMensaje("Empleado actualizado",true);
 	   }
 	}
 }
@@ -210,6 +206,7 @@ function tablaEmpleados()
 	fila.insertCell(-1).appendChild(document.createTextNode("Direccion"));
 	fila.insertCell(-1).appendChild(document.createTextNode("Localidad"));
 	fila.insertCell(-1).appendChild(document.createTextNode("C.Postal"));
+	fila.insertCell(-1).appendChild(document.createTextNode("Estado"));
 
 	var body = oTabla.appendChild(oGestion.sRowHTMLEmpleados());
 

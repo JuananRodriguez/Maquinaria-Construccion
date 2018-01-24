@@ -70,12 +70,12 @@ function actualizaCombos(sTipo)
         case "proveedores":
             capaSelect = "selectDivProveedor";
             idSelect = "selectProveedor";
-            arrayDatos = oGestion.proveedores;
+            arrayDatos = obtenerActivos(oGestion.proveedores);
             break;
         case "empleados":
             capaSelect = "selectDivEmpleado";
             idSelect = "selectEmpleado";
-            arrayDatos = oGestion.empleados;
+            arrayDatos = obtenerActivos(oGestion.empleados);
             break;
         case "clientes":
             capaSelect = "selectDivCliente";
@@ -165,4 +165,15 @@ function actualizaCombos(sTipo)
         oSelectClonado=oSelect.cloneNode(true);
         oCapaSelect[i].appendChild(oSelectClonado);
     }
+}
+
+function obtenerActivos(arrayPersonas){
+    var arrayFiltrado = [];
+
+    for (var i = 0; i < arrayPersonas.length; i++) {
+        if(arrayPersonas[i].estado)
+            arrayFiltrado.push(arrayPersonas[i]);
+    }
+
+    return arrayFiltrado;
 }
