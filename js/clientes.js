@@ -9,7 +9,7 @@ oBtnEliminarCliente.addEventListener("click", eliminarCliente, false);
 function validarClientes(formulario)
 {
 	var bCliente = true;
-	var sError = ""; 
+	var aError = []; 
 
 	//DNI
 	var dniCliente = formulario.txtDNICliente.value.trim();
@@ -21,7 +21,7 @@ function validarClientes(formulario)
 			formulario.txtDNICliente.focus();
 		}
 		claseError(formulario, 0);
-		sError += "DNI incorrecto<br>";
+		aError.push("DNI incorrecto");
 	}
 	else
 	{
@@ -38,7 +38,7 @@ function validarClientes(formulario)
 			formulario.txtNombreCliente.focus();
 		}
 		claseError(formulario, 1);
-		sError += "Nombre incorrecto<br>";
+		aError.push("Nombre incorrecto");
 	}
 	else
 	{
@@ -55,7 +55,7 @@ function validarClientes(formulario)
 			formulario.txtApellidoCliente.focus();
 		}
 		claseError(formulario, 2);
-		sError += "Apellidos incorrectos<br>";
+		aError.push("Apellidos incorrectos");
 	}
 	else
 	{
@@ -72,7 +72,7 @@ function validarClientes(formulario)
 			formulario.txtTelefonoCliente.focus();
 		}
 		claseError(formulario, 3);
-		sError += "Teléfono incorrecto<br>";
+		aError.push("Teléfono incorrecto");
 	}
 	else
 	{
@@ -89,11 +89,15 @@ function validarClientes(formulario)
 			formulario.txtCPostalCliente.focus();
 		}
 		claseError(formulario, 6);
-		sError += "Código postal incorrecto<br>";
+		aError.push("Código postal incorrecto");
 	}
 	else
 	{
 		quitarError(formulario, 6);
+	}
+	if(aError.length>0){ // Este If muestra los mensajes de error de la validación. 
+						 //	Los mete en un Div y los manda a MostrarMensaje
+		DeMensajesADiv(aError);
 	}
 	return bCliente;
 }
@@ -121,14 +125,14 @@ function anadirCliente()
 		{
 			actualizaCombos("clientes");
 			sMensaje = "Cliente dado de alta";
-			mostrarMensaje(sMensaje);
+			mostrarMensaje(sMensaje,true);
 			document.frmAltaCliente.reset();			
 		}
 
 		else
 		{
 			sMensaje = "Cliente ya existente";
-			mostrarMensaje(sMensaje);
+			mostrarMensaje(sMensaje,false);
 			claseError(document.frmAltaCliente, 0);
 		}
 	} 
@@ -137,14 +141,14 @@ function anadirCliente()
 function eliminarCliente()
 {
     var clienteEliminar = document.getElementById("selectCliente").value;
-    alert(clienteEliminar);
+    //alert(clienteEliminar);
 
     if(oGestion.eliminarCliente(clienteEliminar)){
     	actualizaCombos("clientes");
-    	mostrarMensaje("Cliente eliminado");
+    	mostrarMensaje("Cliente eliminado",true);
     }
     else
-    	mostrarMensaje("Cliente no existe");
+    	mostrarMensaje("Cliente no existe",false);
 }
 
 function camposFormModificarCliente()
@@ -182,36 +186,29 @@ function modificarCliente()
 
 		if(oGestion.modificarCliente(clienteaModificar,oCliente)){
 	    	actualizaCombos("clientes");
-	    	mostrarMensaje("Cliente actualizado");
+	    	mostrarMensaje("Cliente actualizado",true);
 	   }
 	}
 }
 
 function tablaClientes()
 {	
-	// var oTabla = document.createElement("TABLE");
-	// oTabla.setAttribute("table", "table-striped");
-	// oTabla.id = "tablaListada";
+	var oTabla = document.createElement("TABLE");
+	oTabla.setAttribute("class", "table table-striped");
+	oTabla.id = "tablaListada";
 
-	var sTabla = "<table id='tablaListada' class='table table-striped'>"+
-    "<thead>"+
-      "<tr>"+
-        "<th>DNI</th>"+
-        "<th>Nombre</th>"+
-        "<th>Apellidos</th>"+
-        "<th>Teléfono</th>"+
-        "<th>Direccion</th>"+
-        "<th>Localidad</th>"+
-        "<th>C.Postal</th>"+
-      "</tr>"+
-    "</thead>"+
-    "<tbody>";
+	var header = oTabla.createTHead();
+	var fila = header.insertRow(0);
+	fila.insertCell(-1).appendChild(document.createTextNode("DNI"));
+	fila.insertCell(-1).appendChild(document.createTextNode("Nombre"));
+	fila.insertCell(-1).appendChild(document.createTextNode("Apellidos"));
+	fila.insertCell(-1).appendChild(document.createTextNode("Teléfono"));
+	fila.insertCell(-1).appendChild(document.createTextNode("Direccion"));
+	fila.insertCell(-1).appendChild(document.createTextNode("Localidad"));
+	fila.insertCell(-1).appendChild(document.createTextNode("C.Postal"));
 
-    sTabla += oGestion.sRowHTMLClientes();
+	var body = oTabla.appendChild(oGestion.sRowHTMLClientes());
 
-    sTabla += "</tbody>"+
-  "</table>"+
-"</div>";
-	return sTabla;
+	return oTabla;	
 }
 

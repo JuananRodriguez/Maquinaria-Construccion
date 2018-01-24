@@ -1,36 +1,60 @@
+//Transforma un array dado en un objeto Div con diferentes texto separados por br
+function DeMensajesADiv(arrayMensajes){
+    var oTexto=document.createElement("DIV");
 
-//Activa la clase error en formularios
-function claseError(oForm, iDiv) 
-{
-    var oDiv = oForm.querySelectorAll("div")[iDiv];
-    oDiv.classList.add("has-danger");
+        for(var i=0;i<arrayMensajes.length; i++){
+            var sTexto = document.createTextNode(arrayMensajes[i]);
+            oTexto.appendChild(sTexto);
+            var oSalto=document.createElement("BR");
+            oTexto.appendChild(oSalto);
+        }
 
-    var oInput = oForm.querySelectorAll("input")[iDiv];
-    oInput.classList.add("form-control-danger");
+        mostrarMensaje(oTexto);
 }
 
-//Desactiva la clase error en formularios
-function quitarError(oForm, iDiv) 
+//Activa la clase error en formularios//
+function claseError(oForm, iDiv) 
 {
-    var oDiv = oForm.querySelectorAll("div")[iDiv];
-    oDiv.classList.remove("has-danger");
+    //var oDiv = oForm.querySelectorAll("div")[iDiv];
+    //oDiv.classList.add("has-danger");
 
     var oInput = oForm.querySelectorAll("input")[iDiv];
-    oInput.classList.remove("form-control-danger");
+    oInput.classList.add("is-invalid");
+}
+
+//Desactiva la clase error en formularios//
+function quitarError(oForm, iDiv) 
+{
+    //var oDiv = oForm.querySelectorAll("div")[iDiv];
+    //oDiv.classList.remove("has-danger");
+
+    var oInput = oForm.querySelectorAll("input")[iDiv];
+    oInput.classList.remove("is-invalid");
 }
 
 //Mostrar mensajes
-function mostrarMensaje(sTexto) 
+function mostrarMensaje(sTexto,boolean) //El primer parámetro puede ser un String o un Nodo tipo Div
 {
-  
-  // alert(sTexto);
-  //   if (iCodigoError == 0) {
-  //       toastr.success(sTexto);
-  //   }
-  //   else {
-  //       toastr.error(sTexto);
-  //   }
-   
+    oMensaje = document.querySelector("#mensajes");
+    //oMensaje.classList.add("transicionMensaje");
+    oAlerta = document.createElement("DIV");
+    oAlerta.classList.add("alert");
+    if(boolean)
+        oAlerta.classList.add("alert-success");
+    else
+        oAlerta.classList.add("alert-danger");
+    if(sTexto.nodeName!="DIV"){
+        oTexto = document.createTextNode(sTexto);
+        oAlerta.appendChild(oTexto);
+    }
+
+    else{
+        oAlerta.appendChild(sTexto);
+    }
+    oMensaje.insertBefore(oAlerta, oMensaje.firstChild);
+    setTimeout(function(){oAlerta.classList.add("transicionAlerta");},100);
+    setTimeout(function(){oMensaje.lastChild.classList.remove("transicionAlerta");},4450);
+    setTimeout(function(){oMensaje.removeChild(oMensaje.lastChild);},4500);
 }
 
 //RELLENAR COMBOS
@@ -43,6 +67,11 @@ function actualizaCombos(sTipo)
 
     switch(sTipo) 
     {
+        case "proveedores":
+            capaSelect = "selectDivProveedor";
+            idSelect = "selectProveedor";
+            arrayDatos = oGestion.proveedores;
+            break;
         case "empleados":
             capaSelect = "selectDivEmpleado";
             idSelect = "selectEmpleado";
@@ -64,7 +93,12 @@ function actualizaCombos(sTipo)
     {
         var oValores = [];
         switch(tipo) 
-        {
+        {   
+            case "proveedor":
+                oValores[0] = array[i].empresa;
+                oValores[1] = array[i].nombre;
+                oValores[2] = array[i].apellido;
+                break;
             case "empleados":
                 oValores[0] = array[i].dniEmpleado;
                 oValores[1] = array[i].nombreEmpleado;
@@ -114,7 +148,7 @@ function actualizaCombos(sTipo)
             var arrayValores = devolverValue(arrayDatos,i,sTipo);
             var oOption = document.createElement("option");
             oOption.value = arrayValores[0];
-            if(sTipo=="clientes"||sTipo=="empleados")
+            if(sTipo=="clientes"|| sTipo=="empleados"|| sTipo=="proveedores")
             {
                 var oTextNode = document.createTextNode(arrayValores[0] + " - " + arrayValores[1] +" "+ arrayValores[2]);
             }

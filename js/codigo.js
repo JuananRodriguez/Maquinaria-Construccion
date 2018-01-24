@@ -1,13 +1,15 @@
 var oGestion = new Gestion();
 
 resetForms();
-datosDePueba();
+datosDePrueba();
 
 /************* Añade Datos de Prueba **************/
-function datosDePueba(){
-	var oEmpleado = new Empleado("1","48954566V","DOS", "Rodriguez Martinez", 685097696, "C/Paris", "Montequinto", "41089");
+function datosDePrueba(){
+	oGestion.altaEmpleado(new Empleado("1","48954566V","DOS", "Rodriguez Martinez", 685097696, "C/Paris", "Montequinto", "41089"));
 
-	oGestion.altaEmpleado(oEmpleado);
+	oGestion.altaProveedor(new Proveedor("1","48954566V","DOS", "Rodriguez Martinez","empresa", 685097696, "C/Paris", "Montequinto", "41089"));
+	oGestion.altaProveedor(new Proveedor("10","48951566V","DOS", "Rodriguez Martinez","empresa", 685097696, "C/Paris", "Montequinto", "41089"));
+
 	oGestion.altaCliente(new Cliente("48959266V","UNO", "Rodriguez Martinez", 685097696, "C/Paris", "Montequinto", "41089"));
 	oGestion.altaCliente(new Cliente("48954566V","DOS", "Rodriguez Martinez", 685097696, "C/Paris", "Montequinto", "41089"));
 	oGestion.altaCliente(new Cliente("48955436V","TRES", "Rodriguez Martinez", 685097696, "C/Paris", "Montequinto", "41089"));
@@ -23,10 +25,75 @@ function resetForms(){
 	for (var i = 0; i < AformsSel.length; i++) {
    		AformsSel[i].style.display="none";
    		AformsSel[i].reset();
-    }  
+    }
+
+    var aClases = document.querySelectorAll(".is-invalid");
+
+    for(var i=0;i<aClases.length;i++){
+    	aClases[i].classList.remove("is-invalid");
+    }
 }
 
 /************* Selección de botones ***************/
+
+/**Proveedores**/
+var menuProveedores = document.getElementById("menuProveedor").children[1];
+
+for (var i = 0; i < menuProveedores.children.length; i++) {
+   		menuProveedores.children[i].addEventListener('click',mostrarEnProveedores);
+}
+
+function mostrarEnProveedores(oEvento){
+	var oE = oEvento || window.event;
+	resetForms();
+
+	switch(oE.target.name) 
+	{
+	    case "Alta":
+	        document.getElementById('frmAltaProveedor').style.display="block";
+	        break;
+	    case "Baja":
+	        actualizaCombos("proveedores");
+	        document.getElementById('frmBajaProveedor').style.display="block";
+	        break;
+	    case "Modificar":
+	        actualizaCombos("proveedores");
+	        document.getElementById('frmModProveedor').style.display="block";
+	        break;
+	    default:
+	        document.getElementById('frmListarProveedor').style.display="block";
+	        listarProveedores();
+    }
+}
+
+/*** Proveedor --> MODIFICAR ****/
+var oSelectModificarProveedor = document.getElementById("selectModificarProveedor");
+oSelectModificarProveedor.addEventListener("change", mostrarModificarProveedor, false);
+
+var oBtnModificarProveedor = document.getElementById("btnModificarProveedor");
+oBtnModificarProveedor.addEventListener("click", modificarProveedor, false);
+
+function mostrarModificarProveedor(){
+	var index = oSelectModificarProveedor.firstChild.selectedIndex;
+	if(index!=0){
+		document.getElementById('frmModProveedorSeleccionado').style.display="block";
+		camposFormModificarProveedor();
+	}
+	else
+		document.getElementById('frmModProveedorSeleccionado').style.display="none";
+}
+
+
+/***Proveedor --> LISTAR ****/
+function listarProveedores(){
+	var formListar = document.getElementById("frmListarProveedor");
+	var tablaPrevia = document.getElementById("tablaListada");
+
+	if(tablaPrevia!=null)
+		tablaPrevia.remove();
+	
+	formListar.appendChild(tablaProveedores());
+}
 
 /**Empleados**/
 var menuEmpleados = document.getElementById("menuEmpleado").children[1];
@@ -84,7 +151,7 @@ function listarEmpleados(){
 	if(tablaPrevia!=null)
 		tablaPrevia.remove();
 	
-	formListar.innerHTML += tablaEmpleados();
+	formListar.appendChild(tablaEmpleados());
 }
 
 
@@ -145,7 +212,7 @@ function listarClientes(){
 	if(tablaPrevia!=null)
 		tablaPrevia.remove();
 	
-	formListar.innerHTML += tablaClientes();
+	formListar.appendChild(tablaClientes());
 }
 
 
@@ -201,13 +268,15 @@ function mostrarModificarMaquina(){
 /***Maquina --> LISTAR ****/
 function listarMaquinas(){
 	var formListar = document.getElementById("frmListarMaquina");
-	var tablaPrevia = document.getElementById("tablaListadaMaq");
+	var tablaPrevia = document.getElementById("tablaListada");
 
 	if(tablaPrevia!=null)
 		tablaPrevia.remove();
 	
-	formListar.innerHTML += tablaMaquinas();
+	formListar.appendChild(tablaMaquinas());
 }
+
+
 
 /**Alquiler**/
 var menuAlquiler = document.getElementById("menuAlquileres").children[1];

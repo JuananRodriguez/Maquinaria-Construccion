@@ -9,7 +9,7 @@ oBtnEliminarEmpleado.addEventListener("click", eliminarEmpleado, false);
 function validarEmpleados(formulario)
 {
 	var bEmpleado = true;
-	var sError = ""; 
+	var aError = [];  
 
 	//CODIGO
 
@@ -24,7 +24,7 @@ function validarEmpleados(formulario)
 			formulario.txtDNIEmpleado.focus();
 		}
 		claseError(formulario, 0);
-		sError += "DNI incorrecto<br>";
+		aError.push("DNI incorrecto");
 	}
 	else
 	{
@@ -41,7 +41,7 @@ function validarEmpleados(formulario)
 			formulario.txtNombreEmpleado.focus();
 		}
 		claseError(formulario, 1);
-		sError += "Nombre incorrecto<br>";
+		aError.push("Nombre incorrecto");
 	}
 	else
 	{
@@ -58,7 +58,7 @@ function validarEmpleados(formulario)
 			formulario.txtApellidoEmpleado.focus();
 		}
 		claseError(formulario, 2);
-		sError += "Apellidos incorrectos<br>";
+		aError.push("Apellidos incorrectos");
 	}
 	else
 	{
@@ -75,7 +75,7 @@ function validarEmpleados(formulario)
 			formulario.txtTelefonoEmpleado.focus();
 		}
 		claseError(formulario, 3);
-		sError += "Teléfono incorrecto<br>";
+		aError.push("Teléfono incorrecto");
 	}
 	else
 	{
@@ -92,11 +92,16 @@ function validarEmpleados(formulario)
 			formulario.txtCPostalEmpleado.focus();
 		}
 		claseError(formulario, 6);
-		sError += "Código postal incorrecto<br>";
+		aError.push("Código postal incorrecto");
 	}
 	else
 	{
 		quitarError(formulario, 6);
+	}
+
+	if(aError.length>0){ // Este If muestra los mensajes de error de la validación. 
+						 //	Los mete en un Div y los manda a MostrarMensaje
+		DeMensajesADiv(aError);
 	}
 	return bEmpleado;
 }
@@ -144,10 +149,10 @@ function eliminarEmpleado()
     if(oGestion.eliminarEmpleado(empleadoEliminar))
     {
     	actualizaCombos("empleados");
-    	mostrarMensaje("Empleado eliminado");
+    	mostrarMensaje("Empleado eliminado",true);
     }
     else
-    	mostrarMensaje("Empleado no existe");
+    	mostrarMensaje("Empleado no existe",false);
 }
 
 function camposFormModificarEmpleado()
@@ -192,28 +197,21 @@ function modificarEmpleado()
 
 function tablaEmpleados()
 {	
-	// var oTabla = document.createElement("TABLE");
-	// oTabla.setAttribute("table", "table-striped");
-	// oTabla.id = "tablaListada";
+	var oTabla = document.createElement("TABLE");
+	oTabla.setAttribute("class", "table table-striped");
+	oTabla.id = "tablaListada";
 
-	var sTabla = "<table id='tablaListada' class='table table-striped'>"+
-    "<thead>"+
-      "<tr>"+
-        "<th>DNI</th>"+
-        "<th>Nombre</th>"+
-        "<th>Apellidos</th>"+
-        "<th>Teléfono</th>"+
-        "<th>Direccion</th>"+
-        "<th>Localidad</th>"+
-        "<th>C.Postal</th>"+
-      "</tr>"+
-    "</thead>"+
-    "<tbody>";
+	var header = oTabla.createTHead();
+	var fila = header.insertRow(0);
+	fila.insertCell(-1).appendChild(document.createTextNode("DNI"));
+	fila.insertCell(-1).appendChild(document.createTextNode("Nombre"));
+	fila.insertCell(-1).appendChild(document.createTextNode("Apellidos"));
+	fila.insertCell(-1).appendChild(document.createTextNode("Teléfono"));
+	fila.insertCell(-1).appendChild(document.createTextNode("Direccion"));
+	fila.insertCell(-1).appendChild(document.createTextNode("Localidad"));
+	fila.insertCell(-1).appendChild(document.createTextNode("C.Postal"));
 
-    sTabla += oGestion.sRowHTMLEmpleados();
+	var body = oTabla.appendChild(oGestion.sRowHTMLEmpleados());
 
-    sTabla += "</tbody>"+
-  "</table>"+
-"</div>";
-	return sTabla;
+	return oTabla;	
 }

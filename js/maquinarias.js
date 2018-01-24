@@ -9,7 +9,7 @@ oBtnEliminarMaquinaria.addEventListener("click", eliminarMaquinaria, false);
 function validarMaquina(formulario)
 {
 	var bMaquina = true;
-	var sError = ""; 
+	var aError = []; 
 
 	//MODELO
 	var modMaquina = formulario.txtModeloMaquina.value.trim();
@@ -21,7 +21,7 @@ function validarMaquina(formulario)
 			formulario.txtModeloMaquina.focus();
 		}
 		claseError(formulario, 0);
-		sError += "Modelo incorrecto<br>";
+		aError.push("Modelo incorrecto");
 	}
 	else
 	{
@@ -38,7 +38,7 @@ function validarMaquina(formulario)
 			formulario.txtIDMaquina.focus();
 		}
 		claseError(formulario, 1);
-		sError += "ID incorrecta<br>";
+		aError.push("ID incorrecta");
 	}
 	else
 	{
@@ -55,7 +55,7 @@ function validarMaquina(formulario)
 			formulario.txtNombreMaquina.focus();
 		}
 		claseError(formulario, 2);
-		sError += "El nombre no es válido<br>";
+		aError.push("El nombre no es válido");
 	}
 	else
 	{
@@ -72,7 +72,7 @@ function validarMaquina(formulario)
 			formulario.txtDecMaquina.focus();
 		}
 		claseError(formulario, 3);
-		sError += "La descripción no es válida<br>";
+		aError.push("La descripción no es válida");
 	}
 	else
 	{
@@ -89,11 +89,16 @@ function validarMaquina(formulario)
 			formulario.txtPrecioMaquina.focus();
 		}
 		claseError(formulario, 4);
-		sError += "No es un precio válido<br>";
+		aError.push("No es un precio válido");
 	}
 	else
 	{
 		quitarError(formulario, 4);
+	}
+
+	if(aError.length>0){ // Este If muestra los mensajes de error de la validación. 
+						 //	Los mete en un Div y los manda a MostrarMensaje
+		DeMensajesADiv(aError);
 	}
 	return bMaquina;
 }
@@ -135,9 +140,9 @@ function eliminarMaquinaria()
 {
     var maquinaEliminar = document.getElementById("selectMaquina").value;
     if(oGestion.eliminarMaquina(maquinaEliminar))
-    	mostrarMensaje("Maquina eliminada");
+    	mostrarMensaje("Maquina eliminada",true);
     else
-    	mostrarMensaje("Maquina no existe");
+    	mostrarMensaje("Maquina no existe",false);
     actualizaCombos("maquinas");
 }
 
@@ -180,28 +185,21 @@ function modificarMaquina()
 }
 
 function tablaMaquinas()
-{	
-	// var oTabla = document.createElement("TABLE");
-	// oTabla.setAttribute("table", "table-striped");
-	// oTabla.id = "tablaListadaMaq";
+{		
+	var oTabla = document.createElement("TABLE");
+	oTabla.setAttribute("class", "table table-striped");
+	oTabla.id = "tablaListada";
 
-	var sTabla = "<table id='tablaListadaMaq' class='table table-striped'>"+
-    "<thead>"+
-      "<tr>"+
-        "<th>Modelo</th>"+
-        "<th>Id. Maquina</th>"+
-        "<th>Nombre</th>"+
-        "<th>Descripción</th>"+
-        "<th>Precio del Alquiler</th>"+
-        "<th>Avería</th>"+
-      "</tr>"+
-    "</thead>"+
-    "<tbody>";
+	var header = oTabla.createTHead();
+	var fila = header.insertRow(0);
+	fila.insertCell(-1).appendChild(document.createTextNode("Modelo"));
+	fila.insertCell(-1).appendChild(document.createTextNode("Id. Maquina"));
+	fila.insertCell(-1).appendChild(document.createTextNode("Nombre"));
+	fila.insertCell(-1).appendChild(document.createTextNode("Descripción"));
+	fila.insertCell(-1).appendChild(document.createTextNode("Precio del Alquiler"));
+	fila.insertCell(-1).appendChild(document.createTextNode("Avería"));
 
-    sTabla += oGestion.sRowHTMLMaquinas();
+	var body = oTabla.appendChild(oGestion.sRowHTMLMaquinas());
 
-    sTabla += "</tbody>"+
-  "</table>"+
-"</div>";
-	return sTabla;
+	return oTabla;	
 }

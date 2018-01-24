@@ -14,14 +14,15 @@ function Cliente(dniCliente,nombreCliente, apellidoCliente, telClientes, dirClie
 //METODOS:
 Cliente.prototype.sRowHTML = function() 
 { 
-	var sRow = "";
-	sRow +="<td>"+this.dniCliente+"</td>";
-	sRow +="<td>"+this.nombreCliente+"</td>";
-	sRow +="<td>"+this.apellidoCliente+"</td>";
-	sRow +="<td>"+this.telClientes+"</td>";
-	sRow +="<td>"+this.dirCliente+"</td>";
-	sRow +="<td>"+this.localidadCliente+"</td>";
-	sRow +="<td>"+this.cpCliente+"</td>";
+	var fila = document.createElement("TR");
 
-	return sRow;
+	fila.insertCell(-1).appendChild(document.createTextNode(this.dniCliente));
+	fila.insertCell(-1).appendChild(document.createTextNode(this.nombreCliente));
+	fila.insertCell(-1).appendChild(document.createTextNode(this.apellidoCliente));
+	fila.insertCell(-1).appendChild(document.createTextNode(this.telClientes));
+	fila.insertCell(-1).appendChild(document.createTextNode(this.dirCliente));
+	fila.insertCell(-1).appendChild(document.createTextNode(this.localidadCliente));
+	fila.insertCell(-1).appendChild(document.createTextNode(this.cpCliente));
+
+	return fila;
 }
