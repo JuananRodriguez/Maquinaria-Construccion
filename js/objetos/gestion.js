@@ -6,8 +6,7 @@ function Gestion()
     this.clientes = [];
     this.maquinas = [];
     this.proveedores = [];
-    this.alquileres = [];
-    this.devoluciones = [];
+    this.compras = [];
 }
 
 //MÉTODOS SOBRE PROVEEDORES
@@ -92,7 +91,8 @@ Gestion.prototype.altaEmpleado = function(oEmpleado)
 };
 
 Gestion.prototype.buscarEmpleado = function(sNif) 
-{
+{		
+		//console.log(sNif);
 		var oEmpleado = null;
 		var i = 0;
 		
@@ -110,6 +110,7 @@ Gestion.prototype.buscarEmpleado = function(sNif)
 Gestion.prototype.eliminarEmpleado = function(sNif) 
 {
 	var bEliminado = false;
+	//console.log(this.buscarEmpleado(sNif));
 		
 	if (this.buscarEmpleado(sNif)!=null)
 	{
@@ -185,8 +186,9 @@ Gestion.prototype.eliminarCliente = function(sNif)
 	if (this.buscarCliente(sNif)!=null)
 	{
 		oCliente = this.buscarCliente(sNif);
-		var pos = this.clientes.indexOf(oCliente);
-		this.clientes.splice(pos, 1);
+		oCliente.estado=false;
+		//var pos = this.clientes.indexOf(oCliente);
+		//this.clientes.splice(pos, 1);
 		bEliminado = true;
 	}
 	return bEliminado;
@@ -283,101 +285,73 @@ Gestion.prototype.sRowHTMLMaquinas = function()
 		oBody.appendChild(this.maquinas[i].sRowHTML());
 
 	return oBody;
-}
-
-//METODOS SOBRE ALQUILERES
-Gestion.prototype.altaAlquiler = function(oAlquiler)
-{
-	var bInsertado = false;
-		if (this.buscarAlquiler(oAlquiler.idAlquiler)==null)
-		{
-			bInsertado = true;
-			this.alquileres.push(oAlquiler);
-		}
-return bInsertado;
-}
-
-Gestion.prototype.buscarAlquiler = function(id) 
-{
-		var oAlquiler = null;
-		var i = 0;
-		
-		while (i < this.alquileres.length && oAlquiler == null)
-		{
-			if (this.alquileres[i].idAlquiler == id)
-			{
-				oAlquiler = this.alquileres[i];
-			}
-			i++;
-		}
-		return oAlquiler;
-}
-
-Gestion.prototype.modificarAlquileres = function(sId,oAlquilerActualizado) 
-{
-	var bActualizado = false;
-		
-	if (this.buscarAlquiler(sId)!=null)
-	{
-		oAlquiler = this.buscarAlquiler(sId);
-		var pos = this.alquileres.indexOf(oAlquiler);
-		if(sId == oAlquilerActualizado.idAlquiler || this.buscarAlquiler(oAlquilerActualizado.idAlquiler)==null){
-			this.alquileres.splice(pos, 1, oAlquilerActualizado);
-			bActualizado = true;
-		 }
-	}
-	return bActualizado;
 };
 
 
-Gestion.prototype.sRowHTMLAlquileres = function() 
-{	
-	var oBody = document.createElement("TBODY");
-
-	for (var i=0; i<this.alquileres.length;i++)
-		oBody.appendChild(this.alquileres[i].sRowHTML());
-
-	return oBody;
-}
-
-
-//METODOS SOBRE DEVOLUCIONES
-Gestion.prototype.altaDevolucion = function(oDevolucion)
-{
+//METODOS SOBRE COMPRAS
+Gestion.prototype.altaCompra =function(oCompra){
 	var bInsertado = false;
-		if (this.buscarDevolucion(oDevolucion.idAlquiler)==null)
+
+	if (this.buscarCompra(oCompra.id)==null)
 		{
 			bInsertado = true;
-			this.devoluciones.push(oDevolucion);
-			oAlquiler = this.buscarAlquiler(oDevolucion.idAlquiler);
-			oAlquiler.estado = false;
-			this.modificarAlquileres(oDevolucion.idAlquiler, oAlquiler);
+			this.compras.push(oCompra);
 		}
-return bInsertado;
-}
 
-Gestion.prototype.buscarDevolucion = function(id) 
+	return bInsertado;
+};
+
+
+
+Gestion.prototype.buscarCompra = function(iId) 
 {
-		var oDevolucion = null;
+		var oCompra = null;
 		var i = 0;
 		
-		while (i < this.devoluciones.length && oDevolucion == null)
+		while (i < this.compras.length && oCompra == null)
 		{
-			if (this.devoluciones[i].idAlquiler == id)
-			{
-				oDevolucion = this.devoluciones[i];
-			}
+			if (this.compras[i].id == iId)
+				oCompra = this.compras[i];	
 			i++;
 		}
-		return oDevolucion;
-}
+		return oCompra;
+};
 
-Gestion.prototype.sRowHTMLDevoluciones= function() 
+Gestion.prototype.venderCompra= function(iId,fecha,fPrecio)
+{
+	var bEliminado = false;
+		
+	if (this.buscarVenta(iId)!=null)
+	{
+		oVenta = this.buscarVenta(iId);
+		oVenta.estado=false;
+		bEliminado = true;
+	}
+	return bEliminado;
+
+};
+
+Gestion.prototype.buscarVenta = function(iId)
+{
+	var oVenta = null;
+		var i = 0;
+		
+		while (i < this.compras.length && oVenta == null)
+		{
+			if (this.compras[i].id == iId)
+				oVenta = this.compras[i];	
+			i++;
+		}
+		return oVenta;
+
+};
+
+Gestion.prototype.sRowHTMLCompras = function() 
 {	
 	var oBody = document.createElement("TBODY");
 
-	for (var i=0; i<this.devoluciones.length;i++)
-		oBody.appendChild(this.devoluciones[i].sRowHTML());
+	for (var i=0; i<this.compras.length;i++)
+		oBody.appendChild(this.compras[i].sRowHTML());
 
 	return oBody;
-}
+};
