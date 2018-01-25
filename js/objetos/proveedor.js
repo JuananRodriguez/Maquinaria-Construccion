@@ -26,14 +26,10 @@ Proveedor.prototype.sRowHTML = function()
 	fila.insertCell(-1).appendChild(document.createTextNode(this.direccion));
 	fila.insertCell(-1).appendChild(document.createTextNode(this.localidad));
 	fila.insertCell(-1).appendChild(document.createTextNode(this.cPostal));
-	if(this.estado){
+	if(this.estado)
 		fila.insertCell(-1).appendChild(document.createTextNode("Activo"));
-		fila.classList.add("table-success");
-	}
-	else{
+	else
 		fila.insertCell(-1).appendChild(document.createTextNode("Inactivo"));
-		fila.classList.add("table-danger");
-	}
 
 	return fila;
 }
