@@ -1,0 +1,801 @@
+ <!DOCTYPE html>
+ <html>
+ <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/estilo.css">
+	<!-- <link rel="stylesheet" href="css/estilo.css"> -->
+ 	<title>Gestión de Maquinaria Agrícola</title>
+ </head>
+ <body>
+ 	<div id="mensajes"></div>
+ 	 <nav class="navbar navbar-expand-sm bg-dark navbar-dark mb-5">
+	  <!-- Brand -->
+	  <a class="navbar-brand" href="#">Gestión de Maquinaria</a>
+
+	  <!-- Links -->
+	  <ul class="navbar-nav">
+
+		<!--Gestión de Empleados-->
+	    <li class="nav-item dropdown" id="menuEmpleado">
+	      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+	        Empleados
+	      </a>
+	      <div class="dropdown-menu">
+	        <a class="dropdown-item" href="#" name="Alta">Alta</a>
+	        <a class="dropdown-item" href="#" name="Baja">Baja</a>
+	        <a class="dropdown-item" href="#" name="Modificar">Modificar</a>
+	        <a class="dropdown-item" href="#" name="Listar">Listar</a>
+	      </div>
+	    </li>
+		
+		<!--Gestión de Proveedores-->
+	    <li class="nav-item dropdown" id="menuProveedor">
+	      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+	        Proveedores
+	      </a>
+	      <div class="dropdown-menu">
+	        <a class="dropdown-item" href="#" name="Alta">Alta</a>
+	        <a class="dropdown-item" href="#" name="Baja">Baja</a>
+	        <a class="dropdown-item" href="#" name="Modificar">Modificar</a>
+	        <a class="dropdown-item" href="#" name="Listar">Listar</a>
+	      </div>
+	    </li>
+
+	  	<!--Gestión de Clientes-->
+	    <li class="nav-item dropdown" id="menuCliente">
+	      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+	        Clientes
+	      </a>
+	      <div class="dropdown-menu">
+	        <a class="dropdown-item" href="#" name="Alta">Alta</a>
+	        <a class="dropdown-item" href="#" name="Baja">Baja</a>
+	        <a class="dropdown-item" href="#" name="Modificar">Modificar</a>
+	        <a class="dropdown-item" href="#" name="Listar">Listar</a>
+	      </div>
+	    </li>
+
+	    <!--Gestión de Maquinaria-->
+	    <li class="nav-item dropdown" id="menuMaquinaria">
+	      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+	        Maquinaria
+	      </a>
+	      <div class="dropdown-menu">
+	        <a class="dropdown-item" href="#" name="Alta">Alta</a>
+	        <a class="dropdown-item" href="#" name="Baja">Baja</a>
+	        <a class="dropdown-item" href="#" name="Modificar">Modificar</a>
+	        <a class="dropdown-item" href="#" name="Listar">Listar</a>
+	      </div>
+	    </li>
+
+	    <!--Gestión de Compras-->
+	    <li class="nav-item dropdown" id="menuCompra">
+	      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+	        Compras
+	      </a>
+	      <div class="dropdown-menu">
+	        <a class="dropdown-item" href="#" name="Comprar">Comprar</a>
+	        <a class="dropdown-item" href="#" name="Modificar">Modificar</a>
+	        <a class="dropdown-item" href="#" name="Vender">Vender</a>
+	        <a class="dropdown-item" href="#" name="Ver">Ver</a>
+	      </div>
+	    </li>
+
+	    <!--Gestión de Alquileres-->
+	    <li class="nav-item dropdown" id="menuAlquileres">
+	      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+	        Alquileres
+	      </a>
+	      <div class="dropdown-menu">
+	        <a class="dropdown-item" href="#" name="Alta">Registrar</a>
+	        <a class="dropdown-item" href="#" name="Listar">Listar</a>
+	      </div>
+	    </li>
+		
+		<!--Gestión de Devoluciones-->
+	    <li class="nav-item dropdown" id="menuDevoluciones">
+	      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+	        Devoluciones
+	      </a>
+	      <div class="dropdown-menu">
+	        <a class="dropdown-item" href="#" name="Devolver">Devolver</a>
+	        <a class="dropdown-item" href="#" name="Listar">Listar</a>
+	      </div>
+	    </li>
+
+	    <!--Gestión de Alquileres-->
+	    <li class="nav-item dropdown" id="menuPagos">
+	      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+	        Pagos
+	      </a>
+	      <div class="dropdown-menu">
+	        <a class="dropdown-item" href="#" name="Alta">Pago</a>
+	        <a class="dropdown-item" href="#" name="Listar">Listar</a>
+	      </div>
+	    </li>
+
+	    <!--Gestión de Balances-->
+	     <li class="nav-item">
+     		 <a class="nav-link" href="#" id="btnBalance">Balance</a>
+   		 </li>
+
+	  </ul>
+	</nav> 
+
+	<div class="row">
+	  <div class="col-md-2 d-none d-sm-block"></div>
+	  <div class="col-12 col-md-8">
+
+	
+
+	<!--****************************** Formularios Proveedores ******************************-->
+	<!--Alta-->
+	 <form action="#" id="frmAltaProveedor" name="frmAltaProveedor" class="pr-5 pl-5">
+	 <h1>Formulario de alta para Nuevos Proveedores</h1>
+
+	  <div class="form-group">
+	    <label for="txtDNIProveedor">DNI:</label>
+	    <input type="text" class="form-control" id="txtDNIProveedor">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtNombreProveedor">Nombre:</label>
+	    <input type="text" class="form-control" id="txtNombreProveedor">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtApellidoProveedor">Apellido:</label>
+	    <input type="text" class="form-control" id="txtApellidoProveedor">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtEmpresa">Empresa:</label>
+	    <input type="text" class="form-control" id="txtEmpresa">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtTelefonoProveedor">Teléfono:</label>
+	    <input type="text" class="form-control" id="txtTelefonoProveedor">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtDireccionProveedor">Dirección:</label>
+	    <input type="text" class="form-control" id="txtDireccionProveedor">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtLocalidadProveedor">Localidad:</label>
+	    <input type="text" class="form-control" id="txtLocalidadProveedor">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtCPostalProveedor">C.Postal:</label>
+	    <input type="text" class="form-control" id="txtCPostalProveedor">
+	  </div>
+
+	    <button type="button" class="btn btn-primary" id="btnAnadirProveedor" name="btnAnadirProveedor">Dar de Alta</button>
+	</form> 
+
+	<!--Baja-->
+	<form action="#" id="frmBajaProveedor" name="frmBajaProveedor" class="pr-5 pl-5">
+		<h1>Formulario de baja para Proveedores Regitrados</h1>
+	      <div id="selectEliminarProveedor" class="selectDivProveedor sep-inf"></div><br>
+	    <div class="form-group">
+	    <button type="button" name="btnEliminarProveedor" id="btnEliminarProveedor" class="btn btn-primary">Aceptar</button>
+        </div>
+		
+	</form>
+
+	<!--Modificar-->
+	<form action="#" id="frmModProveedor"  class="pr-5 pl-5">
+		<h1>Modificación de Proveedores Registrados</h1>
+	       <div id="selectModificarProveedor" class="selectDivProveedor sep-inf"></div><br>
+	</form>
+
+	<!--Modificar-->
+	 <form action="#" id="frmModProveedorSeleccionado" name="frmModProveedorSeleccionado" class="pr-5 pl-5">
+	 <h1>Formulario de modificación de Proveedores</h1>
+
+	  <div class="form-group">
+	    <label for="txtDNIProveedor">DNI:</label>
+	    <input type="text" class="form-control" id="txtDNIProveedor">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtNombreProveedor">Nombre:</label>
+	    <input type="text" class="form-control" id="txtNombreProveedor">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtApellidoProveedor">Apellido:</label>
+	    <input type="text" class="form-control" id="txtApellidoProveedor">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtEmpresaProveedor">Empresa:</label>
+	    <input type="text" class="form-control" id="txtEmpresaProveedor">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtTelefonoProveedor">Teléfono:</label>
+	    <input type="text" class="form-control" id="txtTelefonoProveedor">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtDireccionProveedor">Dirección:</label>
+	    <input type="text" class="form-control" id="txtDireccionProveedor">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtLocalidadProveedor">Localidad:</label>
+	    <input type="text" class="form-control" id="txtLocalidadProveedor">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtCPostalProveedor">C.Postal:</label>
+	    <input type="text" class="form-control" id="txtCPostalProveedor">
+	  </div>
+	      <button type="button" id="btnModificarProveedor" class="btn btn-primary">Actualizar</button>
+	</form> 
+
+	<!--Listar-->
+
+	<form action="#" id="frmListarProveedor"  class="pr-5 pl-5">
+		<h1>Listado de todos los Proveedores Registrados</h1>
+		<br>	
+	</form>
+
+
+
+	<!--****************************** Formularios Empleados ******************************-->
+	<!--Alta-->
+	 <form action="#" id="frmAltaEmpleado" name="frmAltaEmpleado" class="pr-5 pl-5">
+	 <h1>Formulario de alta para Nuevos Empleados</h1>
+
+	  <div class="form-group">
+	    <label for="txtDNIEmpleado">DNI:</label>
+	    <input type="text" class="form-control" id="txtDNIEmpleado">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtNombreEmpleado">Nombre:</label>
+	    <input type="text" class="form-control" id="txtNombreEmpleado">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtApellidoEmpleado">Apellido:</label>
+	    <input type="text" class="form-control" id="txtApellidoEmpleado">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtTelefonoEmpleado">Teléfono:</label>
+	    <input type="text" class="form-control" id="txtTelefonoEmpleado">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtDireccionEmpleado">Dirección:</label>
+	    <input type="text" class="form-control" id="txtDireccionEmpleado">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtLocalidadEmpleado">Localidad:</label>
+	    <input type="text" class="form-control" id="txtLocalidadEmpleado">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtCPostalEmpleado">C.Postal:</label>
+	    <input type="text" class="form-control" id="txtCPostalEmpleado">
+	  </div>
+
+	    <button type="button" class="btn btn-primary" id="btnAnadirEmpleado" name="btnAnadirEmpleado">Dar de Alta</button>
+	</form> 
+
+	<!--Baja-->
+	<form action="#" id="frmBajaEmpleado" name="frmBajaEmpleado" class="pr-5 pl-5">
+		<h1>Formulario de baja para Empleados Regitrados</h1>
+	      <div id="selectEliminarEmpleado" class="selectDivEmpleado sep-inf"></div><br>
+	    <div class="form-group">
+	    <button type="button" name="btnEliminarEmpleado" id="btnEliminarEmpleado" class="btn btn-primary">Aceptar</button>
+        </div>
+		
+	</form>
+
+	<!--Modificar-->
+	<form action="#" id="frmModEmpleado"  class="pr-5 pl-5">
+		<h1>Modificación de Empleados Registrados</h1>
+	       <div id="selectModificarEmpleado" class="selectDivEmpleado sep-inf"></div><br>
+	</form>
+
+	<!--Modificar-->
+	 <form action="#" id="frmModEmpleadoSeleccionado" name="frmModEmpleadoSeleccionado" class="pr-5 pl-5">
+	 <h1>Formulario de modificación de Empleados</h1>
+
+	  <div class="form-group">
+	    <label for="txtDNIEmpleado">DNI:</label>
+	    <input type="text" class="form-control" id="txtDNIEmpleado">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtNombreEmpleado">Nombre:</label>
+	    <input type="text" class="form-control" id="txtNombreEmpleado">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtApellidoEmpleado">Apellido:</label>
+	    <input type="text" class="form-control" id="txtApellidoEmpleado">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtTelefonoEmpleado">Teléfono:</label>
+	    <input type="text" class="form-control" id="txtTelefonoEmpleado">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtDireccionEmpleado">Dirección:</label>
+	    <input type="text" class="form-control" id="txtDireccionEmpleado">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtLocalidadEmpleado">Localidad:</label>
+	    <input type="text" class="form-control" id="txtLocalidadEmpleado">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtCPostalEmpleado">C.Postal:</label>
+	    <input type="text" class="form-control" id="txtCPostalEmpleado">
+	  </div>
+	      <button type="button" id="btnModificarEmpleado" class="btn btn-primary">Actualizar</button>
+	</form> 
+
+	<!--Listar-->
+
+	<form action="#" id="frmListarEmpleado"  class="pr-5 pl-5">
+		<h1>Listado de todos los Empleados Registrados</h1>
+		<br>	
+	</form>
+
+	<!--****************************** Formularios Cliente ******************************-->
+	<!--Alta-->
+	 <form action="#" id="frmAltaCliente" name="frmAltaCliente" class="pr-5 pl-5">
+	 <h1>Formulario de alta para Nuevos Clientes</h1>
+
+	  <div class="form-group">
+	    <label for="txtDNICliente">DNI:</label>
+	    <input type="text" class="form-control" id="txtDNICliente">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtNombreCliente">Nombre:</label>
+	    <input type="text" class="form-control" id="txtNombreCliente">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtApellidoCliente">Apellido:</label>
+	    <input type="text" class="form-control" id="txtApellidoCliente">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtTelefonoCliente">Teléfono:</label>
+	    <input type="text" class="form-control" id="txtTelefonoCliente">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtDireccionCliente">Dirección:</label>
+	    <input type="text" class="form-control" id="txtDireccionCliente">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtLocalidadCliente">Localidad:</label>
+	    <input type="text" class="form-control" id="txtLocalidadCliente">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtCPostalCliente">C.Postal:</label>
+	    <input type="text" class="form-control" id="txtCPostalCliente">
+	  </div>
+
+	    <button type="button" class="btn btn-primary" id="btnAnadirCliente" name="btnAnadirCliente">Dar de Alta</button>
+	</form> 
+
+	<!--Baja-->
+	<form action="#" id="frmBajaCliente" name="frmBajaCliente" class="pr-5 pl-5">
+		<h1>Formulario de baja para Clientes Regitrados</h1>
+	      <div id="selectEliminarCliente" class="selectDivCliente sep-inf"></div><br>
+	    <div class="form-group">
+	    <button type="button" name="btnEliminarCliente" id="btnEliminarCliente" class="btn btn-primary">Aceptar</button>
+        </div>
+		
+	</form>
+
+	<!--Modificar-->
+	<form action="#" id="frmModCliente"  class="pr-5 pl-5">
+		<h1>Modificación de Clientes Registrados</h1>
+	       <div id="selectModificarCliente" class="selectDivCliente sep-inf"></div><br>
+	</form>
+
+	<!--Modificar-->
+	 <form action="#" id="frmModClienteSeleccionado" name="frmModClienteSeleccionado" class="pr-5 pl-5">
+	 <h1>Formulario de modificación de Clientes</h1>
+
+	  <div class="form-group">
+	    <label for="txtDNICliente">DNI:</label>
+	    <input type="text" class="form-control" id="txtDNICliente">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtNombreCliente">Nombre:</label>
+	    <input type="text" class="form-control" id="txtNombreCliente">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtApellidoCliente">Apellido:</label>
+	    <input type="text" class="form-control" id="txtApellidoCliente">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtTelefonoCliente">Teléfono:</label>
+	    <input type="text" class="form-control" id="txtTelefonoCliente">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtDireccionCliente">Dirección:</label>
+	    <input type="text" class="form-control" id="txtDireccionCliente">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtLocalidadCliente">Localidad:</label>
+	    <input type="text" class="form-control" id="txtLocalidadCliente">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtCPostalCliente">C.Postal:</label>
+	    <input type="text" class="form-control" id="txtCPostalCliente">
+	  </div>
+	      <button type="button" id="btnModificarCliente" class="btn btn-primary">Actualizar</button>
+	</form> 
+
+	<!--Listar-->
+
+	<form action="#" id="frmListarCliente"  class="pr-5 pl-5">
+		<h1>Listado de todos los Clientes Registrados</h1>
+		<br>
+		
+	</form>
+
+	<!--****************************** Formularios Maquinaria ******************************-->
+	<!--Alta-->
+	 <form action="#" id="frmAltaMaquina"  name="frmAltaMaquina" class="pr-5 pl-5">
+		<h1>Formulario de alta para Nuevas Máquinas</h1>
+	  <div class="form-group">
+	    <label for="txtModeloMaquina">Modelo:</label>
+	    <input type="text" class="form-control" id="txtModeloMaquina">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtIDMaquina">ID Maquina:</label>
+	    <input type="text" class="form-control" id="txtIDMaquina">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtNombreMaquina">Nombre:</label>
+	    <input type="text" class="form-control" id="txtNombreMaquina">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtDecMaquina">Descripción:</label>
+	    <input type="text" class="form-control" id="txtDecMaquina">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtPrecioMaquina">Precio del Alquiler:</label>
+	    <input type="text" class="form-control" id="txtPrecioMaquina">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtAveriaMaquina">Avería:</label>
+	    <input type="text" class="form-control" id="txtAveriaMaquina">
+	  </div>
+
+	    <button type="button" name="btnAltaMaquina" id="btnAltaMaquina" class="btn btn-primary">Aceptar</button>
+	</form> 
+
+	<!--Baja-->
+	<form action="#" id="frmBajaMaquina" name="frmBajaMaquina"  class="pr-5 pl-5">
+	<h1>Formulario de baja para Máquinas Registradas</h1>
+	    <div id="selectEliminarMaquina" class="selectDivMaquina sep-inf"></div><br>
+	    <div class="form-group">
+	 	<button type="button" name="btnEliminarMaquina" id="btnEliminarMaquina" class="btn btn-primary">Aceptar</button>
+		</div>
+	</form>
+
+	<!--Modificar-->
+	<form action="#" id="frmModMaquina" class="pr-5 pl-5">
+	<h1>Formulario de modificación para Máquinas Registradas</h1>	
+		 <div id="selectModificarMaquina" class="selectDivMaquina sep-inf"></div><br>
+	</form>
+
+	<form action="#" id="frmModMaquinaSeleccionada"  name="frmModMaquinaSeleccionada" class="pr-5 pl-5">
+		<h1>Formulario de alta para Nuevas Máquinas</h1>
+	  <div class="form-group">
+	    <label for="txtModeloMaquina">Modelo:</label>
+	    <input type="text" class="form-control" id="txtModeloMaquina">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtIDMaquina">ID Maquina:</label>
+	    <input type="text" class="form-control" id="txtIDMaquina">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtNombreMaquina">Nombre:</label>
+	    <input type="text" class="form-control" id="txtNombreMaquina">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtDecMaquina">Descripción:</label>
+	    <input type="text" class="form-control" id="txtDecMaquina">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtPrecioMaquina">Precio del Alquiler:</label>
+	    <input type="text" class="form-control" id="txtPrecioMaquina">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtAveriaMaquina">Avería:</label>
+	    <input type="text" class="form-control" id="txtAveriaMaquina">
+	  </div>
+
+	    <button type="button" name="btnModificarMaquina" id="btnModificarMaquina" class="btn btn-primary">Actualizar</button>
+	</form> 
+
+	<!--Listar-->
+	<form action="#" id="frmListarMaquina">
+	<h1>Listado de todas las máquinas</h1>	
+	<br>
+
+	</form>
+
+	 <!--*******************************Formulario Compras *********************************-->
+	  <!--Comprar-->
+	<form action="#" id="frmComprar" name="frmComprar" class="pr-5 pl-5">
+		<h1>Formulario Comprar Maquinaria</h1>
+
+	  <div class="form-group">
+	    <label for="txtIDComprar">ID de la Compra</label>
+	    <input type="text" class="form-control" id="txtIDComprar">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtFechaComprar">Fecha de Inicio del Alquiler</label>
+	    <input type="date" class="form-control" id="txtFechaComprar">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtCoste">Coste:</label>
+	    <input type="text" class="form-control" id="txtCoste">
+	  </div>
+	  <br>
+
+      <div name="provedor" class="selectDivProveedor sep-inf"></div><br>
+	  <div name="empleado" class="selectDivEmpleado sep-inf"></div><br>
+	  <div name="maquina" class="selectDivMaquina sep-inf"></div><br>
+
+	  <div class="form-group">
+	    <button type="button" name="btnComprar" id="btnComprar" class="btn btn-primary">Realizar Compra</button>
+      </div>
+		
+	</form>
+	 <!--Modificar Compra-->
+	<form action="#" id="frmModificarCompra" name="frmModificarCompra" class="pr-5 pl-5">
+		<h1>Formulario Modificar Compra</h1>
+		<br>
+		 <div id="selectModificarMaquina" class="selectDivCompra sep-inf"></div><br>
+	    <div class="form-group">
+		</div>
+
+	</form>
+	<!--Modificar Abierto Compra-->
+	<form action="#" id="frmModificarCompraAbierto" name="frmModificarCompraAbierto" class="pr-5 pl-5">
+	  <div class="form-group">
+	    <label for="txtIDComprar">ID de la Compra</label>
+	    <input type="text" class="form-control" id="txtIDComprar">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtFechaComprar">Fecha de Inicio del Alquiler</label>
+	    <input type="date" class="form-control" id="txtFechaComprar">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtCoste">Coste:</label>
+	    <input type="text" class="form-control" id="txtCoste">
+	  </div>
+	  <br>
+
+      <div name="provedor" class="selectDivProveedor sep-inf"></div><br>
+	  <div name="empleado" class="selectDivEmpleado sep-inf"></div><br>
+	  <div name="maquina" class="selectDivMaquina sep-inf"></div><br>
+
+	  <div class="form-group">
+	    <button type="button" name="btnComprar" id="btnComprar" class="btn btn-primary">Actualizar Compra</button>
+      </div>
+   </form>
+    <!--Venta-->
+    <form action="#" id="frmVenta" name="frmVenta"  class="pr-5 pl-5">
+		<h1>Formulario de Venta de Maquinaria Adquirida</h1>
+		<br>
+		 <div id="selectVenderMaquina" class="selectDivCompra sep-inf"></div><br>
+		
+		<div class="form-group">
+		    <label for="txtFechaVenta">Fecha de la Venta</label>
+		    <input type="date" class="form-control" name="txtFechaVenta" id="txtFechaVenta">
+	 	</div>
+
+
+	    <div class="form-group">
+		    <label for="txtPrecio">Precio de Venta:</label>
+		    <input type="text" class="form-control" name="txtPrecio"  id="txtPrecio">
+	    </div>
+
+	 	<button type="button" name="venderMaquina" id="btnVenderMaquina" class="btn btn-primary">Vender</button>
+		</div>	
+	</form>
+
+    <!--Listar-->
+    <form action="#" id="frmListarCompras"  class="pr-5 pl-5">
+		<h1>Listado de todas las Compras y Ventas Registradas</h1>
+		<br>	
+	</form>
+
+	
+
+	<!--****************************** Formularios Alquileres ******************************-->
+	<!--Alta-->
+	<form action="#" id="frmAltaAlquiler" class="pr-5 pl-5">
+	<h1>Formulario de Alta de Alquiler</h1>
+	  <div class="form-group">
+	    <label for="txtIDAlquiler">ID del Alquiler</label>
+	    <input type="text" class="form-control" id="txtIDAlquiler">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtFechaIniAlquiler">Fecha de Inicio del Alquiler</label>
+	    <input type="date" class="form-control" id="txtFechaIniAlquiler">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtFechaFinAlquiler">Fecha de Fin del Alquiler</label>
+	    <input type="date" class="form-control" id="txtFechaFinAlquiler">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtImporteAlquiler">Importe</label>
+	    <input type="text" class="form-control" id="txtImporteAlquiler">
+	  </div>
+
+	  <label for="txtDNICliAlquiler">DNI del Cliente (debe existir previamente)</label>
+	      <select class="form-control" id="txtDNICliAlquiler">
+	        <option>1</option>
+	        <option>2</option>
+	        <option>3</option>
+	        <option>4</option>
+	      </select>
+	   <br>
+
+	  <label for="txtIDMaqAlquiler">ID de la Máquina (debe existir previamente)</label>
+	      <select class="form-control" id="txtIDMaqAlquiler">
+	        <option>1</option>
+	        <option>2</option>
+	        <option>3</option>
+	        <option>4</option>
+	      </select>
+	   <br>
+
+	  <label for="txtDNIEmpAlquiler">DNI del empleado (debe existir previamente)</label>
+	      <select class="form-control" id="txtDNIEmpAlquiler">
+	        <option>1</option>
+	        <option>2</option>
+	        <option>3</option>
+	        <option>4</option>
+	      </select>
+	   <br>
+
+	    <button type="button" class="btn btn-primary">button</button>
+	</form> 
+
+	<!--Listar-->
+	<form action="#" id="frmListarAlquiler" class="pr-5 pl-5">
+	<h1>Listado de todos los alquileres acaecidos</h1>	
+
+	</form>
+
+	<!--****************************** Formularios Devoluciones ******************************-->
+	<!--Baja-->
+	<form action="#" id="frmDevolucion" class="pr-5 pl-5">
+	<h1>Formulario de Devolución</h1>
+
+		<label for="txtIDAlquiler">ID del Alquiler (debe existir previamente)</label>
+	      <select class="form-control" id="txtIDAlquiler">
+	        <option>1</option>
+	        <option>2</option>
+	        <option>3</option>
+	        <option>4</option>
+	      </select>
+	   <br>
+
+	  <div class="form-group">
+	    <label for="txtFechaDevolucion">Fecha de Devolución</label>
+	    <input type="text" class="form-control" id="txtFechaDevolucion">
+	  </div>
+
+	    <button type="button" class="btn btn-primary">button</button>
+	</form> 
+
+	<!--Listar-->
+	<form action="#" id="frmListarDevolucion" class="pr-5 pl-5">
+	<h1>Listado de todos los alquileres devueltos</h1>	
+
+	</form>
+
+
+	<!--****************************** Formularios Seguro ******************************-->
+	<!--Alta-->
+	<form action="#" id="frmAltaPago" class="pr-5 pl-5">
+	<h1>Ni puta idea de lo que hay que poner aquí</h1>
+
+	  <div class="form-group">
+	    <label for="txtŃumSeguro">Número de Pago:</label>
+	    <input type="text" class="form-control" id="txtŃumSeguro">
+	  </div>
+
+	    <button type="button" class="btn btn-primary">button</button>
+	</form> 
+
+	<!--Listar-->
+	<form action="#" id="frmListarPago" class="pr-5 pl-5">
+	<h1>Listado de todos los pagos</h1>	
+
+	</form>
+
+
+	<!--****************************** Formularios Empleados ******************************-->
+	<!--Listar-->
+	<form action="#" id="frmListarBalance" class="pr-5 pl-5">
+	<h1>Balance de los Pagos/Alquileres</h1>
+	<h2>Filtrar por positivo,negativo o neutro?</h2>	
+
+	</form>
+
+	</div>
+	  <div class="col-md-2 d-none d-sm-block"></div>
+	</div>
+
+	<!--****************************** Archvos JS de Bootstrap ******************************-->
+	<script src="js/objetos/gestion.js"></script>
+	<script src="js/objetos/proveedor.js"></script>
+	<script src="js/objetos/empleado.js"></script>
+	<script src="js/objetos/cliente.js"></script>
+	<script src="js/objetos/compra.js"></script>
+	<script src="js/objetos/maquinaria.js"></script>
+	<script src="js/proveedores.js"></script>
+	<script src="js/compras.js"></script>
+	<script src="js/empleados.js"></script>
+	<script src="js/clientes.js"></script>
+	<script src="js/maquinarias.js"></script>
+	<script src="js/funciones.js"></script>
+	<script src="js/codigo.js"></script>
+	<script src="js/datosDePrueba.js"></script>
+
+	 <!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<!-- Popper JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script> 
+
+ </body>
+ </html>
