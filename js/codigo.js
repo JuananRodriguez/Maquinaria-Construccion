@@ -19,6 +19,42 @@ function resetForms(){
 }
 
 /************* Selección de botones ***************/
+/**Compras**/
+var menuCompras = document.getElementById("menuCompra").children[1];
+
+for (var i = 0; i < menuCompras.children.length; i++) {
+   		menuCompras.children[i].addEventListener('click',mostrarEnCompras);
+}
+
+function mostrarEnCompras(oEvento){
+	var oE = oEvento || window.event;
+	resetForms();
+
+	switch(oE.target.name) 
+	{
+	    case "Comprar":
+	    	actualizaCombos("proveedores");
+	    	actualizaCombos("maquinas");
+	    	actualizaCombos("empleados");
+	        document.getElementById('frmComprar').style.display="block";
+	        break;
+
+	    case "Vender":
+	        actualizaCombos("compras");
+	        document.getElementById('frmVenta').style.display="block";
+	        break;
+
+	    case "Modificar":
+	        actualizaCombos("compras");
+	        document.getElementById('frmModificarCompra').style.display="block";
+	        break;
+
+	    default:
+	        document.getElementById('frmListarCompras').style.display="block";
+	        listarCompras();
+    }
+}
+
 
 /**Proveedores**/
 var menuProveedores = document.getElementById("menuProveedor").children[1];
@@ -260,6 +296,17 @@ function listarMaquinas(){
 	formListar.appendChild(tablaMaquinas());
 }
 
+/**Compras**/
+function listarCompras(){
+	var formListar = document.getElementById("frmListarCompras");
+	var tablaPrevia = document.getElementById("tablaListada");
+
+	if(tablaPrevia!=null)
+		tablaPrevia.remove();
+	
+	formListar.appendChild(tablaCompras());
+
+}
 
 
 /**Alquiler**/
@@ -350,7 +397,6 @@ function mostrarBalance(oEvento){
 
 //-----------EXPRESIONES REGULARES ÚTILES------------
 
-var oExpRegValidarId = /^[0-9]{3}$/;
 var oExpRegValidarNombre = /^[a-zA-Z\s]{3,20}$/;
 var oExpRegValidarTelefono = /^[679][0-9]{8}$/;
 var oExpRegValidarApellidos = /^[a-zA-Z\s]{2,40}$/;
@@ -359,7 +405,7 @@ var oExpRegValidarDuracion = /^[0-9]{2,3}$/;
 var oExpRegValidarIdioma = /^[a-zA-Z]{3,20}$/;
 var oExpRegValidarTitulo = /^[a-zA-Z0-9\s]{3,40}$/;
 var oExpRegValidarNumSegSocial = /^[0-9]{12}$/;
-var oExpRegValidarPrecio = /^[0-9]{1,}\.?[0-9]{0,2}?$/;
+
 var oExpRegValidarFecha = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;
 var oExpRegValidarHora = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
 var oExpRegValidadCapacidad = /^(?!0).*[0-9]{2,3}$/;
@@ -369,3 +415,5 @@ var oExpRegValidarMod = /^[a-zA-Z\s]{3,20}$/;
 var oExpRegValidarIdMaquina = /^[0-9]{3}$/;
 var oExpRegValidarDescripcion = /^[a-zA-Z0-9\s]{10,140}$/;
 var oExpRegValidarPrecioAlq = /^[0-9]{1,}\.?[0-9]{0,2}?$/;
+var oExpRegValidarPrecio = /^[0-9]{1,}\.?[0-9]{0,2}?$/;
+var oExpRegValidarId = /^[0-9]{3}$/;

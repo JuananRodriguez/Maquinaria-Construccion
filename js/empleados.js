@@ -141,7 +141,7 @@ function anadirEmpleado()
 function eliminarEmpleado()
 {
     var empleadoEliminar = document.getElementById("selectEmpleado").value;
-
+   
     if(oGestion.eliminarEmpleado(empleadoEliminar))
     {
     	actualizaCombos("empleados");
