@@ -5,19 +5,14 @@ datosDePrueba();
 
 /************* Añade Datos de Prueba **************/
 function datosDePrueba(){
-// 	oGestion.altaEmpleado(new Empleado("48954566V","DOS", "Rodriguez Martinez", 685097696, "C/Paris", "Montequinto", "41089"));
-// 	oGestion.altaEmpleado(new Empleado("77812141","OCHO", "rrrrrr rrtrrr", 685097696, "C/Paris", "Montequinto", "41089"));
 
-// 	oGestion.altaProveedor(new Proveedor("48954566V","DOS", "Rodriguez Martinez","empresa", 685097696, "C/Paris", "Montequinto", "41089"));
-// 	oGestion.altaProveedor(new Proveedor("48951566V","DOS", "Rodriguez Martinez","empresa", 685097696, "C/Paris", "Montequinto", "41089"));
-
-// 	oGestion.altaCliente(new Cliente("48959266V","UNO", "Rodriguez Martinez", 685097696, "C/Paris", "Montequinto", "41089"));
-// 	oGestion.altaCliente(new Cliente("48954566V","DOS", "Rodriguez Martinez", 685097696, "C/Paris", "Montequinto", "41089"));
-// 	oGestion.altaCliente(new Cliente("48955436V","TRES", "Rodriguez Martinez", 685097696, "C/Paris", "Montequinto", "41089"));
-
- 	oGestion.altaMaquina(new Maquina("ROBOCOCA","200", "ROBOCOCA 2000", "oh blanca navidad", 75, "ninguna"));
+ 	oGestion.altaMaquina(new Maquina("ROBOCOCA", 200, "ROBOCOCA 2000", "oh blanca navidad", 75, "ninguna"));
 
  	oGestion.altaAlquiler(new Alquiler("A-1","2018-12-27", "2018-12-28", "700", "48959266V", "200", "48954566V"));
+
+ 	oGestion.altaCompra(new Compra("T-1","2018-12-27", 700, 200, "25478565G", "48954566V"));
+
+ 	//oGestion.altaVenta(new Venta("T-2","2018-12-27", 700, 200, "25478565G", "48954566V"));
  }
 
 
@@ -61,7 +56,9 @@ function mostrarEnCompras(oEvento)
 	        break;
 
 	    case "Vender":
-	        actualizaCombos("compras");
+	        actualizaCombos("empleados");
+	    	actualizaCombos("maquinas");
+	    	actualizaCombos("clientes");
 	        document.getElementById('frmVenta').style.display="block";
 	        break;
 
@@ -72,7 +69,7 @@ function mostrarEnCompras(oEvento)
 
 	    default:
 	        document.getElementById('frmListarCompras').style.display="block";
-	        listarCompras();
+	        listarTransacciones();
     }
 }
 
@@ -156,7 +153,7 @@ function mostrarEnEmpleados(oEvento){
 	        document.getElementById('frmBajaEmpleado').style.display="block";
 	        break;
 	    case "Modificar":
-	        actualizaCombos("empleados");
+	        actualizaCombosTodos("empleados");
 	        document.getElementById('frmModEmpleado').style.display="block";
 	        break;
 	    default:
@@ -318,14 +315,14 @@ function listarMaquinas(){
 
 
 /**Compras**/
-function listarCompras(){
+function listarTransacciones(){
 	var formListar = document.getElementById("frmListarCompras");
 	var tablaPrevia = document.getElementById("tablaListada");
 
 	if(tablaPrevia!=null)
 		tablaPrevia.remove();
 	
-	formListar.appendChild(tablaCompras());
+	formListar.appendChild(tablaTransacciones());
 }
 
 
@@ -499,4 +496,4 @@ var oExpRegValidarIdAlquiler = /^([A]{1}-\d+)$/;
 var oExpRegValidarFecha = /^([0-2][0-9]|3[0-1])(\/|-)(0[1-9]|1[0-2])\2(\d{4})$/;
 var oExpRegValidarImporte = /^\d*\.?\d+(,\d+)?/;
 var oExpRegValidarPrecio = /^[0-9]{1,}\.?[0-9]{0,2}?$/;
-var oExpRegValidarId = /^[0-9]{3}$/; 
+var oExpRegValidarIdTransaccion = /^([T]{1}-\d+)$/;

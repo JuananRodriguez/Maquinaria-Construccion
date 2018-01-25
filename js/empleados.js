@@ -125,8 +125,9 @@ function anadirEmpleado()
 		if (bAltaEmpleado) 
 		{
 			actualizaCombos("empleados");
+			actualizaCombosTodos("empleados");
 			sMensaje = "Empleado dado de alta";
-			mostrarMensaje(sMensaje);
+			mostrarMensaje(sMensaje, true);
 			document.frmAltaEmpleado.reset();			
 		}
 		else
@@ -145,6 +146,7 @@ function eliminarEmpleado()
     if(oGestion.eliminarEmpleado(empleadoEliminar))
     {
     	actualizaCombos("empleados");
+    	actualizaCombosTodos("empleados");
     	mostrarMensaje("Empleado eliminado",true);
     }
     else
@@ -184,8 +186,10 @@ function modificarEmpleado()
 
 		var EmpleadoaModificar = document.getElementById("selectModificarEmpleado").firstChild.value;
 
-		if(oGestion.modificarEmpleado(EmpleadoaModificar,oEmpleado)){
+		if(oGestion.modificarEmpleado(EmpleadoaModificar,oEmpleado))
+		{
 	    	actualizaCombos("empleados");
+	    	actualizaCombosTodos("empleados");
 	    	mostrarMensaje("Empleado actualizado",true);
 	   }
 	}

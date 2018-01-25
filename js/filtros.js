@@ -1,5 +1,6 @@
 
 var ordenarEstados=0;
+var ordenarTransaccion=0;
 var arrayBooleanos=[];
 function ordenarActivos(formulario){
 
@@ -27,6 +28,36 @@ function ordenarActivos(formulario){
 	}
 	else{
 		ordenarEstados=0;
+		mostrarMensaje("Mostrando Todos",true);
+	}
+}
+
+function ordenarTransacciones(formulario){
+
+	var tabla = formulario.getElementsByTagName("table")[0];
+	var filas = tabla.getElementsByTagName("tr");
+	removeClassAll("invisible");
+
+	if(ordenarTransaccion==0){
+		for (var i = 1; i < filas.length; i++) {
+			if (filas[i].lastChild.textContent == "VENTA"){
+				filas[i].classList.add("invisible");
+			}
+		}
+		ordenarTransaccion=1;
+		mostrarMensaje("Mostrando sólo las Compras",false);
+	}
+	else if(ordenarTransaccion==1){
+		for (var i = 1; i < filas.length; i++) {
+			if (filas[i].lastChild.textContent == "COMPRA"){
+				filas[i].classList.add("invisible");
+			}
+		}
+		ordenarTransaccion=2;
+		mostrarMensaje("Mostrando sólo las Ventas",true);
+	}
+	else{
+		ordenarTransaccion=0;
 		mostrarMensaje("Mostrando Todos",true);
 	}
 }

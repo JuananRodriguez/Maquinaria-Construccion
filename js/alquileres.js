@@ -173,19 +173,56 @@ function tablaAlquileres()
 	var oTabla = document.createElement("TABLE");
 	oTabla.setAttribute("class", "table table-striped");
 	oTabla.id = "tablaListada";
+	oTabla.setAttribute("name","tablaListada");
 
+	/*Cramos el Header y la Fila Principal*/
 	var header = oTabla.createTHead();
 	var fila = header.insertRow(0);
-	fila.insertCell(-1).appendChild(document.createTextNode("ID"));
-	fila.insertCell(-1).appendChild(document.createTextNode("Fecha Inicio"));
-	fila.insertCell(-1).appendChild(document.createTextNode("Fecha Fin"));
-	fila.insertCell(-1).appendChild(document.createTextNode("Importe"));
-	fila.insertCell(-1).appendChild(document.createTextNode("Cliente"));
-	fila.insertCell(-1).appendChild(document.createTextNode("Maquina"));
-	fila.insertCell(-1).appendChild(document.createTextNode("Empleado"));
-	fila.insertCell(-1).appendChild(document.createTextNode("Estado"));
+
+	/*Creamos las Celdas, con la Función crearCabecera (js/funciones.js)
+	Las celdas estas contienen un A con un event que llaman a la 
+	función Ordenar Fila (js/filtros.js)*/
+	var oFormulario = document.getElementById("frmListarAlquiler");
+
+	crearCabecera(oFormulario,fila,0,"ID");
+	crearCabecera(oFormulario,fila,1,"Fecha Inicio");
+	crearCabecera(oFormulario,fila,2,"Fecha Fin");
+	crearCabecera(oFormulario,fila,3,"Importe");
+	crearCabecera(oFormulario,fila,4,"Cliente");
+	crearCabecera(oFormulario,fila,5,"Maquina");
+	crearCabecera(oFormulario,fila,6,"Empleado");
+
+	/*Finalmente creamos la cabecera de Estado, que tiene la 
+	función ordenarActivos (js/filtros.js)*/
+	var enlaceOrden = document.createElement("A");
+	enlaceOrden.href="#";
+	enlaceOrden.appendChild(document.createTextNode("Estado"));
+	enlaceOrden.addEventListener("click", function(){ordenarActivos(oFormulario)}, false);
+
+	fila.insertCell(-1).appendChild(enlaceOrden);
 
 	var body = oTabla.appendChild(oGestion.sRowHTMLAlquileres());
 
 	return oTabla;	
+
+				/********************/
+
+	// var oTabla = document.createElement("TABLE");
+	// oTabla.setAttribute("class", "table table-striped");
+	// oTabla.id = "tablaListada";
+
+	// var header = oTabla.createTHead();
+	// var fila = header.insertRow(0);
+	// fila.insertCell(-1).appendChild(document.createTextNode("ID"));
+	// fila.insertCell(-1).appendChild(document.createTextNode("Fecha Inicio"));
+	// fila.insertCell(-1).appendChild(document.createTextNode("Fecha Fin"));
+	// fila.insertCell(-1).appendChild(document.createTextNode("Importe"));
+	// fila.insertCell(-1).appendChild(document.createTextNode("Cliente"));
+	// fila.insertCell(-1).appendChild(document.createTextNode("Maquina"));
+	// fila.insertCell(-1).appendChild(document.createTextNode("Empleado"));
+	// fila.insertCell(-1).appendChild(document.createTextNode("Estado"));
+
+	// var body = oTabla.appendChild(oGestion.sRowHTMLAlquileres());
+
+	// return oTabla;	
 }

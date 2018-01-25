@@ -6,7 +6,7 @@ function Gestion()
     this.clientes = [];
     this.maquinas = [];
     this.proveedores = [];
-    this.compras = [];
+    this.transacciones = [];
     this.alquileres = [];
     this.devoluciones = [];
 }
@@ -287,65 +287,52 @@ Gestion.prototype.sRowHTMLMaquinas = function()
 	return oBody;
 }
 
-//METODOS SOBRE COMPRAS
+//METODOS SOBRE TRANSACCIONES
 Gestion.prototype.altaCompra =function(oCompra)
 {
 	var bInsertado = false;
 
-	if (this.buscarCompra(oCompra.id)==null) 
+	if (this.buscarTransaccion(oCompra.id)==null) 
 	{
  			bInsertado = true;
-			this.compras.push(oCompra);
+			this.transacciones.push(oCompra);
 	}
 	return bInsertado;
 }
 
-Gestion.prototype.buscarCompra = function(iId)
+Gestion.prototype.altaVenta =function(oCompra,sId)
+{
+	var bInsertado = false;
+
+	if (this.buscarTransaccion(oCompra.id)==null) 
+	{
+			var oMaquina = this.buscarMaquina(sId);
+			oMaquina.estado = false;
+ 			bInsertado = true;
+			this.transacciones.push(oCompra);
+	}
+	return bInsertado;
+}
+
+Gestion.prototype.buscarTransaccion = function(iId)
 {
 	var oCompra = null;
 	var i = 0;
-	while (i < this.compras.length && oCompra == null)
+	while (i < this.transacciones.length && oCompra == null)
 		{
-			if (this.compras[i].id == iId)
-				oCompra = this.compras[i];	
+			if (this.transacciones[i].id == iId)
+				oCompra = this.transacciones[i];	
 			i++;
  		}
  	return oCompra;
 }
 
-Gestion.prototype.venderCompra= function(iId,fecha,fPrecio)
-{
-	var bEliminado = false;
-	if (this.buscarVenta(iId)!=null)
-	{
-		oVenta = this.buscarVenta(iId);
-		oVenta.estado=false;
-		bEliminado = true;
-	}
-	return bEliminado;
-}
-
-Gestion.prototype.buscarVenta = function(iId)
-{
-	var oVenta = null;
-	var i = 0;
- 		
-	while (i < this.compras.length && oVenta == null)
-	{	
-		if (this.compras[i].id == iId)
-			oVenta = this.compras[i];	
-		i++;
-	}
-	
-	return oVenta;
-}
-
-Gestion.prototype.sRowHTMLCompras = function()
+Gestion.prototype.sRowHTMLTransacciones = function()
 {
 	var oBody = document.createElement("TBODY");
  
-	for (var i=0; i<this.compras.length;i++)
-		oBody.appendChild(this.compras[i].sRowHTML());
+	for (var i=0; i<this.transacciones.length;i++)
+		oBody.appendChild(this.transacciones[i].sRowHTML());
 
 	return oBody;
 }

@@ -25,8 +25,14 @@ Alquiler.prototype.sRowHTML = function()
 	fila.insertCell(-1).appendChild(document.createTextNode(this.idMaquina));
 	fila.insertCell(-1).appendChild(document.createTextNode(this.dniEmpleado));
 	if(this.estado==true)
+	{
 		fila.insertCell(-1).appendChild(document.createTextNode("Activo"));
+		fila.classList.add("table-success");
+	}
 	else
+	{
 		fila.insertCell(-1).appendChild(document.createTextNode("Terminado"));
+		fila.classList.add("table-danger");
+	}
 	return fila;
 }

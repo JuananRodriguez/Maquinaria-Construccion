@@ -1,18 +1,18 @@
 var oBtnComprar = document.frmComprar.btnComprar;
 oBtnComprar.addEventListener("click", anadirCompra, false);
 
-var oBtnVender = document.frmVenta.venderMaquina;
-oBtnVender.addEventListener("click", venderCompra, false);
+var oBtnVender = document.frmVenta.btnVender;
+oBtnVender.addEventListener("click", anadirVenta, false);
 
 
-function validarCompra(formulario){
+function validarTransaccion(formulario,tipo){
 
 	var bCompra = true;
 	var aError = [];  
 
-	//DNI
+	//ID de Transacción
 	var idCompra = formulario.txtIDComprar.value.trim();
-	if(oExpRegValidarId.test(idCompra) == false)
+	if(oExpRegValidarIdTransaccion.test(idCompra) == false)
 	{
 		if(bCompra)
 		{
@@ -64,54 +64,73 @@ function validarCompra(formulario){
 	}
 	//------
 
-	//Proveedor	
-	if(document.getElementById("frmComprar").getElementsByClassName("selectDivProveedor")[0].firstChild.selectedIndex == 0)
+	//Proveedor
+	if(tipo=="compra")
+	if(formulario.getElementsByClassName("selectDivProveedor")[0].firstChild.selectedIndex == 0)
 	{
 		if(bCompra)
 		{
 			bCompra = false;
-			document.getElementById("frmComprar").getElementsByClassName("selectDivProveedor")[0].firstChild.focus();
+			formulario.getElementsByClassName("selectDivProveedor")[0].firstChild.focus();
 		}
-		document.getElementById("frmComprar").getElementsByClassName("selectDivProveedor")[0].firstChild.classList.add("is-invalid");
+		formulario.getElementsByClassName("selectDivProveedor")[0].firstChild.classList.add("is-invalid");
 		aError.push("Debe seleccionar un Proveedor");
 	}
 	else
 	{
-		document.getElementById("frmComprar").getElementsByClassName("selectDivProveedor")[0].firstChild.classList.remove("is-invalid");
+		formulario.getElementsByClassName("selectDivProveedor")[0].firstChild.classList.remove("is-invalid");
 	}
 	//------
 
-	//Empleado	
-	if(document.getElementById("frmComprar").getElementsByClassName("selectDivEmpleado")[0].firstChild.selectedIndex == 0)
+	//Cliente
+	if(tipo=="venta")
+	if(formulario.getElementsByClassName("selectDivCliente")[0].firstChild.selectedIndex == 0)
 	{
 		if(bCompra)
 		{
 			bCompra = false;
-			document.getElementById("frmComprar").getElementsByClassName("selectDivEmpleado")[0].firstChild.focus();
+			formulario.getElementsByClassName("selectDivCliente")[0].firstChild.focus();
 		}
-		document.getElementById("frmComprar").getElementsByClassName("selectDivEmpleado")[0].firstChild.classList.add("is-invalid");
+		formulario.getElementsByClassName("selectDivCliente")[0].firstChild.classList.add("is-invalid");
+		aError.push("Debe seleccionar un Cliente");
+	}
+	else
+	{
+		formulario.getElementsByClassName("selectDivCliente")[0].firstChild.classList.remove("is-invalid");
+	}
+	//-------
+
+	//Empleado	
+	if(formulario.getElementsByClassName("selectDivEmpleado")[0].firstChild.selectedIndex == 0)
+	{
+		if(bCompra)
+		{
+			bCompra = false;
+			formulario.getElementsByClassName("selectDivEmpleado")[0].firstChild.focus();
+		}
+		formulario.getElementsByClassName("selectDivEmpleado")[0].firstChild.classList.add("is-invalid");
 		aError.push("Debe seleccionar un Empleado");
 	}
 	else
 	{
-		document.getElementById("frmComprar").getElementsByClassName("selectDivEmpleado")[0].firstChild.classList.remove("is-invalid");
+		formulario.getElementsByClassName("selectDivEmpleado")[0].firstChild.classList.remove("is-invalid");
 	}
 	//------
 
 	//Maquina	
-	if(document.getElementById("frmComprar").getElementsByClassName("selectDivMaquina")[0].firstChild.selectedIndex == 0)
+	if(formulario.getElementsByClassName("selectDivMaquina")[0].firstChild.selectedIndex == 0)
 	{
 		if(bCompra)
 		{
 			bCompra = false;
-			document.getElementById("frmComprar").getElementsByClassName("selectDivMaquina")[0].firstChild.focus();
+			formulario.getElementsByClassName("selectDivMaquina")[0].firstChild.focus();
 		}
-		document.getElementById("frmComprar").getElementsByClassName("selectDivMaquina")[0].firstChild.classList.add("is-invalid");
+		formulario.getElementsByClassName("selectDivMaquina")[0].firstChild.classList.add("is-invalid");
 		aError.push("Debe seleccionar un Máquina");
 	}
 	else
 	{
-		document.getElementById("frmComprar").getElementsByClassName("selectDivMaquina")[0].firstChild.classList.remove("is-invalid");
+		formulario.getElementsByClassName("selectDivMaquina")[0].firstChild.classList.remove("is-invalid");
 	}
 	//------
 
@@ -131,11 +150,11 @@ function anadirCompra()
 	var sMensaje = "";
 	formulario = document.frmComprar;
 
-	if(validarCompra(formulario))		
+	if(validarTransaccion(formulario,"compra"))		
 	{
-		var iId = parseInt(formulario.txtIDComprar.value.trim());
+		var iId = formulario.txtIDComprar.value.trim();
 		//console.log(Date.parse(formulario.txtFechaComprar.value));
-		var fecha = formulario.txtFechaComprar.value;
+		var fecha = new Date(formulario.txtFechaComprar.value);
 
 		var sEmpleado = document.getElementById("frmComprar").getElementsByClassName("selectDivEmpleado")[0].firstChild.value;
 		var sProveedor = document.getElementById("frmComprar").getElementsByClassName("selectDivProveedor")[0].firstChild.value;
@@ -143,7 +162,7 @@ function anadirCompra()
 
 		var fCoste = parseFloat(formulario.txtCoste.value.trim());
 
-		var oCompra = new Compra(iId,fecha,sEmpleado,sProveedor,iMaquina,fCoste);
+		var oCompra = new Compra(iId,fecha,fCoste,iMaquina,sEmpleado,sProveedor);
 
 		var bAltaCompra = oGestion.altaCompra(oCompra);
 		
@@ -156,7 +175,7 @@ function anadirCompra()
 
 		else
 		{
-			sMensaje = "Hay una compra con el mismo id";
+			sMensaje = "Hay una transaccion con el mismo id";
 			mostrarMensaje(sMensaje,false);
 			claseError(formulario, 0);
 		}
@@ -164,113 +183,82 @@ function anadirCompra()
 
 }
 
-function venderCompra(){
-	
-   formulario = document.frmVenta;
-   if(validarVenta(formulario))		
+function anadirVenta() 
+{	
+
+	var sMensaje = "";
+	formulario = document.frmVenta;
+
+	if(validarTransaccion(formulario,"venta"))		
 	{
-		var iId = parseInt(document.getElementById("selectCompra").value);
-		var fecha = formulario.txtFechaVenta.value;
-		var fPrecio =parseFloat(formulario.txtPrecio.value.trim());
-	    if(oGestion.venderCompra(iId))
-	    {
-	    	actualizaCombos("compras");
-	    	mostrarMensaje("Venta Realizada",true);
-	    }
-	    else
-	    	mostrarMensaje("La venta no se ha podido realizar",false);
-	}
+		var iId = formulario.txtIDComprar.value.trim();
+		//console.log(Date.parse(formulario.txtFechaComprar.value));
+		var fecha = new Date(formulario.txtFechaComprar.value);
 
-    function validarVenta(formulario){
+		var sEmpleado = document.getElementById("frmVenta").getElementsByClassName("selectDivEmpleado")[0].firstChild.value;
+		var sCliente = document.getElementById("frmVenta").getElementsByClassName("selectDivCliente")[0].firstChild.value;
+		var iMaquina = parseInt(document.getElementById("frmVenta").getElementsByClassName("selectDivMaquina")[0].firstChild.value);
 
-    	var bCompra = true;
-		var aError = []; 
-    	//Compra	
-		if(document.getElementById("frmVenta").getElementsByClassName("selectDivCompra")[0].firstChild.selectedIndex == 0)
+		var fCoste = parseFloat(formulario.txtCoste.value.trim());
+
+		var oVenta = new Venta(iId,fecha,fCoste,iMaquina,sEmpleado,sCliente);
+
+		var bAltaVenta = oGestion.altaVenta(oVenta,iMaquina);
+		
+		if (bAltaVenta) 
 		{
-			if(bCompra)
-			{
-				bCompra = false;
-				document.getElementById("frmVenta").getElementsByClassName("selectDivCompra")[0].firstChild.focus();
-			}
-			document.getElementById("frmVenta").getElementsByClassName("selectDivCompra")[0].firstChild.classList.add("is-invalid");
-			aError.push("Debe seleccionar una Venta");
+			sMensaje = "Venta realizada";
+			mostrarMensaje(sMensaje,true);
+			formulario.reset();			
 		}
+
 		else
 		{
-			document.getElementById("frmVenta").getElementsByClassName("selectDivCompra")[0].firstChild.classList.remove("is-invalid");
-		}
-		//------
-
-		//FECHA 
-		var fecha = formulario.txtFechaVenta.value;
-		if(fecha == "")
-		{
-			if(bCompra)
-			{
-				bCompra = false;
-				formulario.txtFechaVenta.focus();
-			}
+			sMensaje = "Hay una transaccion con el mismo id";
+			mostrarMensaje(sMensaje,false);
 			claseError(formulario, 0);
-			aError.push("Debe introducir una fecha");
 		}
-		else
-		{
-			quitarError(formulario, 0);
-		}
-		//------
-
-		//Precio
-		var precio = parseFloat(formulario.txtPrecio.value.trim());
-		if(oExpRegValidarPrecio.test(precio) == false)
-		{
-			if(bCompra)
-			{
-				bCompra = false;
-				formulario.txtPrecio.focus();
-			}
-			claseError(formulario, 1);
-			aError.push("El coste no es válido");
-		}
-		else
-		{
-			quitarError(formulario, 1);
-		}
-		//------
-
-		if(aError.length>0){ // Este If muestra los mensajes de error de la validación. 
-						 //	Los mete en un Div y los manda a MostrarMensaje
-		DeMensajesADiv(aError);
-		}
-
-		//-------
-
-		return bCompra;
-    }
+	}
 
 }
 
-function tablaCompras()
+function tablaTransacciones()
 {	
+	/*Creamos la Tabla*/
 	var oTabla = document.createElement("TABLE");
 	oTabla.setAttribute("class", "table table-striped");
 	oTabla.id = "tablaListada";
+	oTabla.setAttribute("name","tablaListada");
 
+	/*Cramos el Header y la Fila Principal*/
 	var header = oTabla.createTHead();
 	var fila = header.insertRow(0);
-	fila.insertCell(-1).appendChild(document.createTextNode("ID"));
-	fila.insertCell(-1).appendChild(document.createTextNode("Fecha"));
-	fila.insertCell(-1).appendChild(document.createTextNode("Fecha de Venta"));
-	fila.insertCell(-1).appendChild(document.createTextNode("Empleado"));
-	fila.insertCell(-1).appendChild(document.createTextNode("Proveedor"));
-	fila.insertCell(-1).appendChild(document.createTextNode("Máquina"));
-	fila.insertCell(-1).appendChild(document.createTextNode("Coste"));
-	fila.insertCell(-1).appendChild(document.createTextNode("Beneficio"));
-	fila.insertCell(-1).appendChild(document.createTextNode("Estado"));
 
-	var body = oTabla.appendChild(oGestion.sRowHTMLCompras());
+	/*Creamos las Celdas, con la Función crearCabecera (js/funciones.js)
+	Las celdas estas contienen un A con un event que llaman a la 
+	función Ordenar Fila (js/filtros.js)*/
+	var oFormulario = document.getElementById("frmListarCompras");
 
-	return oTabla;	
+	crearCabecera(oFormulario,fila,0,"ID-Transaccion");
+	crearCabecera(oFormulario,fila,1,"Fecha");
+	crearCabecera(oFormulario,fila,2,"Valor");
+	crearCabecera(oFormulario,fila,3,"Id. Máquina");
+	crearCabecera(oFormulario,fila,4,"DNI Empleado");
+	crearCabecera(oFormulario,fila,5,"DNI Proveedor/Cliente");
+
+
+	/*Finalmente creamos la cabecera de Estado, que tiene la 
+	función ordenarActivos (js/filtros.js)*/
+	var enlaceOrden = document.createElement("A");
+	enlaceOrden.href="#";
+	enlaceOrden.appendChild(document.createTextNode("Tipo"));
+	enlaceOrden.addEventListener("click", function(){ordenarTransacciones(oFormulario)}, false);
+
+	fila.insertCell(-1).appendChild(enlaceOrden);
+
+	var body = oTabla.appendChild(oGestion.sRowHTMLTransacciones());
+
+	return oTabla;		
 }
 
 
