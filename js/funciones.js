@@ -80,17 +80,17 @@ function actualizaCombos(sTipo)
         case "clientes":
             capaSelect = "selectDivCliente";
             idSelect = "selectCliente";
-            arrayDatos = obtenerActivos(oGestion.clientes);
+            arrayDatos = oGestion.clientes;
             break;
         case "maquinas":
             capaSelect = "selectDivMaquina";
             idSelect = "selectMaquina";
             arrayDatos = oGestion.maquinas;
             break;
-        case "compras":
-            capaSelect = "selectDivCompra";
-            idSelect = "selectCompra";
-            arrayDatos = obtenerActivos(oGestion.compras);
+        case "alquileres":
+            capaSelect = "selectDivAlquiler";
+            idSelect = "selectAlquiler";
+            arrayDatos = oGestion.alquileres;
             break;
     }
 
@@ -119,10 +119,10 @@ function actualizaCombos(sTipo)
                 oValores[1] = array[i].sNombreMaquina;
                 oValores[2] = array[i].sModelo;
                 break;
-            case "compras":
-                oValores[0] = array[i].id;
-                oValores[1] = array[i].fecha;
-                oValores[2] = array[i].maquina;
+            case "alquileres":
+                oValores[0] = array[i].idAlquiler;
+                oValores[1] = array[i].idMaquina;
+                oValores[2] = array[i].dniCliente;
                 break;
         }
         return oValores;
@@ -158,14 +158,13 @@ function actualizaCombos(sTipo)
             var arrayValores = devolverValue(arrayDatos,i,sTipo);
             var oOption = document.createElement("option");
             oOption.value = arrayValores[0];
-            if(sTipo=="clientes"|| sTipo=="empleados"|| sTipo=="proveedores")
+            if(sTipo=="clientes"|| sTipo=="empleados"|| sTipo=="proveedores"|| sTipo=="alquileres")
             {
                 var oTextNode = document.createTextNode(arrayValores[0] + " - " + arrayValores[1] +" "+ arrayValores[2]);
             }
-            else if(sTipo=="maquinas")
-                var oTextNode = document.createTextNode(" Id: " +arrayValores[0] + " - " + arrayValores[1] +". Mod: "+ arrayValores[2]);
             else
-                var oTextNode = document.createTextNode(" Id: " +arrayValores[0] + " Fch: " + arrayValores[1] +" Maq: "+ arrayValores[2]);
+                var oTextNode = document.createTextNode(" Id: " +arrayValores[0] + " - " + arrayValores[1] +". Mod: "+ arrayValores[2]);
+
             oOption.appendChild(oTextNode);
             oSelect.appendChild(oOption);
         }
@@ -178,7 +177,8 @@ function actualizaCombos(sTipo)
     }
 }
 
-function obtenerActivos(arrayPersonas){
+function obtenerActivos(arrayPersonas)
+{
     var arrayFiltrado = [];
 
     for (var i = 0; i < arrayPersonas.length; i++) {
