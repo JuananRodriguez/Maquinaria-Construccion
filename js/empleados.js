@@ -141,7 +141,7 @@ function anadirEmpleado()
 function eliminarEmpleado()
 {
     var empleadoEliminar = document.getElementById("selectEmpleado").value;
-   
+
     if(oGestion.eliminarEmpleado(empleadoEliminar))
     {
     	actualizaCombos("empleados");
@@ -193,20 +193,37 @@ function modificarEmpleado()
 
 function tablaEmpleados()
 {	
+	/*Creamos la Tabla*/
 	var oTabla = document.createElement("TABLE");
 	oTabla.setAttribute("class", "table table-striped");
 	oTabla.id = "tablaListada";
+	oTabla.setAttribute("name","tablaListada");
 
+	/*Cramos el Header y la Fila Principal*/
 	var header = oTabla.createTHead();
 	var fila = header.insertRow(0);
-	fila.insertCell(-1).appendChild(document.createTextNode("DNI"));
-	fila.insertCell(-1).appendChild(document.createTextNode("Nombre"));
-	fila.insertCell(-1).appendChild(document.createTextNode("Apellidos"));
-	fila.insertCell(-1).appendChild(document.createTextNode("Teléfono"));
-	fila.insertCell(-1).appendChild(document.createTextNode("Direccion"));
-	fila.insertCell(-1).appendChild(document.createTextNode("Localidad"));
-	fila.insertCell(-1).appendChild(document.createTextNode("C.Postal"));
-	fila.insertCell(-1).appendChild(document.createTextNode("Estado"));
+
+	/*Creamos las Celdas, con la Función crearCabecera (js/funciones.js)
+	Las celdas estas contienen un A con un event que llaman a la 
+	función Ordenar Fila (js/filtros.js)*/
+	var oFormulario = document.getElementById("frmListarEmpleado");
+
+	crearCabecera(oFormulario,fila,0,"DNI");
+	crearCabecera(oFormulario,fila,1,"Nombre");
+	crearCabecera(oFormulario,fila,2,"Apellidos");
+	crearCabecera(oFormulario,fila,3,"Telefono");
+	crearCabecera(oFormulario,fila,4,"Direccion");
+	crearCabecera(oFormulario,fila,5,"Localidad");
+	crearCabecera(oFormulario,fila,6,"C.Postal");
+
+	/*Finalmente creamos la cabecera de Estado, que tiene la 
+	función ordenarActivos (js/filtros.js)*/
+	var enlaceOrden = document.createElement("A");
+	enlaceOrden.href="#";
+	enlaceOrden.appendChild(document.createTextNode("Estado"));
+	enlaceOrden.addEventListener("click", function(){ordenarActivos(oFormulario)}, false);
+
+	fila.insertCell(-1).appendChild(enlaceOrden);
 
 	var body = oTabla.appendChild(oGestion.sRowHTMLEmpleados());
 
