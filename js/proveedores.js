@@ -20,12 +20,12 @@ function validarProveedores(formulario)
 			bValido = false;
 			formulario.txtDNIProveedor.focus();
 		}
-		claseError(formulario, 1);
+		claseError(formulario, 0);
 		aError.push("DNI incorrecto");
 	}
 	else
 	{
-		quitarError(formulario, 1);
+		quitarError(formulario, 0);
 	}
 
 	//NOMBRE
@@ -37,12 +37,12 @@ function validarProveedores(formulario)
 			bValido = false;
 			formulario.txtNombreProveedor.focus();
 		}
-		claseError(formulario, 2);
+		claseError(formulario, 1);
 		aError.push("Nombre incorrecto");
 	}
 	else
 	{
-		quitarError(formulario, 2);
+		quitarError(formulario, 1);
 	}
 
 	//APELLIDOS
@@ -54,12 +54,12 @@ function validarProveedores(formulario)
 			bValido = false;
 			formulario.txtApellidoProveedor.focus();
 		}
-		claseError(formulario, 3);
+		claseError(formulario, 2);
 		aError.push("Apellidos incorrectos");
 	}
 	else
 	{
-		quitarError(formulario, 3);
+		quitarError(formulario, 2);
 	}
 
 	//TELEFONO
@@ -71,12 +71,12 @@ function validarProveedores(formulario)
 			bValido = false;
 			formulario.txtTelefonoProveedor.focus();
 		}
-		claseError(formulario, 5);
+		claseError(formulario, 4);
 		aError.push("Teléfono incorrecto");
 	}
 	else
 	{
-		quitarError(formulario, 5);
+		quitarError(formulario, 4);
 	}
 
 	//CP
@@ -88,12 +88,12 @@ function validarProveedores(formulario)
 			bValido = false;
 			formulario.txtCPostalProveedor.focus();
 		}
-		claseError(formulario, 8);
+		claseError(formulario, 7);
 		aError.push("Código postal incorrecto");
 	}
 	else
 	{
-		quitarError(formulario, 8);
+		quitarError(formulario, 7);
 	}
 	if(aError.length>0){ // Este If muestra los mensajes de error de la validación. 
 						 //	Los mete en un Div y los manda a MostrarMensaje
@@ -142,7 +142,7 @@ function anadirProveedor()
 
 function eliminarProveedor()
 {
-    var provedorEliminar = document.getElementById("selectProveedores").value;
+    var provedorEliminar = document.getElementById("selectProveedor").value;
     //alert(clienteEliminar);
 
     if(oGestion.eliminarProveedor(provedorEliminar)){
@@ -155,33 +155,34 @@ function eliminarProveedor()
 
 function camposFormModificarProveedor()
 {
-	var dniClienteModificar = document.getElementById("selectModificarCliente").firstChild.value;
-	var antiguoCliente = oGestion.buscarCliente(dniClienteModificar);
+	var dniProveedorModificar = document.getElementById("selectModificarProveedor").firstChild.value;
+	var antiguoProveedor = oGestion.buscarProveedor(dniProveedorModificar);
 
-	CamposFormulario = document.getElementById("frmModClienteSeleccionado").getElementsByTagName("input");
+	CamposFormulario = document.getElementById("frmModProveedorSeleccionado").getElementsByTagName("input");
 
-	CamposFormulario[0].value = antiguoCliente.dniCliente;
-    CamposFormulario[1].value = antiguoCliente.nombreCliente;
-    CamposFormulario[2].value = antiguoCliente.apellidoCliente;
-    CamposFormulario[3].value = antiguoCliente.telClientes;
-    CamposFormulario[4].value = antiguoCliente.dirCliente;
-    CamposFormulario[5].value = antiguoCliente.localidadCliente;
-    CamposFormulario[6].value = antiguoCliente.cpCliente;
+	CamposFormulario[0].value = antiguoProveedor.dni;
+    CamposFormulario[1].value = antiguoProveedor.nombre;
+    CamposFormulario[2].value = antiguoProveedor.apellido;
+    CamposFormulario[3].value = antiguoProveedor.empresa;
+    CamposFormulario[4].value = antiguoProveedor.telefono;
+    CamposFormulario[5].value = antiguoProveedor.direccion;
+    CamposFormulario[6].value = antiguoProveedor.localidad;
+    CamposFormulario[7].value = antiguoProveedor.cPostal;
 
 }
 
 function modificarProveedor()
 {	
-	formulario=document.frmModClienteSeleccionado;
-	if(validarClientes(formulario)){
-		var dni = formulario.txtDNICliente.value.trim();
-		var nombre = formulario.txtNombreCliente.value.trim();
-		var apellido = formulario.txtApellidoCliente.value.trim();
-		var empresa = formulario.txtEmpresa.value.trim();
-		var telefono = formulario.txtTelefonoCliente.value.trim();
-		var direccion = formulario.txtDireccionCliente.value.trim();
-		var localidad = formulario.txtLocalidadCliente.value.trim();
-		var cPostal = formulario.txtCPostalCliente.value.trim();
+	formulario=document.frmModProveedorSeleccionado;
+	if(validarProveedores(formulario)){
+		var dni = formulario.txtDNIProveedor.value.trim();
+		var nombre = formulario.txtNombreProveedor.value.trim();
+		var apellido = formulario.txtApellidoProveedor.value.trim();
+		var empresa = formulario.txtEmpresaProveedor.value.trim();
+		var telefono = formulario.txtTelefonoProveedor.value.trim();
+		var direccion = formulario.txtDireccionProveedor.value.trim();
+		var localidad = formulario.txtLocalidadProveedor.value.trim();
+		var cPostal = formulario.txtCPostalProveedor.value.trim();
 
 		var oProveedor = new Proveedor(dni,nombre, apellido,empresa, telefono, direccion, localidad, cPostal);
 
@@ -205,12 +206,14 @@ function tablaProveedores()
 	fila.insertCell(-1).appendChild(document.createTextNode("DNI"));
 	fila.insertCell(-1).appendChild(document.createTextNode("Nombre"));
 	fila.insertCell(-1).appendChild(document.createTextNode("Apellidos"));
+	fila.insertCell(-1).appendChild(document.createTextNode("Empresa"));
 	fila.insertCell(-1).appendChild(document.createTextNode("Teléfono"));
 	fila.insertCell(-1).appendChild(document.createTextNode("Direccion"));
 	fila.insertCell(-1).appendChild(document.createTextNode("Localidad"));
 	fila.insertCell(-1).appendChild(document.createTextNode("C.Postal"));
+	fila.insertCell(-1).appendChild(document.createTextNode("Estado"));
 
-	var body = oTabla.appendChild(oGestion.sRowHTMLClientes());
+	var body = oTabla.appendChild(oGestion.sRowHTMLProveedores());
 
 	return oTabla;	
 }

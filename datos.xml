@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gestion>
+	<clientes>
+		<cliente>
+	        <dni>25465466H</dni>
+	        <nombre>Fernando</nombre>
+	        <apellidos>Menacho Pantoja</apellidos>
+	        <tlf>654789321</tlf>
+	        <direccion>C/La Pantomima</direccion>
+	        <localidad>Dos Hermanas</localidad>
+	        <codPostal>41023</codPostal>
+	    </cliente>
+
+	    <cliente>
+	        <dni>78946264V</dni>
+	        <nombre>Juan</nombre>
+	        <apellidos>Mallen Unijeje</apellidos>
+	        <tlf>789654123</tlf>
+	        <direccion>C/Faros 33</direccion>
+	        <localidad>Mairena del Aljarafe</localidad>
+	        <codPostal>45789</codPostal>
+	    </cliente>
+	    
+	</clientes>
+
+	<empleados>
+		<empleado>
+	        <dni>47852369G</dni>
+	        <nombre>Marcelino</nombre>
+	        <apellidos>Pan y Vino</apellidos>
+	        <tlf>612542378</tlf>
+	        <direccion>C/La Vendimia 45</direccion>
+	        <localidad>La Rioja</localidad>
+	        <codPostal>84756</codPostal>
+	    </empleado>
+
+	    <empleado>
+	        <dni>84591263J</dni>
+	        <nombre>Dolores</nombre>
+	        <apellidos>Fuertes Barriga</apellidos>
+	        <tlf>612542378</tlf>
+	        <direccion>C/Hambre 75</direccion>
+	        <localidad>La Roja</localidad>
+	        <codPostal>54786</codPostal>
+	    </empleado>
+	</empleados>
+
+	<proveedores>
+		<proveedor>
+	        <dni>47852369G</dni>
+	        <nombre>Marcelino</nombre>
+	        <apellidos>Pan y Vino</apellidos>
+	        <empresa>Toldos y Carpas QuitaSol</empresa>
+	        <tlf>612542378</tlf>
+	        <direccion>C/La Vendimia 45</direccion>
+	        <localidad>La Rioja</localidad>
+	        <codPostal>84756</codPostal>
+	    </proveedor>
+	</proveedores>
+
+	<maquinaria>
+		<maquina>
+	        <modelo>47852369G</modelo>
+	        <id>2000</id>
+	        <nombre>Pan y Vino</nombre>
+	        <descripcion>Toldos y Carpas QuitaSol</descripcion>
+	        <precio>612542378</precio>
+	        <averia>C/La Vendimia 45</averia>
+	    </maquina>
+	</maquinaria>
+</gestion>

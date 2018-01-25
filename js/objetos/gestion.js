@@ -6,6 +6,7 @@ function Gestion()
     this.clientes = [];
     this.maquinas = [];
     this.proveedores = [];
+    this.compras = [];
 }
 
 //MÉTODOS SOBRE PROVEEDORES
@@ -43,8 +44,9 @@ Gestion.prototype.eliminarProveedor = function(sNif)
 	if (this.buscarProveedor(sNif)!=null)
 	{
 		oProveedor = this.buscarProveedor(sNif);
-		var pos = this.proveedores.indexOf(oProveedor);
-		this.proveedores.splice(pos, 1);
+		oProveedor.estado=false;
+		// var pos = this.proveedores.indexOf(oProveedor);
+		// this.proveedores.splice(pos, 1);
 		bEliminado = true;
 	}
 	return bEliminado;
@@ -89,7 +91,8 @@ Gestion.prototype.altaEmpleado = function(oEmpleado)
 };
 
 Gestion.prototype.buscarEmpleado = function(sNif) 
-{
+{		
+		//console.log(sNif);
 		var oEmpleado = null;
 		var i = 0;
 		
@@ -107,12 +110,14 @@ Gestion.prototype.buscarEmpleado = function(sNif)
 Gestion.prototype.eliminarEmpleado = function(sNif) 
 {
 	var bEliminado = false;
+	//console.log(this.buscarEmpleado(sNif));
 		
 	if (this.buscarEmpleado(sNif)!=null)
 	{
 		oEmpleado = this.buscarEmpleado(sNif);
-		var pos = this.empleados.indexOf(oEmpleado);
-		this.empleados.splice(pos, 1);
+		oEmpleado.estado=false;
+		//var pos = this.empleados.indexOf(oEmpleado);
+		//this.empleados.splice(pos, 1);
 		bEliminado = true;
 	}
 	return bEliminado;
@@ -181,8 +186,9 @@ Gestion.prototype.eliminarCliente = function(sNif)
 	if (this.buscarCliente(sNif)!=null)
 	{
 		oCliente = this.buscarCliente(sNif);
-		var pos = this.clientes.indexOf(oCliente);
-		this.clientes.splice(pos, 1);
+		oCliente.estado=false;
+		//var pos = this.clientes.indexOf(oCliente);
+		//this.clientes.splice(pos, 1);
 		bEliminado = true;
 	}
 	return bEliminado;
@@ -279,4 +285,73 @@ Gestion.prototype.sRowHTMLMaquinas = function()
 		oBody.appendChild(this.maquinas[i].sRowHTML());
 
 	return oBody;
-}
+};
+
+
+//METODOS SOBRE COMPRAS
+Gestion.prototype.altaCompra =function(oCompra){
+	var bInsertado = false;
+
+	if (this.buscarCompra(oCompra.id)==null)
+		{
+			bInsertado = true;
+			this.compras.push(oCompra);
+		}
+
+	return bInsertado;
+};
+
+
+
+Gestion.prototype.buscarCompra = function(iId) 
+{
+		var oCompra = null;
+		var i = 0;
+		
+		while (i < this.compras.length && oCompra == null)
+		{
+			if (this.compras[i].id == iId)
+				oCompra = this.compras[i];	
+			i++;
+		}
+		return oCompra;
+};
+
+Gestion.prototype.venderCompra= function(iId,fecha,fPrecio)
+{
+	var bEliminado = false;
+		
+	if (this.buscarVenta(iId)!=null)
+	{
+		oVenta = this.buscarVenta(iId);
+		oVenta.estado=false;
+		bEliminado = true;
+	}
+	return bEliminado;
+
+};
+
+Gestion.prototype.buscarVenta = function(iId)
+{
+	var oVenta = null;
+		var i = 0;
+		
+		while (i < this.compras.length && oVenta == null)
+		{
+			if (this.compras[i].id == iId)
+				oVenta = this.compras[i];	
+			i++;
+		}
+		return oVenta;
+
+};
+
+Gestion.prototype.sRowHTMLCompras = function() 
+{	
+	var oBody = document.createElement("TBODY");
+
+	for (var i=0; i<this.compras.length;i++)
+		oBody.appendChild(this.compras[i].sRowHTML());
+
+	return oBody;
+};

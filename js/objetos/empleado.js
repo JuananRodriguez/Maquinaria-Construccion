@@ -1,6 +1,5 @@
-function Empleado(codEmpleado, dniEmpleado, nombreEmpleado, apellidoEmpleado, telEmpleado, dirEmpleado, localidadEmpleado, cpEmpleado)
+function Empleado(dniEmpleado, nombreEmpleado, apellidoEmpleado, telEmpleado, dirEmpleado, localidadEmpleado, cpEmpleado)
 {
-    this.codEmpleado = codEmpleado;
 		this.dniEmpleado = dniEmpleado;
 		this.nombreEmpleado = nombreEmpleado;
 		this.apellidoEmpleado = apellidoEmpleado;
@@ -8,6 +7,7 @@ function Empleado(codEmpleado, dniEmpleado, nombreEmpleado, apellidoEmpleado, te
 		this.dirEmpleado = dirEmpleado;
 		this.localidadEmpleado = localidadEmpleado;
 		this.cpEmpleado = cpEmpleado;
+		this.estado = true;
 }
 
 //METODOS:
@@ -22,38 +22,14 @@ Empleado.prototype.sRowHTML = function() {
 	fila.insertCell(-1).appendChild(document.createTextNode(this.dirEmpleado));
 	fila.insertCell(-1).appendChild(document.createTextNode(this.localidadEmpleado));
 	fila.insertCell(-1).appendChild(document.createTextNode(this.cpEmpleado));
+	if(this.estado){
+		fila.insertCell(-1).appendChild(document.createTextNode("Activo"));
+		fila.classList.add("table-success");
+	}
+	else{
+		fila.insertCell(-1).appendChild(document.createTextNode("Inactivo"));
+		fila.classList.add("table-danger");
+	}
 
 	return fila;
 }
-
-
-
-// class Empleado{
-
-// 	contructor(codEmpleado, dniEmpleado, nombreEmpleado, apellidoEmpleado, telEmpleado, dirEmpleado, localidadEmpleado, cpEmpleado)
-// 	{
-// 		this.codEmpleado = codEmpleado;
-// 		this.dniEmpleado = dniEmpleado;
-// 		this.nombreEmpleado = nombreEmpleado;
-// 		this.apellidoEmpleado = apellidoEmpleado;
-// 		this.telEmpleado = telEmpleado;
-// 		this.dirEmpleado = dirEmpleado;
-// 		this.localidadEmpleado = localidadEmpleado;
-// 		this.cpEmpleado = cpEmpleado;
-// 	}
-
-// 	sRowHTML() 
-// 	{ 
-// 		var sRow = "";
-// 		sRow +="<td>"+this.codEmpleado+"</td>";
-// 		sRow +="<td>"+this.dniEmpleado+"</td>";
-// 		sRow +="<td>"+this.nombreEmpleado+"</td>";
-// 		sRow +="<td>"+this.apellidoEmpleado+"</td>";
-// 		sRow +="<td>"+this.telEmpleado+"</td>";
-// 		sRow +="<td>"+this.dirEmpleado+"</td>";
-// 		sRow +="<td>"+this.localidadEmpleado+"</td>";
-// 		sRow +="<td>"+this.cpEmpleado+"</td>";
-
-// 		return sRow;
-// 	}
-// }

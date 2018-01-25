@@ -70,22 +70,27 @@ function actualizaCombos(sTipo)
         case "proveedores":
             capaSelect = "selectDivProveedor";
             idSelect = "selectProveedor";
-            arrayDatos = oGestion.proveedores;
+            arrayDatos = obtenerActivos(oGestion.proveedores);
             break;
         case "empleados":
             capaSelect = "selectDivEmpleado";
             idSelect = "selectEmpleado";
-            arrayDatos = oGestion.empleados;
+            arrayDatos = obtenerActivos(oGestion.empleados);
             break;
         case "clientes":
             capaSelect = "selectDivCliente";
             idSelect = "selectCliente";
-            arrayDatos = oGestion.clientes;
+            arrayDatos = obtenerActivos(oGestion.clientes);
             break;
         case "maquinas":
             capaSelect = "selectDivMaquina";
             idSelect = "selectMaquina";
             arrayDatos = oGestion.maquinas;
+            break;
+        case "compras":
+            capaSelect = "selectDivCompra";
+            idSelect = "selectCompra";
+            arrayDatos = obtenerActivos(oGestion.compras);
             break;
     }
 
@@ -94,8 +99,8 @@ function actualizaCombos(sTipo)
         var oValores = [];
         switch(tipo) 
         {   
-            case "proveedor":
-                oValores[0] = array[i].empresa;
+            case "proveedores":
+                oValores[0] = array[i].dni;
                 oValores[1] = array[i].nombre;
                 oValores[2] = array[i].apellido;
                 break;
@@ -113,6 +118,11 @@ function actualizaCombos(sTipo)
                 oValores[0] = array[i].iIdMaquina;
                 oValores[1] = array[i].sNombreMaquina;
                 oValores[2] = array[i].sModelo;
+                break;
+            case "compras":
+                oValores[0] = array[i].id;
+                oValores[1] = array[i].fecha;
+                oValores[2] = array[i].maquina;
                 break;
         }
         return oValores;
@@ -152,9 +162,10 @@ function actualizaCombos(sTipo)
             {
                 var oTextNode = document.createTextNode(arrayValores[0] + " - " + arrayValores[1] +" "+ arrayValores[2]);
             }
-            else
+            else if(sTipo=="maquinas")
                 var oTextNode = document.createTextNode(" Id: " +arrayValores[0] + " - " + arrayValores[1] +". Mod: "+ arrayValores[2]);
-
+            else
+                var oTextNode = document.createTextNode(" Id: " +arrayValores[0] + " Fch: " + arrayValores[1] +" Maq: "+ arrayValores[2]);
             oOption.appendChild(oTextNode);
             oSelect.appendChild(oOption);
         }
@@ -165,4 +176,15 @@ function actualizaCombos(sTipo)
         oSelectClonado=oSelect.cloneNode(true);
         oCapaSelect[i].appendChild(oSelectClonado);
     }
+}
+
+function obtenerActivos(arrayPersonas){
+    var arrayFiltrado = [];
+
+    for (var i = 0; i < arrayPersonas.length; i++) {
+        if(arrayPersonas[i].estado)
+            arrayFiltrado.push(arrayPersonas[i]);
+    }
+
+    return arrayFiltrado;
 }
