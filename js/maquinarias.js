@@ -198,7 +198,6 @@ function tablaMaquinas()
 	fila.insertCell(-1).appendChild(document.createTextNode("Descripción"));
 	fila.insertCell(-1).appendChild(document.createTextNode("Precio del Alquiler"));
 	fila.insertCell(-1).appendChild(document.createTextNode("Avería"));
-	fila.insertCell(-1).appendChild(document.createTextNode("Estado"));
 
 	var body = oTabla.appendChild(oGestion.sRowHTMLMaquinas());
 
