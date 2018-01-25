@@ -30,3 +30,6 @@ table#tablaListada {
     background: white;
 }
 
+.invisible{
+	display: none;
+}

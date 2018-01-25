@@ -80,7 +80,7 @@
 	        <a class="dropdown-item" href="#" name="Vender">Vender</a>
 	        <a class="dropdown-item" href="#" name="Ver">Ver</a>
 	      </div>
-	    </li>
+    	</li>
 
 	    <!--Gestión de Alquileres-->
 	    <li class="nav-item dropdown" id="menuAlquileres">
@@ -89,6 +89,7 @@
 	      </a>
 	      <div class="dropdown-menu">
 	        <a class="dropdown-item" href="#" name="Alta">Registrar</a>
+	        <a class="dropdown-item" href="#" name="Modificar">Modificar</a>
 	        <a class="dropdown-item" href="#" name="Listar">Listar</a>
 	      </div>
 	    </li>
@@ -126,9 +127,7 @@
 	<div class="row">
 	  <div class="col-md-2 d-none d-sm-block"></div>
 	  <div class="col-12 col-md-8">
-
-	
-
+	  
 	<!--****************************** Formularios Proveedores ******************************-->
 	<!--Alta-->
 	 <form action="#" id="frmAltaProveedor" name="frmAltaProveedor" class="pr-5 pl-5">
@@ -514,9 +513,9 @@
 	<h1>Formulario de modificación para Máquinas Registradas</h1>	
 		 <div id="selectModificarMaquina" class="selectDivMaquina sep-inf"></div><br>
 	</form>
-
+	
 	<form action="#" id="frmModMaquinaSeleccionada"  name="frmModMaquinaSeleccionada" class="pr-5 pl-5">
-		<h1>Formulario de alta para Nuevas Máquinas</h1>
+		
 	  <div class="form-group">
 	    <label for="txtModeloMaquina">Modelo:</label>
 	    <input type="text" class="form-control" id="txtModeloMaquina">
@@ -561,30 +560,28 @@
 	  <!--Comprar-->
 	<form action="#" id="frmComprar" name="frmComprar" class="pr-5 pl-5">
 		<h1>Formulario Comprar Maquinaria</h1>
-
 	  <div class="form-group">
 	    <label for="txtIDComprar">ID de la Compra</label>
 	    <input type="text" class="form-control" id="txtIDComprar">
-	  </div>
-
-	  <div class="form-group">
+	</div>
+	<div class="form-group">
 	    <label for="txtFechaComprar">Fecha de Inicio del Alquiler</label>
 	    <input type="date" class="form-control" id="txtFechaComprar">
-	  </div>
+	</div>
 
-	  <div class="form-group">
+	<div class="form-group">
 	    <label for="txtCoste">Coste:</label>
 	    <input type="text" class="form-control" id="txtCoste">
-	  </div>
-	  <br>
+	</div>
+	 <br>
 
-      <div name="provedor" class="selectDivProveedor sep-inf"></div><br>
-	  <div name="empleado" class="selectDivEmpleado sep-inf"></div><br>
-	  <div name="maquina" class="selectDivMaquina sep-inf"></div><br>
-
-	  <div class="form-group">
+    <div name="provedor" class="selectDivProveedor sep-inf"></div><br>
+	 <div name="empleado" class="selectDivEmpleado sep-inf"></div><br>
+	 <div name="maquina" class="selectDivMaquina sep-inf"></div><br>
+ 
+ 	  <div class="form-group">
 	    <button type="button" name="btnComprar" id="btnComprar" class="btn btn-primary">Realizar Compra</button>
-      </div>
+    </div>
 		
 	</form>
 	 <!--Modificar Compra-->
@@ -601,24 +598,23 @@
 	  <div class="form-group">
 	    <label for="txtIDComprar">ID de la Compra</label>
 	    <input type="text" class="form-control" id="txtIDComprar">
-	  </div>
+	</div>
 
-	  <div class="form-group">
+	<div class="form-group">
 	    <label for="txtFechaComprar">Fecha de Inicio del Alquiler</label>
 	    <input type="date" class="form-control" id="txtFechaComprar">
 	  </div>
 
-	  <div class="form-group">
+	<div class="form-group">
 	    <label for="txtCoste">Coste:</label>
 	    <input type="text" class="form-control" id="txtCoste">
-	  </div>
+	 </div>
 	  <br>
-
-      <div name="provedor" class="selectDivProveedor sep-inf"></div><br>
+	  <div name="provedor" class="selectDivProveedor sep-inf"></div><br>
 	  <div name="empleado" class="selectDivEmpleado sep-inf"></div><br>
 	  <div name="maquina" class="selectDivMaquina sep-inf"></div><br>
-
-	  <div class="form-group">
+	  <br>
+	<div class="form-group">
 	    <button type="button" name="btnComprar" id="btnComprar" class="btn btn-primary">Actualizar Compra</button>
       </div>
    </form>
@@ -633,27 +629,24 @@
 		    <input type="date" class="form-control" name="txtFechaVenta" id="txtFechaVenta">
 	 	</div>
 
-
-	    <div class="form-group">
+	 <div class="form-group">
 		    <label for="txtPrecio">Precio de Venta:</label>
 		    <input type="text" class="form-control" name="txtPrecio"  id="txtPrecio">
-	    </div>
-
-	 	<button type="button" name="venderMaquina" id="btnVenderMaquina" class="btn btn-primary">Vender</button>
+	</div>
+		<button type="button" name="venderMaquina" id="btnVenderMaquina" class="btn btn-primary">Vender</button>
 		</div>	
 	</form>
+
 
     <!--Listar-->
     <form action="#" id="frmListarCompras"  class="pr-5 pl-5">
 		<h1>Listado de todas las Compras y Ventas Registradas</h1>
 		<br>	
-	</form>
-
-	
+  	</form> 
 
 	<!--****************************** Formularios Alquileres ******************************-->
 	<!--Alta-->
-	<form action="#" id="frmAltaAlquiler" class="pr-5 pl-5">
+	<form action="#" id="frmAltaAlquiler" name ="frmAltaAlquiler" class="pr-5 pl-5">
 	<h1>Formulario de Alta de Alquiler</h1>
 	  <div class="form-group">
 	    <label for="txtIDAlquiler">ID del Alquiler</label>
@@ -676,34 +669,76 @@
 	  </div>
 
 	  <label for="txtDNICliAlquiler">DNI del Cliente (debe existir previamente)</label>
-	      <select class="form-control" id="txtDNICliAlquiler">
-	        <option>1</option>
-	        <option>2</option>
-	        <option>3</option>
-	        <option>4</option>
-	      </select>
+	  <div id="selectAlquilerCliente" class="selectDivCliente sep-inf"></div><br>
+	
 	   <br>
 
 	  <label for="txtIDMaqAlquiler">ID de la Máquina (debe existir previamente)</label>
-	      <select class="form-control" id="txtIDMaqAlquiler">
-	        <option>1</option>
-	        <option>2</option>
-	        <option>3</option>
-	        <option>4</option>
-	      </select>
+	  <div id="selectAlquilerMaquina" class="selectDivMaquina sep-inf"></div><br>
+
 	   <br>
 
 	  <label for="txtDNIEmpAlquiler">DNI del empleado (debe existir previamente)</label>
-	      <select class="form-control" id="txtDNIEmpAlquiler">
-	        <option>1</option>
-	        <option>2</option>
-	        <option>3</option>
-	        <option>4</option>
-	      </select>
+	   <div id="selectAlquilerEmpleado" class="selectDivEmpleado sep-inf"></div><br>
+
 	   <br>
 
-	    <button type="button" class="btn btn-primary">button</button>
+	    <button type="button" id="btnAltaAlquiler" class="btn btn-primary">Aceptar</button>
 	</form> 
+
+
+	<!--MODIFICAR-->
+	<form action="#" id="frmModAlquiler"  class="pr-5 pl-5">
+		<h1>Modificación de Alquileres</h1>
+	       <div id="selectModificarAlquileres" class="selectDivAlquiler sep-inf"></div><br>
+	</form>
+
+	<form action="#" id="frmModAlquilerSeleccionado" name ="frmModAlquilerSeleccionado" class="pr-5 pl-5">
+	
+	  <div class="form-group">
+	    <label for="txtIDAlquiler">ID del Alquiler</label>
+	    <input type="text" class="form-control" id="txtIDAlquiler">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtFechaIniAlquiler">Fecha de Inicio del Alquiler</label>
+	    <input type="date" class="form-control" id="txtFechaIniAlquiler">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtFechaFinAlquiler">Fecha de Fin del Alquiler</label>
+	    <input type="date" class="form-control" id="txtFechaFinAlquiler">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="txtImporteAlquiler">Importe</label>
+	    <input type="text" class="form-control" id="txtImporteAlquiler">
+	  </div>
+
+	  <label for="txtDNICliAlquiler">DNI del Cliente (debe existir previamente)</label>
+	  <div id="selectAlquilerCliente" class="selectDivCliente sep-inf"></div><br>
+	
+	   <br>
+
+	  <label for="txtIDMaqAlquiler">ID de la Máquina (debe existir previamente)</label>
+	  <div id="selectAlquilerMaquina" class="selectDivMaquina sep-inf"></div><br>
+
+	   <br>
+
+	  <label for="txtDNIEmpAlquiler">DNI del empleado (debe existir previamente)</label>
+	   <div id="selectAlquilerEmpleado" class="selectDivEmpleado sep-inf"></div><br>
+
+	   <br>
+
+	   	<div class="form-check">
+			<label class="form-check-label">
+	  		<input class="form-check-input" type="checkbox" value="" id="estadoAlquiler" name="estadoAlquiler">
+	  		Activo</label>
+		</div>
+
+	    <button type="button" id="btnModificarAlquiler" class="btn btn-primary">Actualizar</button>
+	</form> 
+
 
 	<!--Listar-->
 	<form action="#" id="frmListarAlquiler" class="pr-5 pl-5">
@@ -713,24 +748,19 @@
 
 	<!--****************************** Formularios Devoluciones ******************************-->
 	<!--Baja-->
-	<form action="#" id="frmDevolucion" class="pr-5 pl-5">
+	<form action="#" id="frmDevolucion" name="frmDevolucion" class="pr-5 pl-5">
 	<h1>Formulario de Devolución</h1>
 
 		<label for="txtIDAlquiler">ID del Alquiler (debe existir previamente)</label>
-	      <select class="form-control" id="txtIDAlquiler">
-	        <option>1</option>
-	        <option>2</option>
-	        <option>3</option>
-	        <option>4</option>
-	      </select>
+		<div id="txtIDAlquiler" class="selectDivAlquiler sep-inf"></div><br>
 	   <br>
 
 	  <div class="form-group">
 	    <label for="txtFechaDevolucion">Fecha de Devolución</label>
-	    <input type="text" class="form-control" id="txtFechaDevolucion">
+	    <input type="date" class="form-control" id="txtFechaDevolucion">
 	  </div>
 
-	    <button type="button" class="btn btn-primary">button</button>
+	    <button type="button" id="btnAltaDevolucion" name="btnAltaDevolucion" class="btn btn-primary">Aceptar</button>
 	</form> 
 
 	<!--Listar-->
@@ -772,20 +802,25 @@
 	  <div class="col-md-2 d-none d-sm-block"></div>
 	</div>
 
-	<!--****************************** Archvos JS de Bootstrap ******************************-->
+	<!--****************************** Archivos JS de Bootstrap ******************************-->
 	<script src="js/objetos/gestion.js"></script>
 	<script src="js/objetos/proveedor.js"></script>
 	<script src="js/objetos/empleado.js"></script>
 	<script src="js/objetos/cliente.js"></script>
 	<script src="js/objetos/compra.js"></script>
 	<script src="js/objetos/maquinaria.js"></script>
+	<script src="js/objetos/alquiler.js"></script>
+	<script src="js/objetos/devolucion.js"></script>
 	<script src="js/proveedores.js"></script>
-	<script src="js/compras.js"></script>
 	<script src="js/empleados.js"></script>
 	<script src="js/clientes.js"></script>
+	<script src="js/compras.js"></script>
 	<script src="js/maquinarias.js"></script>
+	<script src="js/alquileres.js"></script>
+	<script src="js/devoluciones.js"></script>
 	<script src="js/funciones.js"></script>
 	<script src="js/codigo.js"></script>
+	<script src="js/filtros.js"></script>
 	<script src="js/datosDePrueba.js"></script>
 
 	 <!-- jQuery library -->
