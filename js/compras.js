@@ -64,7 +64,7 @@ function validarTransaccion(formulario,tipo){
 	}
 	//------
 
-	//Proveedor
+	//Proveedor	
 	if(tipo=="compra")
 	if(formulario.getElementsByClassName("selectDivProveedor")[0].firstChild.selectedIndex == 0)
 	{
@@ -83,6 +83,8 @@ function validarTransaccion(formulario,tipo){
 	//------
 
 	//Cliente
+	
+		console.log(formulario.getElementsByClassName("selectDivCliente")[0]);
 	if(tipo=="venta")
 	if(formulario.getElementsByClassName("selectDivCliente")[0].firstChild.selectedIndex == 0)
 	{
@@ -117,7 +119,8 @@ function validarTransaccion(formulario,tipo){
 	}
 	//------
 
-	//Maquina	
+	//Maquina
+	if(formulario!=document.frmModificarVentaAbierto)
 	if(formulario.getElementsByClassName("selectDivMaquina")[0].firstChild.selectedIndex == 0)
 	{
 		if(bCompra)
@@ -150,7 +153,7 @@ function anadirCompra()
 	var sMensaje = "";
 	formulario = document.frmComprar;
 
-	if(validarTransaccion(formulario,"compra"))		
+	if(validarTransaccion(formulario,"compra"))			
 	{
 		var iId = formulario.txtIDComprar.value.trim();
 		//console.log(Date.parse(formulario.txtFechaComprar.value));
@@ -175,7 +178,7 @@ function anadirCompra()
 
 		else
 		{
-			sMensaje = "Hay una transaccion con el mismo id";
+			sMensaje = "Hay una Transacción con el mismo id";
 			mostrarMensaje(sMensaje,false);
 			claseError(formulario, 0);
 		}
@@ -220,6 +223,80 @@ function anadirVenta()
 		}
 	}
 
+}
+
+function camposFormModificarCompra()
+{
+	var idAntiguaCompra = document.getElementById("selectModificarCompra").firstChild.value;
+	var antiguaCompra = oGestion.buscarTransaccion(idAntiguaCompra);
+
+	CamposFormulario = document.getElementById("frmModificarCompraAbierto").elements;
+
+	CamposFormulario[0].value = antiguaCompra.id;
+    CamposFormulario[1].valueAsDate = antiguaCompra.fecha;
+    CamposFormulario[2].value = antiguaCompra.valor;
+    CamposFormulario[3].value = antiguaCompra.maquina;
+    CamposFormulario[4].value = antiguaCompra.empleado;
+    CamposFormulario[5].value = antiguaCompra.proveedor;
+}
+
+function modificarCompra()
+{	
+	var idAntiguaCompra = document.getElementById("selectModificarCompra").firstChild.value;
+	var antiguaCompra = oGestion.buscarTransaccion(idAntiguaCompra);
+
+	formulario=document.frmModificarCompraAbierto;
+	if(validarTransaccion(formulario,"compra")){
+		
+		antiguaCompra.fecha = new Date(formulario.txtFechaComprar.value);
+		
+		antiguaCompra.empleado = document.getElementById("frmModificarCompraAbierto").getElementsByClassName("selectDivEmpleado")[0].firstChild.value;
+		antiguaCompra.proveedor = document.getElementById("frmModificarCompraAbierto").getElementsByClassName("selectDivProveedor")[0].firstChild.value;
+		antiguaCompra.maquina = parseInt(document.getElementById("frmModificarCompraAbierto").getElementsByClassName("selectDivMaquina")[0].firstChild.value);
+
+		antiguaCompra.valor = parseFloat(formulario.txtCoste.value.trim());
+
+		mostrarMensaje("compra actualizada",true);
+		document.getElementById('frmModificarCompraAbierto').style.display="none";
+		actualizaCombos("transacciones");	
+	}
+}
+
+function camposFormModificarVenta(){
+	var idAntiguaVenta = document.getElementById("selectModificarCompra").firstChild.value;
+	var antiguaVenta = oGestion.buscarTransaccion(idAntiguaVenta);
+
+	CamposFormulario = document.getElementById("frmModificarVentaAbierto").elements;
+
+	CamposFormulario[0].value = antiguaVenta.id;
+    CamposFormulario[1].valueAsDate  = new Date(antiguaVenta.fecha);
+    CamposFormulario[2].value = antiguaVenta.valor;
+    CamposFormulario[3].value = antiguaVenta.maquina;
+    CamposFormulario[5].value = antiguaVenta.empleado;
+    CamposFormulario[6].value = antiguaVenta.cliente;
+}
+
+function modificarVenta()
+{	
+	var idAntiguaVenta = document.getElementById("selectModificarCompra").firstChild.value;
+	var antiguaVenta = oGestion.buscarTransaccion(idAntiguaVenta);
+
+	formulario=document.frmModificarVentaAbierto;
+	if(validarTransaccion(formulario,"venta")){
+		
+		antiguaVenta.fecha = new Date(formulario.txtFechaComprar.value);
+		
+		antiguaVenta.empleado = document.getElementById("frmModificarVentaAbierto").getElementsByClassName("selectDivEmpleado")[0].firstChild.value;
+		antiguaVenta.cliente = document.getElementById("frmModificarVentaAbierto").getElementsByClassName("selectDivCliente")[0].firstChild.value;
+		if(formulario.getElementsByClassName("selectDivMaquina")[0].firstChild.selectedIndex != 0)
+			antiguaVenta.maquina = parseInt(document.getElementById("frmModificarVentaAbierto").getElementsByClassName("selectDivMaquina")[0].firstChild.value);
+
+		antiguaVenta.valor = parseFloat(formulario.txtCoste.value.trim());
+
+		mostrarMensaje("venta actualizada",true);
+		document.getElementById('frmModificarVentaAbierto').style.display="none";
+		actualizaCombos("transacciones");
+	}
 }
 
 function tablaTransacciones()

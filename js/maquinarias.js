@@ -125,7 +125,6 @@ function anadirMaquinaria()
 			sMensaje = "Máquina dado de alta";
 			mostrarMensaje(sMensaje);
 			document.frmAltaMaquina.reset();
-			actualizaCombos("maquinas");
 		}
 		else
 		{
@@ -139,11 +138,14 @@ function anadirMaquinaria()
 function eliminarMaquinaria()
 {
     var maquinaEliminar = document.getElementById("selectMaquina").value;
+ 
     if(oGestion.eliminarMaquina(maquinaEliminar))
+    {
     	mostrarMensaje("Maquina eliminada",true);
+    }
     else
     	mostrarMensaje("Maquina no existe",false);
-    actualizaCombos("maquinas");
+    actualizaCombos("maquinasNoAlquiladasActivas");
 }
 
 
@@ -160,6 +162,16 @@ function camposFormModificarMaquina()
     CamposFormulario[3].value = antiguaMaquina.sDescMaquina;
     CamposFormulario[4].value = antiguaMaquina.iAlquiler;
     CamposFormulario[5].value = antiguaMaquina.sAveria;
+
+   if(antiguaMaquina.estado)
+    {
+    	document.getElementById("estadoMaquinaria").checked = true;
+	}
+	else
+	{
+		document.getElementById("estadoMaquinaria").checked = false;
+	}
+	CamposFormulario[6].value = antiguaMaquina.estado;
 }
 
 function modificarMaquina()
@@ -173,8 +185,10 @@ function modificarMaquina()
 		var descMaquina = formulario.txtDecMaquina.value.trim();
 		var alquilerMaquina = formulario.txtPrecioMaquina.value.trim();
 		var averiaMaquina = formulario.txtAveriaMaquina.value.trim();
+		var estadoMaquinaria = formulario.estadoMaquinaria.checked;
 
 		var oMaquina = new Maquina(modMaquina,idMaquina, nomMaquina, descMaquina, alquilerMaquina, averiaMaquina);
+		oMaquina.estado=estadoMaquinaria;
 		var maquinaaModificar = document.getElementById("selectModificarMaquina").firstChild.value;
 
 		if(oGestion.modificarMaquina(maquinaaModificar,oMaquina)){
@@ -189,16 +203,32 @@ function tablaMaquinas()
 	var oTabla = document.createElement("TABLE");
 	oTabla.setAttribute("class", "table table-striped");
 	oTabla.id = "tablaListada";
+	oTabla.setAttribute("name","tablaListada");
 
+	/*Cramos el Header y la Fila Principal*/
 	var header = oTabla.createTHead();
 	var fila = header.insertRow(0);
-	fila.insertCell(-1).appendChild(document.createTextNode("Modelo"));
-	fila.insertCell(-1).appendChild(document.createTextNode("Id. Maquina"));
-	fila.insertCell(-1).appendChild(document.createTextNode("Nombre"));
-	fila.insertCell(-1).appendChild(document.createTextNode("Descripción"));
-	fila.insertCell(-1).appendChild(document.createTextNode("Precio del Alquiler"));
-	fila.insertCell(-1).appendChild(document.createTextNode("Avería"));
-	fila.insertCell(-1).appendChild(document.createTextNode("Estado"));
+
+	/*Creamos las Celdas, con la Función crearCabecera (js/funciones.js)
+	Las celdas estas contienen un A con un event que llaman a la 
+	función Ordenar Fila (js/filtros.js)*/
+	var oFormulario = document.getElementById("frmListarMaquina");
+
+	crearCabecera(oFormulario,fila,0,"Modelo");
+	crearCabecera(oFormulario,fila,1,"Id. Maquina");
+	crearCabecera(oFormulario,fila,2,"Nombre");
+	crearCabecera(oFormulario,fila,3,"Descripción");
+	crearCabecera(oFormulario,fila,4,"Precio del Alquiler");
+	crearCabecera(oFormulario,fila,5,"Avería");
+
+	/*Finalmente creamos la cabecera de Estado, que tiene la 
+	función ordenarActivos (js/filtros.js)*/
+	var enlaceOrden = document.createElement("A");
+	enlaceOrden.href="#";
+	enlaceOrden.appendChild(document.createTextNode("Estado"));
+	enlaceOrden.addEventListener("click", function(){ordenarActivos(oFormulario)}, false);
+
+	fila.insertCell(-1).appendChild(enlaceOrden);
 
 	var body = oTabla.appendChild(oGestion.sRowHTMLMaquinas());
 

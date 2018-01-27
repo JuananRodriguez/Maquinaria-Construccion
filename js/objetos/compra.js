@@ -14,7 +14,7 @@ Compra.prototype.sRowHTML = function() {
 	var fila = document.createElement("TR");
 
 	fila.insertCell(-1).appendChild(document.createTextNode(this.id));
-	fila.insertCell(-1).appendChild(document.createTextNode(this.fecha.toLocaleString('ca-ES')));
+	fila.insertCell(-1).appendChild(document.createTextNode(new Date(this.fecha).toLocaleDateString('es-ES')));
 	fila.insertCell(-1).appendChild(document.createTextNode(this.valor.toLocaleString('de-DE', {  style: 'currency', currency: 'EUR'  })));
 	fila.insertCell(-1).appendChild(document.createTextNode(this.maquina));
 	fila.insertCell(-1).appendChild(document.createTextNode(this.empleado));

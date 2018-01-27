@@ -60,7 +60,7 @@ Gestion.prototype.modificarProveedor = function(sNif,oProveedorActualizado)
 		
 	if (this.buscarProveedor(sNif)!=null)
 	{
-		oProveedor = this.buscarCliente(sNif);
+		oProveedor = this.buscarProveedor(sNif);
 		var pos = this.proveedores.indexOf(oProveedor);
 		if(sNif == oProveedorActualizado.dni || this.buscarProveedor(oProveedorActualizado.dni)==null){
 			this.proveedores.splice(pos, 1, oProveedorActualizado);
@@ -129,7 +129,7 @@ Gestion.prototype.modificarEmpleado = function(sNif,oEmpleadoActualizado)
 		
 	if (this.buscarEmpleado(sNif)!=null)
 	{
-		oEmpleado = this.buscarCliente(sNif);
+		oEmpleado = this.buscarEmpleado(sNif);
 		var pos = this.empleados.indexOf(oEmpleado);
 		if(sNif == oEmpleadoActualizado.dniEmpleado || this.buscarEmpleado(oEmpleadoActualizado.dniEmpleado)==null){
 			this.empleados.splice(pos, 1, oEmpleadoActualizado);
@@ -187,8 +187,8 @@ Gestion.prototype.eliminarCliente = function(sNif)
 	{
 		oCliente = this.buscarCliente(sNif);
 		oCliente.estado=false;
-		var pos = this.clientes.indexOf(oCliente);
-		this.clientes.splice(pos, 1);
+		// var pos = this.clientes.indexOf(oCliente);
+		// this.clientes.splice(pos, 1);
 		bEliminado = true;
 	}
 	return bEliminado;
@@ -255,8 +255,9 @@ Gestion.prototype.eliminarMaquina = function(iId)
 	if (this.buscarMaquina(iId)!=null)
 	{
 		oMaquina = this.buscarMaquina(iId);
-		var pos = this.maquinas.indexOf(oMaquina);
-		this.maquinas.splice(pos, 1);
+		oMaquina.estado = false;
+		// var pos = this.maquinas.indexOf(oMaquina);
+		// this.maquinas.splice(pos, 1);
 		bEliminado = true;
 	}
 	return bEliminado;
@@ -391,7 +392,6 @@ Gestion.prototype.sRowHTMLAlquileres = function()
 
 	return oBody;
 }
-
 
 //METODOS SOBRE DEVOLUCIONES
 Gestion.prototype.altaDevolucion = function(oDevolucion)

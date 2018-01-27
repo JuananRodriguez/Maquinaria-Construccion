@@ -6,13 +6,13 @@ datosDePrueba();
 /************* Añade Datos de Prueba **************/
 function datosDePrueba(){
 
- 	oGestion.altaMaquina(new Maquina("ROBOCOCA", 200, "ROBOCOCA 2000", "oh blanca navidad", 75, "ninguna"));
+ 	oGestion.altaMaquina(new Maquina("ROBOCOCA","200", "ROBOCOCA 2000", "oh blanca navidad", 75, "ninguna"));
+ 	oGestion.altaMaquina(new Maquina("ROBOCOCA","300", "ROBOCOCA 2000", "oh blanca navidad", 5, "ninguna"));
+ 	oGestion.altaMaquina(new Maquina("ROBOCOCA","400", "ROBOCOCA 2000", "oh blanca navidad", 10, "ninguna"));
 
  	oGestion.altaAlquiler(new Alquiler("A-1","2018-12-27", "2018-12-28", "700", "48959266V", "200", "48954566V"));
-
- 	oGestion.altaCompra(new Compra("T-1","2018-12-27", 700, 200, "25478565G", "48954566V"));
-
- 	//oGestion.altaVenta(new Venta("T-2","2018-12-27", 700, 200, "25478565G", "48954566V"));
+   	oGestion.altaCompra(new Compra("T-1",new Date(2018,04,01), 700, 200, "47852369G", "47852369G"));
+   	oGestion.altaCompra(new Venta("T-2",new Date(2018,04,01), 700, 200, "47852369G", "25465466H")); 
  }
 
 
@@ -56,14 +56,14 @@ function mostrarEnCompras(oEvento)
 	        break;
 
 	    case "Vender":
-	        actualizaCombos("empleados");
-	    	actualizaCombos("maquinas");
+	  		actualizaCombos("empleados");
+	    	actualizaCombosTodos("maquinasNoAlquiladasActivas");
 	    	actualizaCombos("clientes");
 	        document.getElementById('frmVenta').style.display="block";
 	        break;
 
 	    case "Modificar":
-	        actualizaCombos("compras");
+	        actualizaCombos("transacciones");
 	        document.getElementById('frmModificarCompra').style.display="block";
 	        break;
 
@@ -72,6 +72,58 @@ function mostrarEnCompras(oEvento)
 	        listarTransacciones();
     }
 }
+
+/**Compras --> LISTAR**/
+function listarTransacciones()
+{
+	var formListar = document.getElementById("frmListarCompras");
+	var tablaPrevia = document.getElementById("tablaListada");
+
+	if(tablaPrevia!=null)
+		tablaPrevia.remove();
+	
+	formListar.appendChild(tablaTransacciones());
+}
+
+/*** Compras --> MODIFICAR ****/
+var oSelectModificarTransaccion = document.getElementById("selectModificarCompra");
+oSelectModificarTransaccion.addEventListener("change", mostrarModificarTransaccion, false);
+
+var oBtnModificarCompra = document.getElementById("btnModificarCompra");
+oBtnModificarCompra.addEventListener("click", modificarCompra, false);
+
+var oBtnModificarVenta = document.getElementById("btnModificarVenta");
+oBtnModificarVenta.addEventListener("click", modificarVenta, false);
+
+function mostrarModificarTransaccion(){
+	var index = oSelectModificarTransaccion.firstChild.selectedIndex;
+	if(index!=0){
+		if(oGestion.buscarTransaccion(oSelectModificarTransaccion.firstChild.value) instanceof Compra){
+			document.getElementById('frmModificarCompraAbierto').style.display="block";
+			document.getElementById('frmModificarVentaAbierto').style.display="none";
+			actualizaCombos("proveedores");
+	    	actualizaCombos("maquinas");
+	    	actualizaCombos("empleados");
+			camposFormModificarCompra();
+		}
+		else{
+			document.getElementById('frmModificarVentaAbierto').style.display="block";
+			document.getElementById('frmModificarCompraAbierto').style.display="none";
+			actualizaCombos("clientes");
+	    	actualizaCombos("maquinasNoAlquiladasActivas");
+	    	actualizaCombos("empleados");
+	    	camposFormModificarVenta();
+		}
+		
+	}
+	else{
+		document.getElementById('frmModificarVentaAbierto').style.display="none";
+		document.getElementById('frmModificarCompraAbierto').style.display="none";
+	}
+}
+
+
+
 
 /**Proveedores**/
 var menuProveedores = document.getElementById("menuProveedor").children[1];
@@ -270,7 +322,7 @@ function mostrarEnMaquinaria(oEvento){
 	        document.getElementById('frmAltaMaquina').style.display="block";
 	        break;
 	    case "Baja":
-	        actualizaCombos("maquinas");
+	        actualizaCombos("maquinasNoAlquiladasActivas");
 	        document.getElementById('frmBajaMaquina').style.display="block";
 	        break;
 	    case "Modificar":
@@ -314,18 +366,6 @@ function listarMaquinas(){
 }
 
 
-/**Compras**/
-function listarTransacciones(){
-	var formListar = document.getElementById("frmListarCompras");
-	var tablaPrevia = document.getElementById("tablaListada");
-
-	if(tablaPrevia!=null)
-		tablaPrevia.remove();
-	
-	formListar.appendChild(tablaTransacciones());
-}
-
-
 /**Alquiler**/
 var menuAlquiler = document.getElementById("menuAlquileres").children[1];
 
@@ -342,10 +382,19 @@ function mostrarEnAlquiler(oEvento)
 	{
 	    case "Alta":
 	        resetForms();
-	        actualizaCombos("maquinas");
+	        actualizaCombos("maquinasNoAlquiladasActivas");
 	        actualizaCombos("clientes");
 	        actualizaCombos("empleados");
 	        document.getElementById('frmAltaAlquiler').style.display="block";
+
+	        var oSelectMaquina = document.getElementById("frmAltaAlquiler").selectMaquina;
+			oSelectMaquina.addEventListener("change", calcularImporteAlquiler, false);
+
+			var oSelectFechaini = document.getElementById("frmAltaAlquiler").txtFechaIniAlquiler;
+			oSelectFechaini.addEventListener("change", calcularImporteAlquiler, false);
+
+			var oSelectFechafin = document.getElementById("frmAltaAlquiler").txtFechaFinAlquiler;
+			oSelectFechafin.addEventListener("change", calcularImporteAlquiler, false);
 	        break;
 	    case "Modificar":
 	        resetForms();
@@ -432,32 +481,6 @@ function listarDevoluciones()
 }
 
 
-/**Pagos**/
-var menuPagos = document.getElementById("menuPagos").children[1];
-
-for (var i = 0; i < menuPagos.children.length; i++) 
-{
-   		menuPagos.children[i].addEventListener('click',mostrarEnPagos);
-}
-
-function mostrarEnPagos(oEvento)
-{
-	var oE = oEvento || window.event;
-
-	switch(oE.target.name) 
-	{
-	    case "Alta":
-	        resetForms();
-	        document.getElementById('frmAltaPago').style.display="block";
-	        break;
-	    case "Listar":
-	        resetForms();
-	        document.getElementById('frmListarPago').style.display="block";
-	        break;
-    }
-
-}
-
 /**Balance**/
 var btnBalance = document.getElementById("btnBalance");
 btnBalance.addEventListener('click',mostrarBalance);
@@ -467,7 +490,22 @@ function mostrarBalance(oEvento){
 
 	 resetForms();
 	 document.getElementById('frmListarBalance').style.display="block";
+	 mostrarEstadisticas();
 
+}
+
+function mostrarEstadisticas(){
+	oDiv = document.createElement("DIV");
+	oDiv.id="grafos";
+	oDiv.classList.add("row");
+	document.getElementById('frmListarBalance').replaceChild(oDiv, document.getElementById("grafos"));
+
+	grafoBalanceAlquiler();
+	grafoBalanceTransacciones();
+    grafoClientes();
+    grafoProveedores();
+    grafoEmpleados();
+    grafoMaquinaria();
 }
 
 
@@ -496,4 +534,5 @@ var oExpRegValidarIdAlquiler = /^([A]{1}-\d+)$/;
 var oExpRegValidarFecha = /^([0-2][0-9]|3[0-1])(\/|-)(0[1-9]|1[0-2])\2(\d{4})$/;
 var oExpRegValidarImporte = /^\d*\.?\d+(,\d+)?/;
 var oExpRegValidarPrecio = /^[0-9]{1,}\.?[0-9]{0,2}?$/;
-var oExpRegValidarIdTransaccion = /^([T]{1}-\d+)$/;
+var oExpRegValidarId = /^[0-9]{3}$/; 
+oExpRegValidarIdTransaccion = /^([T]{1}-\d+)$/; 

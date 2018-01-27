@@ -168,12 +168,22 @@ function camposFormModificarEmpleado()
     CamposFormulario[5].value = antiguoEmpleado.localidadEmpleado;
     CamposFormulario[6].value = antiguoEmpleado.cpEmpleado;
 
+    if(antiguoEmpleado.estado)
+    {
+    	document.getElementById("estadoEmpleado").checked = true;
+	}
+	else
+	{
+		document.getElementById("estadoEmpleado").checked = false;
+	}
+	CamposFormulario[7].value = antiguoEmpleado.estado;
 }
 
 function modificarEmpleado()
 {	
 	formulario=document.frmModEmpleadoSeleccionado;
-	if(validarEmpleados(formulario)){
+	if(validarEmpleados(formulario))
+	{
 		var dniEmpleado = formulario.txtDNIEmpleado.value.trim();
 		var nombreEmpleado = formulario.txtNombreEmpleado.value.trim();
 		var apellidoEmpleado = formulario.txtApellidoEmpleado.value.trim();
@@ -181,8 +191,10 @@ function modificarEmpleado()
 		var dirEmpleado = formulario.txtDireccionEmpleado.value.trim();
 		var localidadEmpleado = formulario.txtLocalidadEmpleado.value.trim();
 		var cpEmpleado = formulario.txtCPostalEmpleado.value.trim();
+		var estadoEmpleado = formulario.estadoEmpleado.checked;
 
 		var oEmpleado = new Empleado(dniEmpleado,nombreEmpleado, apellidoEmpleado, telEmpleados, dirEmpleado, localidadEmpleado, cpEmpleado);
+		oEmpleado.estado=estadoEmpleado;
 
 		var EmpleadoaModificar = document.getElementById("selectModificarEmpleado").firstChild.value;
 
@@ -194,6 +206,8 @@ function modificarEmpleado()
 	   }
 	}
 }
+
+
 
 function tablaEmpleados()
 {	

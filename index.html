@@ -4,8 +4,9 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script><!-- CHARTJS library -->
 	<link rel="stylesheet" type="text/css" href="css/estilo.css">
-	<!-- <link rel="stylesheet" href="css/estilo.css"> -->
+
  	<title>Gestión de Maquinaria</title>
  </head>
  <body>
@@ -72,12 +73,12 @@
 	    <!--Gestión de Compras-->
 	    <li class="nav-item dropdown" id="menuCompra">
 	      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-	        Compras
+	        Transacciones
 	      </a>
 	      <div class="dropdown-menu">
 	        <a class="dropdown-item" href="#" name="Comprar">Comprar</a>
-	        <a class="dropdown-item" href="#" name="Modificar">Modificar</a>
 	        <a class="dropdown-item" href="#" name="Vender">Vender</a>
+	        <a class="dropdown-item" href="#" name="Modificar">Modificar</a>	        
 	        <a class="dropdown-item" href="#" name="Ver">Ver</a>
 	      </div>
     	</li>
@@ -105,28 +106,17 @@
 	      </div>
 	    </li>
 
-	    <!--Gestión de Alquileres-->
-	    <li class="nav-item dropdown" id="menuPagos">
-	      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-	        Pagos
-	      </a>
-	      <div class="dropdown-menu">
-	        <a class="dropdown-item" href="#" name="Alta">Pago</a>
-	        <a class="dropdown-item" href="#" name="Listar">Listar</a>
-	      </div>
-	    </li>
-
 	    <!--Gestión de Balances-->
 	     <li class="nav-item">
-     		 <a class="nav-link" href="#" id="btnBalance">Balance</a>
+     		 <a class="nav-link" href="#" id="btnBalance">Estadísticas</a>
    		 </li>
 
 	  </ul>
 	</nav> 
 
 	<div class="row">
-	  <div class="col-md-2 d-none d-sm-block"></div>
-	  <div class="col-12 col-md-8">
+	  <div class="col-md-1 d-none d-sm-block"></div>
+	  <div class="col-12 col-md-10 cuerpo">
 	  
 	<!--****************************** Formularios Proveedores ******************************-->
 	<!--Alta-->
@@ -235,6 +225,13 @@
 	    <label for="txtCPostalProveedor">C.Postal:</label>
 	    <input type="text" class="form-control" id="txtCPostalProveedor">
 	  </div>
+
+		<div class="form-check">
+			<label class="form-check-label">
+	  		<input class="form-check-input" type="checkbox" value="" id="estadoProveedor" name="estadoProveedor">
+	  		Activo</label>
+		</div>
+
 	      <button type="button" id="btnModificarProveedor" class="btn btn-primary">Actualizar</button>
 	</form> 
 
@@ -297,7 +294,6 @@
 	    <div class="form-group">
 	    <button type="button" name="btnEliminarEmpleado" id="btnEliminarEmpleado" class="btn btn-primary">Aceptar</button>
         </div>
-		
 	</form>
 
 	<!--Modificar-->
@@ -345,6 +341,13 @@
 	    <label for="txtCPostalEmpleado">C.Postal:</label>
 	    <input type="text" class="form-control" id="txtCPostalEmpleado">
 	  </div>
+
+		<div class="form-check">
+			<label class="form-check-label">
+	  		<input class="form-check-input" type="checkbox" value="" id="estadoEmpleado" name="estadoEmpleado">
+	  		Activo</label>
+		</div>
+
 	      <button type="button" id="btnModificarEmpleado" class="btn btn-primary">Actualizar</button>
 	</form> 
 
@@ -452,6 +455,12 @@
 	    <label for="txtCPostalCliente">C.Postal:</label>
 	    <input type="text" class="form-control" id="txtCPostalCliente">
 	  </div>
+	
+	<div class="form-check">
+		<label class="form-check-label">
+	  	<input class="form-check-input" type="checkbox" value="" id="estadoCliente" name="estadoCliente">
+	  	Activo</label>
+	</div>
 	      <button type="button" id="btnModificarCliente" class="btn btn-primary">Actualizar</button>
 	</form> 
 
@@ -546,6 +555,11 @@
 	    <label for="txtAveriaMaquina">Avería:</label>
 	    <input type="text" class="form-control" id="txtAveriaMaquina">
 	  </div>
+	<div class="form-check">
+		<label class="form-check-label">
+	  	<input class="form-check-input" type="checkbox" value="" id="estadoMaquinaria" name="estadoMaquinaria">
+	  	Activo</label>
+	</div>
 
 	    <button type="button" name="btnModificarMaquina" id="btnModificarMaquina" class="btn btn-primary">Actualizar</button>
 	</form> 
@@ -561,12 +575,12 @@
 	  <!--Comprar-->
 	<form action="#" id="frmComprar" name="frmComprar" class="pr-5 pl-5">
 		<h1>Formulario de Compra Maquinaria</h1>
-	<div class="form-group">
+	  <div class="form-group">
 	    <label for="txtIDComprar">ID de la Compra</label>
 	    <input type="text" class="form-control" id="txtIDComprar">
 	</div>
 	<div class="form-group">
-	    <label for="txtFechaComprar">Fecha de la adquisición</label>
+	    <label for="txtFechaComprar">Fecha de Adquisición</label>
 	    <input type="date" class="form-control" id="txtFechaComprar">
 	</div>
 
@@ -583,9 +597,8 @@
 	<div name="empleado" class="selectDivEmpleado sep-inf"></div><br>
 
 	<label>Seleccione el proveedor del producto: (debe existir previamente)</label>
-    <div name="provedor" class="selectDivProveedor sep-inf"></div><br>
 
-	
+    <div name="provedor" class="selectDivProveedor sep-inf"></div><br>
  
  	  <div class="form-group">
 	    <button type="button" name="btnComprar" id="btnComprar" class="btn btn-primary">Realizar Compra</button>
@@ -593,14 +606,15 @@
 		
 	</form>
 	 <!--Modificar Compra-->
+
 	<form action="#" id="frmModificarCompra" name="frmModificarCompra" class="pr-5 pl-5">
-		<h1>Formulario Modificar Compra</h1>
+		<h1>Formulario Modificar Transacción</h1>
 		<br>
-		 <div id="selectModificarMaquina" class="selectDivCompra sep-inf"></div><br>
+		 <div id="selectModificarCompra" class="selectDivCompra sep-inf"></div><br>
 	    <div class="form-group">
 		</div>
-
 	</form>
+
 	<!--Modificar Abierto Compra-->
 	<form action="#" id="frmModificarCompraAbierto" name="frmModificarCompraAbierto" class="pr-5 pl-5">
 	  <div class="form-group">
@@ -618,12 +632,18 @@
 	    <input type="text" class="form-control" id="txtCoste">
 	 </div>
 	  <br>
-	  <div name="provedor" class="selectDivProveedor sep-inf"></div><br>
-	  <div name="empleado" class="selectDivEmpleado sep-inf"></div><br>
-	  <div name="maquina" class="selectDivMaquina sep-inf"></div><br>
+	<label>Seleccione la máquina adquirida: (debe existir previamente)</label>
+	<div name="maquina" class="selectDivMaquina sep-inf"></div><br>
+
+    <label>Seleccione el empleado que realiza la compra: (debe existir previamente)</label>
+	<div name="empleado" class="selectDivEmpleado sep-inf"></div><br>
+
+	<label>Seleccione el proveedor del producto: (debe existir previamente)</label>
+
+    <div name="provedor" class="selectDivProveedor sep-inf"></div><br>
 	  <br>
 	<div class="form-group">
-	    <button type="button" name="btnComprar" id="btnComprar" class="btn btn-primary">Actualizar Compra</button>
+	    <button type="button" name="btnModificarCompra" id="btnModificarCompra" class="btn btn-primary">Actualizar Compra</button>
       </div>
    </form>
 
@@ -645,23 +665,56 @@
 	</div>
 	 <br>
 
-	<label>Seleccione la máquina adquirida: (debe existir previamente y estar en activo)</label>
+	<label>Seleccione la máquina vendida: (debe existir previamente y estar en activo)</label>
 	<div name="maquina" class="selectDivMaquina sep-inf"></div><br>
 
 	<label>Seleccione el empleado que realiza la compra: (debe existir previamente)</label>
 	<div name="empleado" class="selectDivEmpleado sep-inf"></div><br>
 
 	<label>Seleccione el cliente al que se vende: (debe existir previamente)</label>
-    <div name="provedor" class="selectDivCliente sep-inf"></div><br>
+    <div name="proveedor" class="selectDivCliente sep-inf"></div><br>
 
-	
- 
  	<div class="form-group">
 	    <button type="button" name="btnVender" id="btnVender" class="btn btn-primary">Realizar la Venta</button>
     </div>
-		
 	</form>
 
+	<!--Modificar Abierto Venta-->
+	<form action="#" id="frmModificarVentaAbierto" name="frmModificarVentaAbierto" class="pr-5 pl-5">
+		
+	<div class="form-group">
+	    <label for="txtIDComprar">ID de la Venta</label>
+	    <input type="text" class="form-control" id="txtIDComprar">
+	</div>
+	<div class="form-group">
+	    <label for="txtFechaComprar">Fecha de la venta</label>
+	    <input type="date" class="form-control" id="txtFechaComprar">
+	</div>
+
+	<div class="form-group">
+	    <label for="txtCoste">Precio de Venta:</label>
+	    <input type="text" class="form-control" id="txtCoste">
+	</div>
+	 <br>
+
+	<div class="form-group">
+	    <label >Máquina vendida:</label>
+	    <input type="text" class="form-control" disabled="disabled">
+	</div>
+
+	<label>Cambiar la máquina vendida por: (debe existir previamente y estar en activo)</label>
+	<div name="maquina" class="selectDivMaquina sep-inf"></div><br>
+
+	<label>Seleccione el empleado que realiza la compra: (debe existir previamente)</label>
+	<div name="empleado" class="selectDivEmpleado sep-inf"></div><br>
+
+	<label>Seleccione el cliente al que se vende: (debe existir previamente)</label>
+    <div name="cliente" class="selectDivCliente sep-inf"></div><br>
+
+ 	<div class="form-group">
+	    <button type="button" name="btnModificarVenta" id="btnModificarVenta" class="btn btn-primary">Actualizar la Venta</button>
+    </div>
+	</form>
 
     <!--Listar-->
     <form action="#" id="frmListarCompras"  class="pr-5 pl-5">
@@ -687,26 +740,21 @@
 	    <label for="txtFechaFinAlquiler">Fecha de Fin del Alquiler</label>
 	    <input type="date" class="form-control" id="txtFechaFinAlquiler">
 	  </div>
-
-	  <div class="form-group">
-	    <label for="txtImporteAlquiler">Importe</label>
-	    <input type="text" class="form-control" id="txtImporteAlquiler">
-	  </div>
+	  <br>
 
 	  <label for="txtDNICliAlquiler">DNI del Cliente (debe existir previamente)</label>
 	  <div id="selectAlquilerCliente" class="selectDivCliente sep-inf"></div><br>
 	
-	   <br>
-
 	  <label for="txtIDMaqAlquiler">ID de la Máquina (debe existir previamente)</label>
 	  <div id="selectAlquilerMaquina" class="selectDivMaquina sep-inf"></div><br>
-
-	   <br>
 
 	  <label for="txtDNIEmpAlquiler">DNI del empleado (debe existir previamente)</label>
 	   <div id="selectAlquilerEmpleado" class="selectDivEmpleado sep-inf"></div><br>
 
-	   <br>
+	  <div class="form-group">
+	    <label for="txtImporteAlquiler">Importe:</label>
+	    <input type="text" class="form-control" id="txtImporteAlquiler" disabled="disabled">
+	  </div>
 
 	    <button type="button" id="btnAltaAlquiler" class="btn btn-primary">Aceptar</button>
 	</form> 
@@ -800,36 +848,18 @@
 	</form>
 
 
-	<!--****************************** Formularios Seguro ******************************-->
-	<!--Alta-->
-	<form action="#" id="frmAltaPago" class="pr-5 pl-5">
-	<h1>Ni puta idea de lo que hay que poner aquí</h1>
-
-	  <div class="form-group">
-	    <label for="txtŃumSeguro">Número de Pago:</label>
-	    <input type="text" class="form-control" id="txtŃumSeguro">
-	  </div>
-
-	    <button type="button" class="btn btn-primary">button</button>
-	</form> 
-
-	<!--Listar-->
-	<form action="#" id="frmListarPago" class="pr-5 pl-5">
-	<h1>Listado de todos los pagos</h1>	
-
-	</form>
-
-
-	<!--****************************** Formularios Empleados ******************************-->
+	<!--****************************** Formulario Balance ******************************-->
 	<!--Listar-->
 	<form action="#" id="frmListarBalance" class="pr-5 pl-5">
-	<h1>Balance de los Pagos/Alquileres</h1>
-	<h2>Filtrar por positivo,negativo o neutro?</h2>	
-
+	<h1>Estadísticas en gráficos</h1>
+	<div id="grafos">
+		
+	</div>	
+	<input type="button" id="mostrarEstadisticas" class="btn btn-primary" value="mostrar estadísticas">
 	</form>
 
 	</div>
-	  <div class="col-md-2 d-none d-sm-block"></div>
+	  <div class="col-md-1 d-none d-sm-block"></div>
 	</div>
 
 	<!--****************************** Archivos JS de Bootstrap ******************************-->
@@ -854,6 +884,7 @@
 	<script src="js/funciones.js"></script>
 	<script src="js/codigo.js"></script>
 	<script src="js/filtros.js"></script>
+	<script src="js/grafos.js"></script>
 	<script src="js/datosDePrueba.js"></script>
 
 	 <!-- jQuery library -->

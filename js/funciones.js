@@ -76,6 +76,7 @@ function actualizaCombos(sTipo, bTodos)
             capaSelect = "selectDivEmpleado";
             idSelect = "selectEmpleado";
             arrayDatos = obtenerActivos(oGestion.empleados);
+            
             break;
         case "clientes":
             capaSelect = "selectDivCliente";
@@ -90,11 +91,23 @@ function actualizaCombos(sTipo, bTodos)
         case "compras":
             capaSelect = "selectDivCompra";
             idSelect = "selectCompra";
-            arrayDatos = oGestion.transacciones;           
+            arrayDatos = oGestion.transacciones;
+            break;
+        case "maquinasNoAlquiladasActivas":
+            capaSelect = "selectDivMaquina";
+            idSelect = "selectMaquina";
+            arrayDatos = maquinasNoAlquiladasActivas();
+            sTipo ="maquinas";
+            break;           
         case "alquileres":
             capaSelect = "selectDivAlquiler";
             idSelect = "selectAlquiler";
             arrayDatos = oGestion.alquileres;
+            break;
+        case "transacciones":
+            capaSelect = "selectDivCompra";
+            idSelect = "selectCompra";
+            arrayDatos = oGestion.transacciones;
             break;
     }
 
@@ -123,10 +136,11 @@ function actualizaCombos(sTipo, bTodos)
                 oValores[1] = array[i].sNombreMaquina;
                 oValores[2] = array[i].sModelo;
                 break;
-            case "compras":
-                oValores[0] = array[i].id;
+            case "transacciones":
+                oValores[0] = array[i].id;  
                 oValores[1] = array[i].fecha;
                 oValores[2] = array[i].maquina;
+                break;
             case "alquileres":
                 oValores[0] = array[i].idAlquiler;
                 oValores[1] = array[i].idMaquina;
@@ -164,6 +178,7 @@ function actualizaCombos(sTipo, bTodos)
         for (var i = 0; i < arrayDatos.length; i++) 
         {
             var arrayValores = devolverValue(arrayDatos,i,sTipo);
+           // console.log(arrayDatos);
             var oOption = document.createElement("option");
             oOption.value = arrayValores[0];
             if(sTipo=="clientes"|| sTipo=="empleados"|| sTipo=="proveedores"|| sTipo=="alquileres")
@@ -241,6 +256,12 @@ function actualizaCombosTodos(sTipo)
             capaSelect = "selectDivMaquina";
             idSelect = "selectMaquina";
             arrayDatos = oGestion.maquinas;
+            break;
+        case "maquinasNoAlquiladasActivas":
+            capaSelect = "selectDivMaquina";
+            idSelect = "selectMaquina";
+            arrayDatos = maquinasNoAlquiladasActivas();
+            sTipo ="maquinas";
             break;
         case "compras":
             capaSelect = "selectDivCompra";
@@ -341,4 +362,135 @@ function actualizaCombosTodos(sTipo)
         oSelectClonado=oSelect.cloneNode(true);
         oCapaSelect[i].appendChild(oSelectClonado);
     }
+}
+
+// function selectAnterior(select,valueBuscado){
+//     for (var i = 0; i < select.children.length; i++) {
+//         if(select.children[i].value == valueBuscado)
+//             select.children[i].selected="selected";
+//     }
+// }
+
+
+function calcularImporte(precioAlquiler, dtfechaInicio, dtfechaFin){
+
+var msecPerMinute = 1000 * 60;
+var msecPerHour = msecPerMinute * 60;
+var msecPerDay = msecPerHour * 24;
+
+var fechaInicio = dtfechaInicio.getTime();
+var fechaFin = dtfechaFin.getTime();
+var interval = fechaFin-fechaInicio;
+
+var numDias = Math.floor(interval / msecPerDay );
+if (numDias == 0)
+    numDias=1;
+var importe = parseInt(precioAlquiler) * numDias;
+console.log(precioAlquiler);
+
+return importe;
+}
+
+
+/************************FUNCIONES QUE DEVUELVEN UN ARRAY ESPECÍFICO*****************************/
+
+
+//Devuelve un array de todas las máquinas que no están en el array 
+//de alquileres pero estan activas.
+function maquinasNoAlquiladasActivas()
+{
+    var aMaquinasNoAlquiladas = [];
+    for (var i = 0; i < oGestion.maquinas.length; i++) {
+        encontrado=false;
+      for (var j = 0; j < oGestion.alquileres.length; j++) {
+           if(oGestion.maquinas[i].iIdMaquina == oGestion.alquileres[j].idMaquina)
+                if(oGestion.alquileres[j].estado)
+                    encontrado=true;
+        }
+     if(!encontrado)
+        if(oGestion.maquinas[i].estado)
+            aMaquinasNoAlquiladas.push(oGestion.maquinas[i]);       
+    }
+
+    return aMaquinasNoAlquiladas;
+}
+
+
+//Devuelve un array de todas las máquinas que no están en el array de alquileres.
+function maquinasNoAlquiladas()
+{
+    var aMaquinasNoAlquiladas = [];
+    for (var i = 0; i < oGestion.maquinas.length; i++) {
+        encontrado=false;
+      for (var j = 0; j < oGestion.alquileres.length; j++) {
+           if(oGestion.maquinas[i].iIdMaquina == oGestion.alquileres[j].idMaquina)
+                if(oGestion.alquileres[j].estado)
+                    encontrado=true;
+        }
+     if(!encontrado)
+            aMaquinasNoAlquiladas.push(oGestion.maquinas[i]);       
+    }
+
+    return aMaquinasNoAlquiladas;
+}
+
+function maquinasAlquiladasActivas()
+{
+    var aMaquinasAlquiladas = [];
+    for (var i = 0; i < oGestion.maquinas.length; i++) {
+        encontrado=false;
+      for (var j = 0; j < oGestion.alquileres.length; j++) {
+           if(oGestion.maquinas[i].iIdMaquina == oGestion.alquileres[j].idMaquina)
+                if(oGestion.alquileres[j].estado)
+                    encontrado=true;
+        }
+     if(encontrado)
+            aMaquinasAlquiladas.push(oGestion.maquinas[i]);       
+    }
+
+    return aMaquinasAlquiladas;
+}
+
+function totalImporteCompras()
+{
+    var total=0;
+    for (var i = 0; i < oGestion.transacciones.length; i++) {
+     if (oGestion.transacciones[i] instanceof Compra )
+        total+=oGestion.transacciones[i].valor;
+     }
+
+    return total;
+}
+
+function totalImporteVentas()
+{
+    var total=0;
+    for (var i = 0; i < oGestion.transacciones.length; i++) {
+     if (oGestion.transacciones[i] instanceof Venta )
+        total+=oGestion.transacciones[i].valor;    
+    }
+
+    return total;
+}
+
+
+function totalImporteAlquileresActivos(){
+
+    var total=0;
+    for (var i = 0; i < oGestion.alquileres.length; i++) {
+     if (oGestion.alquileres[i].estado)
+        total+=oGestion.alquileres[i].importe;    
+    }
+    return total;
+}
+
+
+function totalImporteAlquileresFinalizados(){
+
+    var total=0;
+    for (var i = 0; i < oGestion.alquileres.length; i++) {
+     if (!oGestion.alquileres[i].estado)
+        total+=oGestion.alquileres[i].importe;    
+    }
+    return total;
 }
