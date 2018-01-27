@@ -28,88 +28,37 @@ function validarAlquiler(formulario)
 
 	//fecha inicio
 	var fechaAlquiler = formulario.txtFechaIniAlquiler.value.trim();
-	if(fechaAlquiler == "")
-	{
-		if(bAlquiler)
-		{
-			bAlquiler = false;
-			formulario.txtFechaIniAlquiler.focus();
-		}
-		claseError(formulario, 1);
-		aError.push("Fecha de inicio incorrecta");
-	}
-	else
-	{
-		quitarError(formulario, 1);
-	}
+	// if(oExpRegValidarFecha.test(fechaAlquiler) == false)
+	// {
+	// 	if(bAlquiler)
+	// 	{
+	// 		bAlquiler = false;
+	// 		formulario.txtFechaIniAlquiler.focus();
+	// 	}
+	// 	claseError(formulario, 1);
+	// 	aError.push("Fecha de inicio incorrecta");
+	// }
+	// else
+	// {
+	// 	quitarError(formulario, 1);
+	// }
 
 	//fecha final
 	var fechaAlquilerFin = formulario.txtFechaFinAlquiler.value.trim();
-	if(fechaAlquilerFin == "" )
-	{
-		if(bAlquiler)
-		{
-			bAlquiler = false;
-			formulario.txtFechaFinAlquiler.focus();
-		}
-		claseError(formulario, 2);
-		aError.push("Fecha de finalización incorrecta");
-	}
-	else
-	{
-		quitarError(formulario, 2);
-	}
-
-	//Cliente
-	if(formulario.getElementsByClassName("selectDivCliente")[0].firstChild.selectedIndex == 0)
-	{
-		if(bAlquiler)
-		{
-			bAlquiler = false;
-			formulario.getElementsByClassName("selectDivCliente")[0].firstChild.focus();
-		}
-		formulario.getElementsByClassName("selectDivCliente")[0].firstChild.classList.add("is-invalid");
-		aError.push("Debe seleccionar un Cliente");
-	}
-	else
-	{
-		formulario.getElementsByClassName("selectDivCliente")[0].firstChild.classList.remove("is-invalid");
-	}
-	//-------
-
-	//Empleado	
-	if(formulario.getElementsByClassName("selectDivEmpleado")[0].firstChild.selectedIndex == 0)
-	{
-		if(bAlquiler)
-		{
-			bAlquiler = false;
-			formulario.getElementsByClassName("selectDivEmpleado")[0].firstChild.focus();
-		}
-		formulario.getElementsByClassName("selectDivEmpleado")[0].firstChild.classList.add("is-invalid");
-		aError.push("Debe seleccionar un Empleado");
-	}
-	else
-	{
-		formulario.getElementsByClassName("selectDivEmpleado")[0].firstChild.classList.remove("is-invalid");
-	}
-	//------
-
-	//Maquina	
-	if(formulario.getElementsByClassName("selectDivMaquina")[0].firstChild.selectedIndex == 0)
-	{
-		if(bAlquiler)
-		{
-			bAlquiler = false;
-			formulario.getElementsByClassName("selectDivMaquina")[0].firstChild.focus();
-		}
-		formulario.getElementsByClassName("selectDivMaquina")[0].firstChild.classList.add("is-invalid");
-		aError.push("Debe seleccionar un Máquina");
-	}
-	else
-	{
-		formulario.getElementsByClassName("selectDivMaquina")[0].firstChild.classList.remove("is-invalid");
-	}
-	//------
+	// if(oExpRegValidarFecha.test(fechaAlquilerFin) == false)
+	// {
+	// 	if(bAlquiler)
+	// 	{
+	// 		bAlquiler = false;
+	// 		formulario.txtFechaFinAlquiler.focus();
+	// 	}
+	// 	claseError(formulario, 2);
+	// 	aError.push("Fecha de finalización incorrecta");
+	// }
+	// else
+	// {
+	// 	quitarError(formulario, 2);
+	// }
 
 	//IMPORTE
 	var importeAlquiler = formulario.txtImporteAlquiler.value.trim();
@@ -121,76 +70,49 @@ function validarAlquiler(formulario)
 			formulario.txtImporteAlquiler.focus();
 		}
 		claseError(formulario, 3);
-		aError.push("La fecha de inicio no puede ser posterior a la de fin");
+		aError.push("Importe incorrecto");
 	}
 	else
 	{
 		quitarError(formulario, 3);
 	}
 
-	if(aError.length>0){ // Este If muestra los mensajes de error de la validación. 
-						 //	Los mete en un Div y los manda a MostrarMensaje
-		DeMensajesADiv(aError);
-	}
-
 	return bAlquiler;
 }
-
-function calcularImporteAlquiler(){
-	var formulario = document.frmAltaAlquiler;
-	if(formulario.selectMaquina.selectedIndex!=0)
-		//if(formulario.txtFechaIniAlquiler.value.trim()!="")
-		//	if(formulario.txtImporteAlquiler.value.trim()!="")
-				{		
-					var oMaquina = oGestion.buscarMaquina(formulario.selectMaquina.value);
-					var precioAlquiler = oMaquina.iAlquiler;
-					var fechaInicio = new Date (formulario.txtFechaIniAlquiler.value.trim());
-					console.log(fechaInicio);
-					var fechaFin = new Date(formulario.txtFechaFinAlquiler.value.trim());
-					var importe = calcularImporte(precioAlquiler, fechaInicio, fechaFin);
-					formulario.txtImporteAlquiler.value=importe;
-				}
-}
-
 
 function anadirAlquiler() 
 {
 	var sMensaje = "";
-	var formulario = document.frmAltaAlquiler;
+	formulario = document.frmAltaAlquiler;
 
-	
-		var importeAlquiler = parseInt(formulario.txtImporteAlquiler.value.trim());
+	if(validarAlquiler(formulario))
+	{
+		var idAlquiler = formulario.txtIDAlquiler.value.trim();
+		var fechaAlquiler = formulario.txtFechaIniAlquiler.value.trim();
+		var fechaAlquilerFin = formulario.txtFechaFinAlquiler.value.trim();
+		var importeAlquiler = formulario.txtImporteAlquiler.value.trim();
+		var dniCliente = formulario.selectCliente.value;
+		var dniEmpleado = formulario.selectEmpleado.value;
+		var idMaquina = formulario.selectMaquina.value;
 
-		if(validarAlquiler(formulario))
+		var oAlquiler = new Alquiler(idAlquiler, fechaAlquiler, fechaAlquilerFin, importeAlquiler, dniCliente, idMaquina, dniEmpleado);
+		var bAltaAlquiler = oGestion.altaAlquiler(oAlquiler);
+
+		if (bAltaAlquiler) 
 		{
-			var idAlquiler = formulario.txtIDAlquiler.value.trim();
-			var fechaAlquiler = formulario.txtFechaIniAlquiler.value.trim();
-			var fechaAlquilerFin = formulario.txtFechaFinAlquiler.value.trim();
-			
-			var dniCliente = formulario.selectCliente.value;
-			var dniEmpleado = formulario.selectEmpleado.value;
-			var idMaquina = formulario.selectMaquina.value;
-
-			var oAlquiler = new Alquiler(idAlquiler, fechaAlquiler, fechaAlquilerFin, importeAlquiler, dniCliente, idMaquina, dniEmpleado);
-			var bAltaAlquiler = oGestion.altaAlquiler(oAlquiler);
-
-			if (bAltaAlquiler) 
-			{
-				sMensaje = "Alquiler dado de alta";
-				mostrarMensaje(sMensaje,true);
-				document.frmAltaAlquiler.reset();			
-			}
-			else
-			{
-				sMensaje = "Alquiler ya existente";
-				mostrarMensaje(sMensaje,false);
-				claseError(document.frmAltaAlquiler, 0);
-			}
-
+			actualizaCombos("alquileres");
+			sMensaje = "Alquiler dado de alta";
+			mostrarMensaje(sMensaje);
+			document.frmAltaAlquiler.reset();			
 		}
-
-} 
-
+		else
+		{
+			sMensaje = "Alquiler ya existente";
+			mostrarMensaje(sMensaje);
+			claseError(document.frmAltaAlquiler, 0);
+		}
+	} 
+}
 
 function camposFormModificarAlquileres()
 {
@@ -283,5 +205,24 @@ function tablaAlquileres()
 
 	return oTabla;	
 
-				/********************/	
+				/********************/
+
+	// var oTabla = document.createElement("TABLE");
+	// oTabla.setAttribute("class", "table table-striped");
+	// oTabla.id = "tablaListada";
+
+	// var header = oTabla.createTHead();
+	// var fila = header.insertRow(0);
+	// fila.insertCell(-1).appendChild(document.createTextNode("ID"));
+	// fila.insertCell(-1).appendChild(document.createTextNode("Fecha Inicio"));
+	// fila.insertCell(-1).appendChild(document.createTextNode("Fecha Fin"));
+	// fila.insertCell(-1).appendChild(document.createTextNode("Importe"));
+	// fila.insertCell(-1).appendChild(document.createTextNode("Cliente"));
+	// fila.insertCell(-1).appendChild(document.createTextNode("Maquina"));
+	// fila.insertCell(-1).appendChild(document.createTextNode("Empleado"));
+	// fila.insertCell(-1).appendChild(document.createTextNode("Estado"));
+
+	// var body = oTabla.appendChild(oGestion.sRowHTMLAlquileres());
+
+	// return oTabla;	
 }

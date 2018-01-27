@@ -1,26 +1,25 @@
-class Compra extends Transaccion
+class Venta extends Transaccion
 {	
-	constructor(sId,fecha,fCoste,iMaquina,sEmpleado,sProveedor)
+	constructor(sId,fecha,fCoste,iMaquina,sEmpleado,sCliente)
 	{
 		super(sId,fecha,sEmpleado,iMaquina,fCoste);
-		this.proveedor = sProveedor;
+		this.cliente = sCliente;
 	}
 	
 }
 
 //METODOS:
-Compra.prototype.sRowHTML = function() {
+Venta.prototype.sRowHTML = function() {
 
 	var fila = document.createElement("TR");
 
 	fila.insertCell(-1).appendChild(document.createTextNode(this.id));
-	fila.insertCell(-1).appendChild(document.createTextNode(new Date(this.fecha).toLocaleDateString('es-ES')));
+	fila.insertCell(-1).appendChild(document.createTextNode(this.fecha.toLocaleString('ca-ES')));
 	fila.insertCell(-1).appendChild(document.createTextNode(this.valor.toLocaleString('de-DE', {  style: 'currency', currency: 'EUR'  })));
 	fila.insertCell(-1).appendChild(document.createTextNode(this.maquina));
 	fila.insertCell(-1).appendChild(document.createTextNode(this.empleado));
-	fila.insertCell(-1).appendChild(document.createTextNode(this.proveedor));
-	fila.insertCell(-1).appendChild(document.createTextNode("COMPRA"));
-	fila.classList.add("table-danger");
-
+	fila.insertCell(-1).appendChild(document.createTextNode(this.cliente));
+	fila.insertCell(-1).appendChild(document.createTextNode("VENTA"));
+	fila.classList.add("table-success");
 	return fila;
 }

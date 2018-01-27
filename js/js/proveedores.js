@@ -169,16 +169,6 @@ function camposFormModificarProveedor()
     CamposFormulario[6].value = antiguoProveedor.localidad;
     CamposFormulario[7].value = antiguoProveedor.cPostal;
 
-    if(antiguoProveedor.estado)
-    {
-    	document.getElementById("estadoProveedor").checked = true;
-	}
-	else
-	{
-		document.getElementById("estadoProveedor").checked = false;
-	}
-
-    CamposFormulario[8].value = antiguoProveedor.estado;
 }
 
 function modificarProveedor()
@@ -193,10 +183,9 @@ function modificarProveedor()
 		var direccion = formulario.txtDireccionProveedor.value.trim();
 		var localidad = formulario.txtLocalidadProveedor.value.trim();
 		var cPostal = formulario.txtCPostalProveedor.value.trim();
-		var estadoProveedor = formulario.estadoProveedor.checked;
 
 		var oProveedor = new Proveedor(dni,nombre, apellido,empresa, telefono, direccion, localidad, cPostal);
-		oProveedor.estado=estadoProveedor;
+
 		var proveedoraModificar = document.getElementById("selectModificarProveedor").firstChild.value;
 
 		if(oGestion.modificarProveedor(proveedoraModificar,oProveedor)){

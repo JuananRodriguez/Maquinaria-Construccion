@@ -165,16 +165,6 @@ function camposFormModificarCliente()
     CamposFormulario[5].value = antiguoCliente.localidadCliente;
     CamposFormulario[6].value = antiguoCliente.cpCliente;
 
-    if(antiguoCliente.estado)
-    {
-    	document.getElementById("estadoCliente").checked = true;
-	}
-	else
-	{
-		document.getElementById("estadoCliente").checked = false;
-	}
-	CamposFormulario[7].value = antiguoCliente.estado;
-
 }
 
 function modificarCliente()
@@ -188,10 +178,9 @@ function modificarCliente()
 		var dirCliente = formulario.txtDireccionCliente.value.trim();
 		var localidadCliente = formulario.txtLocalidadCliente.value.trim();
 		var cpCliente = formulario.txtCPostalCliente.value.trim();
-		var estadoCliente = formulario.estadoCliente.checked;
 
 		var oCliente = new Cliente(dniCliente,nombreCliente, apellidoCliente, telClientes, dirCliente, localidadCliente, cpCliente);
-		oCliente.estado=estadoCliente;
+
 		var clienteaModificar = document.getElementById("selectModificarCliente").firstChild.value;
 
 		if(oGestion.modificarCliente(clienteaModificar,oCliente)){
