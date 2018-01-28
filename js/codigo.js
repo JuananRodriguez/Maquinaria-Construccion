@@ -1,19 +1,18 @@
 var oGestion = new Gestion();
 
-resetForms();
-datosDePrueba();
+/**************Inicio del programa*************/
+var btnInicio = document.getElementsByClassName("navbar-brand")[0];
+btnInicio.addEventListener("click",inicio,false);
 
-/************* Añade Datos de Prueba **************/
-function datosDePrueba(){
+inicio();
 
- 	oGestion.altaMaquina(new Maquina("ROBOCOCA","200", "ROBOCOCA 2000", "oh blanca navidad", 75, "ninguna"));
- 	oGestion.altaMaquina(new Maquina("ROBOCOCA","300", "ROBOCOCA 2000", "oh blanca navidad", 5, "ninguna"));
- 	oGestion.altaMaquina(new Maquina("ROBOCOCA","400", "ROBOCOCA 2000", "oh blanca navidad", 10, "ninguna"));
+function inicio(){
+	resetForms();
+	document.getElementById('frmBienvenida').style.display="block";
 
- 	oGestion.altaAlquiler(new Alquiler("A-1","2018-12-27", "2018-12-28", "700", "48959266V", "200", "48954566V"));
-   	oGestion.altaCompra(new Compra("T-1",new Date(2018,04,01), 700, 200, "47852369G", "47852369G"));
-   	oGestion.altaCompra(new Venta("T-2",new Date(2018,04,01), 700, 200, "47852369G", "25465466H")); 
- }
+
+}
+
 
 
 /************* Pone los formularios invisibles y resetea campos **************/
@@ -57,7 +56,7 @@ function mostrarEnCompras(oEvento)
 
 	    case "Vender":
 	  		actualizaCombos("empleados");
-	    	actualizaCombosTodos("maquinasNoAlquiladasActivas");
+	    	actualizaCombos("maquinasNoAlquiladasActivas");
 	    	actualizaCombos("clientes");
 	        document.getElementById('frmVenta').style.display="block";
 	        break;
@@ -146,7 +145,7 @@ function mostrarEnProveedores(oEvento){
 	        document.getElementById('frmBajaProveedor').style.display="block";
 	        break;
 	    case "Modificar":
-	        actualizaCombos("proveedores");
+	        actualizaCombos("todosProveedores");
 	        document.getElementById('frmModProveedor').style.display="block";
 	        break;
 	    default:
@@ -205,7 +204,7 @@ function mostrarEnEmpleados(oEvento){
 	        document.getElementById('frmBajaEmpleado').style.display="block";
 	        break;
 	    case "Modificar":
-	        actualizaCombosTodos("empleados");
+	        actualizaCombos("todosEmpleados");
 	        document.getElementById('frmModEmpleado').style.display="block";
 	        break;
 	    default:
@@ -403,6 +402,15 @@ function mostrarEnAlquiler(oEvento)
 	        actualizaCombos("clientes");
 	        actualizaCombos("empleados");
 	        document.getElementById('frmModAlquiler').style.display="block";
+
+	         var oSelectMaquina = document.getElementById("frmModAlquilerSeleccionado").selectMaquina;
+			oSelectMaquina.addEventListener("change", calcularImporteAlquilerMod, false);
+
+			var oSelectFechaini = document.getElementById("frmModAlquilerSeleccionado").txtFechaIniAlquiler;
+			oSelectFechaini.addEventListener("change", calcularImporteAlquilerMod, false);
+
+			var oSelectFechafin = document.getElementById("frmModAlquilerSeleccionado").txtFechaFinAlquiler;
+			oSelectFechafin.addEventListener("change", calcularImporteAlquilerMod, false);
 	        break;
 	    case "Listar":
 	        resetForms();
@@ -457,7 +465,7 @@ function mostrarEnDevolucion(oEvento)
 	{
 	    case "Devolver":
 	        resetForms();
-	        actualizaCombos("alquileres");
+	        actualizaCombos("alquileresNoFinalizados");
 	        document.getElementById('frmDevolucion').style.display="block";
 	        break;
 	    case "Listar":
@@ -525,14 +533,17 @@ var oExpRegValidarFecha = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-
 var oExpRegValidarHora = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
 var oExpRegValidadCapacidad = /^(?!0).*[0-9]{2,3}$/;
 var oExpRegValidarCP = /^[0-9]{5}$/;
+var oExpRegDireccion=/^[/a-zA-Z\s]{5,80}\d+$/;
+var oExpRegLocalidad = /^[a-zA-Z0-9\s]{3,40}$/;
 
-var oExpRegValidarMod = /^[a-zA-Z\s]{3,20}$/;
-var oExpRegValidarIdMaquina = /^[0-9]{3}$/;
+var oExpRegValidarMod = /^[a-zA-Z\s\d]{3,20}$/;
+var oExpRegValidarIdMaquina = /^[0-9]{3,9}$/;
 var oExpRegValidarDescripcion = /^[a-zA-Z0-9\s]{10,140}$/;
 var oExpRegValidarPrecioAlq = /^[0-9]{1,}\.?[0-9]{0,2}?$/;
 var oExpRegValidarIdAlquiler = /^([A]{1}-\d+)$/;
-var oExpRegValidarFecha = /^([0-2][0-9]|3[0-1])(\/|-)(0[1-9]|1[0-2])\2(\d{4})$/;
+
 var oExpRegValidarImporte = /^\d*\.?\d+(,\d+)?/;
 var oExpRegValidarPrecio = /^[0-9]{1,}\.?[0-9]{0,2}?$/;
 var oExpRegValidarId = /^[0-9]{3}$/; 
-oExpRegValidarIdTransaccion = /^([T]{1}-\d+)$/; 
+var oExpRegValidarIdTransaccion = /^([T]{1}-\d+)$/; 
+var oExpRegValidarFecha = /^([0-2][0-9][0-9][0-9])-(0[1-9]|1[0-2])-(0[1-9]|1[0-9]|2[0-9]|3[0-1])$/;

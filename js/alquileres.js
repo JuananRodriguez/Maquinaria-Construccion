@@ -145,7 +145,24 @@ function calcularImporteAlquiler(){
 					var oMaquina = oGestion.buscarMaquina(formulario.selectMaquina.value);
 					var precioAlquiler = oMaquina.iAlquiler;
 					var fechaInicio = new Date (formulario.txtFechaIniAlquiler.value.trim());
-					console.log(fechaInicio);
+					//console.log(fechaInicio);
+					var fechaFin = new Date(formulario.txtFechaFinAlquiler.value.trim());
+					var importe = calcularImporte(precioAlquiler, fechaInicio, fechaFin);
+					formulario.txtImporteAlquiler.value=importe;
+				}
+}
+
+
+function calcularImporteAlquilerMod(){
+	var formulario = document.frmModAlquilerSeleccionado;
+	if(formulario.selectMaquina.selectedIndex!=0)
+		//if(formulario.txtFechaIniAlquiler.value.trim()!="")
+		//	if(formulario.txtImporteAlquiler.value.trim()!="")
+				{		
+					var oMaquina = oGestion.buscarMaquina(formulario.selectMaquina.value);
+					var precioAlquiler = oMaquina.iAlquiler;
+					var fechaInicio = new Date (formulario.txtFechaIniAlquiler.value.trim());
+					//console.log(fechaInicio);
 					var fechaFin = new Date(formulario.txtFechaFinAlquiler.value.trim());
 					var importe = calcularImporte(precioAlquiler, fechaInicio, fechaFin);
 					formulario.txtImporteAlquiler.value=importe;
@@ -159,13 +176,13 @@ function anadirAlquiler()
 	var formulario = document.frmAltaAlquiler;
 
 	
-		var importeAlquiler = parseInt(formulario.txtImporteAlquiler.value.trim());
+		var importeAlquiler = parseFloat(formulario.txtImporteAlquiler.value.trim());
 
 		if(validarAlquiler(formulario))
 		{
 			var idAlquiler = formulario.txtIDAlquiler.value.trim();
-			var fechaAlquiler = formulario.txtFechaIniAlquiler.value.trim();
-			var fechaAlquilerFin = formulario.txtFechaFinAlquiler.value.trim();
+			var fechaAlquiler = new Date(formulario.txtFechaIniAlquiler.value.trim());
+			var fechaAlquilerFin = new Date(formulario.txtFechaFinAlquiler.value.trim());
 			
 			var dniCliente = formulario.selectCliente.value;
 			var dniEmpleado = formulario.selectEmpleado.value;
@@ -201,8 +218,8 @@ function camposFormModificarAlquileres()
 	CamposFormulario = document.getElementById("frmModAlquilerSeleccionado").elements;
 
 	CamposFormulario[0].value = antiguoAlquiler.idAlquiler;
-    CamposFormulario[1].value = antiguoAlquiler.fechaInicio;
-    CamposFormulario[2].value = antiguoAlquiler.fechaFinal;
+    CamposFormulario[1].valueAsDate = antiguoAlquiler.fechaInicio;
+    CamposFormulario[2].valueAsDate = antiguoAlquiler.fechaFinal;
     CamposFormulario[3].value = antiguoAlquiler.importe;
     CamposFormulario[4].value = antiguoAlquiler.dniCliente;
     CamposFormulario[5].value = antiguoAlquiler.idMaquina;
@@ -221,27 +238,26 @@ function camposFormModificarAlquileres()
 
 function modificarAlquileres()
 {	
+
+	var idAlquilerMod = document.getElementById("selectModificarAlquileres").firstChild.value;
+	var antiguoAlquiler = oGestion.buscarAlquiler(idAlquilerMod);
+
 	formulario=document.frmModAlquilerSeleccionado;
 	if(validarAlquiler(formulario))
 	{
-		var idAlquiler = formulario.txtIDAlquiler.value.trim();
-		var fechaAlquiler = formulario.txtFechaIniAlquiler.value.trim();
-		var fechaAlquilerFin = formulario.txtFechaFinAlquiler.value.trim();
-		var importeAlquiler = formulario.txtImporteAlquiler.value.trim();
-		var dniCliente = formulario.selectCliente.value;
-		var dniEmpleado = formulario.selectEmpleado.value;
-		var idMaquina = formulario.selectMaquina.value;
-		var estadoAlquiler = formulario.estadoAlquiler.checked;
-
-		var oAlquiler = new Alquiler(idAlquiler, fechaAlquiler, fechaAlquilerFin, importeAlquiler, dniCliente, idMaquina, dniEmpleado);
-		oAlquiler.estado=estadoAlquiler;
-		var alquileraModificar = document.getElementById("selectModificarAlquileres").firstChild.value;
-
-		if(oGestion.modificarAlquileres(alquileraModificar,oAlquiler))
-		{
-	    	actualizaCombos("alquileres");
-	    	mostrarMensaje("Alquiler actualizado",true);
-	   }
+		antiguoAlquiler.idAlquiler = formulario.txtIDAlquiler.value.trim();
+		antiguoAlquiler.fechaInicio = new Date(formulario.txtFechaIniAlquiler.value);
+		antiguoAlquiler.fechaFinal = new Date(formulario.txtFechaFinAlquiler.value);
+		antiguoAlquiler.importe = parseFloat(formulario.txtImporteAlquiler.value.trim());
+		antiguoAlquiler.dniCliente = formulario.selectCliente.value;
+		antiguoAlquiler.dniEmpleado = formulario.selectEmpleado.value;
+		antiguoAlquiler.idMaquina = formulario.selectMaquina.value;
+		antiguoAlquiler.estado = formulario.estadoAlquiler.checked;
+		
+    	actualizaCombos("alquileres");
+    	mostrarMensaje("Alquiler actualizado",true);
+    	document.getElementById('frmModAlquilerSeleccionado').style.display="none";
+	   
 	}
 }
 

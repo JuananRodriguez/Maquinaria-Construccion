@@ -62,6 +62,23 @@ function validarProveedores(formulario)
 		quitarError(formulario, 2);
 	}
 
+	//Empresa
+	var empresa = formulario.txtEmpresaProveedor.value.trim();
+	if(empresa == "")
+	{
+		if(bValido)
+		{
+			bValido = false;
+			formulario.txtEmpresaProveedor.focus();
+		}
+		claseError(formulario, 3);
+		aError.push("Localidad incorrecta");
+	}
+	else
+	{
+		quitarError(formulario, 3);
+	}
+
 	//TELEFONO
 	var telProovedor = formulario.txtTelefonoProveedor.value.trim();
 	if(oExpRegValidarTelefono.test(telProovedor) == false)
@@ -77,6 +94,40 @@ function validarProveedores(formulario)
 	else
 	{
 		quitarError(formulario, 4);
+	}
+
+	//Dirección
+	var dirPro = formulario.txtDireccionProveedor.value.trim();
+	if(oExpRegDireccion.test(dirPro) == false)
+	{
+		if(bValido)
+		{
+			bValido = false;
+			formulario.txtDireccionProveedor.focus();
+		}
+		claseError(formulario, 5);
+		aError.push("Dirección incorrecta");
+	}
+	else
+	{
+		quitarError(formulario, 5);
+	}
+
+	//Localidad
+	var locPro = formulario.txtLocalidadProveedor.value.trim();
+	if(oExpRegLocalidad.test(locPro) == false)
+	{
+		if(bValido)
+		{
+			bValido = false;
+			formulario.txtLocalidadProveedor.focus();
+		}
+		claseError(formulario, 6);
+		aError.push("Localidad incorrecta");
+	}
+	else
+	{
+		quitarError(formulario, 6);
 	}
 
 	//CP
@@ -112,7 +163,7 @@ function anadirProveedor()
 		var dni = formulario.txtDNIProveedor.value.trim();
 		var nombre = formulario.txtNombreProveedor.value.trim();
 		var apellido = formulario.txtApellidoProveedor.value.trim();
-		var empresa = formulario.txtEmpresa.value.trim();
+		var empresa = formulario.txtEmpresaProveedor.value.trim();
 		var telefono = formulario.txtTelefonoProveedor.value.trim();
 		var direccion = formulario.txtDireccionProveedor.value.trim();
 		var localidad = formulario.txtLocalidadProveedor.value.trim();
@@ -200,8 +251,9 @@ function modificarProveedor()
 		var proveedoraModificar = document.getElementById("selectModificarProveedor").firstChild.value;
 
 		if(oGestion.modificarProveedor(proveedoraModificar,oProveedor)){
-	    	actualizaCombos("proveedores");
+	    	actualizaCombos("todosProveedores");
 	    	mostrarMensaje("Proveedor actualizado",true);
+	    	document.getElementById('frmModProveedorSeleccionado').style.display="none";
 	   }
 	}
 }

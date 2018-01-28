@@ -123,13 +123,13 @@ function anadirMaquinaria()
 		if (bAltaMaquina) 
 		{
 			sMensaje = "Máquina dado de alta";
-			mostrarMensaje(sMensaje);
+			mostrarMensaje(sMensaje,true);
 			document.frmAltaMaquina.reset();
 		}
 		else
 		{
 			sMensaje = "Máquina ya existente";
-			mostrarMensaje(sMensaje);
+			mostrarMensaje(sMensaje,false);
 			claseError(document.frmAltaMaquina, 0);
 		}
 	} 
@@ -141,7 +141,7 @@ function eliminarMaquinaria()
  
     if(oGestion.eliminarMaquina(maquinaEliminar))
     {
-    	mostrarMensaje("Maquina eliminada",true);
+    	mostrarMensaje("Maquina dada de baja",true);
     }
     else
     	mostrarMensaje("Maquina no existe",false);
@@ -193,7 +193,8 @@ function modificarMaquina()
 
 		if(oGestion.modificarMaquina(maquinaaModificar,oMaquina)){
 	    	actualizaCombos("maquinas");
-	    	mostrarMensaje("Maquina actualizada");
+	    	mostrarMensaje("Maquina actualizada",true);
+	    	document.getElementById('frmModMaquinaSeleccionada').style.display="none";
 	   }
 	}
 }

@@ -22,6 +22,13 @@ Empleado.prototype.sRowHTML = function()
 	fila.insertCell(-1).appendChild(document.createTextNode(this.dirEmpleado));
 	fila.insertCell(-1).appendChild(document.createTextNode(this.localidadEmpleado));
 	fila.insertCell(-1).appendChild(document.createTextNode(this.cpEmpleado));
+	fila.dataset.cero=this.dniEmpleado.substr(0,7);
+	fila.dataset.uno=this.nombreEmpleado;
+	fila.dataset.dos=this.apellidoEmpleado;
+	fila.dataset.tres=this.telEmpleado;
+	fila.dataset.cuatro=this.dirEmpleado;
+	fila.dataset.cinco=this.localidadEmpleado;
+	fila.dataset.seis=this.cpEmpleado;
 	if(this.estado)
 	{
 		fila.insertCell(-1).appendChild(document.createTextNode("Activo"));

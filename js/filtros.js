@@ -2,6 +2,7 @@
 var ordenarEstados=0;
 var ordenarTransaccion=0;
 var arrayBooleanos=[];
+
 function ordenarActivos(formulario){
 
 	var tabla = formulario.getElementsByTagName("table")[0];
@@ -19,7 +20,7 @@ function ordenarActivos(formulario){
 	}
 	else if(ordenarEstados==1){
 		for (var i = 1; i < filas.length; i++) {
-			if (filas[i].lastChild.textContent == "Inactivo"){
+			if (filas[i].lastChild.textContent == "Inactivo" || filas[i].lastChild.textContent == "Terminado"){
 				filas[i].classList.add("invisible");
 			}
 		}
@@ -33,6 +34,7 @@ function ordenarActivos(formulario){
 }
 
 function ordenarTransacciones(formulario){
+
 
 	var tabla = formulario.getElementsByTagName("table")[0];
 	var filas = tabla.getElementsByTagName("tr");
@@ -63,7 +65,39 @@ function ordenarTransacciones(formulario){
 }
 
 function ordenarFila(formulario,col){
-	
+	dataset="";
+	switch (col) {
+		case 0:
+			dataset = "cero"
+			break;
+		case 1:
+			dataset = "uno"
+			break;
+		case 2:
+			dataset = "dos"
+			break;
+		case 3:
+			dataset = "tres"
+			break;
+		case 4:
+			dataset = "cuatro"
+			break;
+		case 5:
+			dataset = "cinco"
+			break;
+		case 6:
+			dataset = "seis"
+			break;
+		case 7:
+			dataset = "siete"
+			break;
+		case 8:
+			dataset = "ocho"
+			break;
+		case 9:
+			dataset = "nueve"
+			break;		
+	}
 	if(arrayBooleanos[col]==null)
 		arrayBooleanos[col]=true;
 
@@ -72,26 +106,19 @@ function ordenarFila(formulario,col){
 	var aElementos = [];
 
 	for (var i = 1; i < aFilas.length; i++) {
-		aElementos.push(aFilas[i].children[col].textContent);
+		aElementos.push(aFilas[i].getAttribute("data-"+dataset));
 	}
-	aElementos.sort();
+	if(arrayBooleanos[col])
+		aElementos.sort(sortNumber);
+	else
+		aElementos.sort(sortNumber2);
 
-	if(arrayBooleanos[col]){
 		for (var i = 0; i < aElementos.length; i++) 
 			for (var j = 1; j < aFilas.length; j++) 
-				if(aElementos[i]==aFilas[j].children[col].textContent)
+				if(aElementos[i]==aFilas[j].getAttribute("data-"+dataset))
 					tabla.appendChild(aFilas[j]);
-		mostrarMensaje("Mostrando en Orden Ascendente",true);
-	}
-	else{
-		for (var i = aElementos.length - 1; i >= 0; i--) 
-			for (var j = 1; j < aFilas.length; j++) 
-				if(aElementos[i]==aFilas[j].children[col].textContent)
-					tabla.appendChild(aFilas[j]);
-		mostrarMensaje("Mostrando en Orden Descendente",false);
-	}
-
-	arrayBooleanos[col] = !arrayBooleanos[col];
+		arrayBooleanos[col] = !arrayBooleanos[col];
+		//mostrarMensaje("Mostrando " +aFilas[0].children[col].textContent+ " en Orden Ascendente",true);
 }
 
 function removeClassAll(clase)
@@ -101,4 +128,12 @@ function removeClassAll(clase)
 	for(var i=0;i<objetos.length;i++){
 		objetos[i].classList.remove(clase);
 	}
+}
+
+function sortNumber(a,b) {
+    return a - b;
+}
+
+function sortNumber2(a,b) {
+    return b - a;
 }
