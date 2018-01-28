@@ -78,6 +78,40 @@ function validarClientes(formulario)
 		quitarError(formulario, 3);
 	}
 
+	//Dirección
+	var dirEmpleado = formulario.txtDireccionCliente.value.trim();
+	if(oExpRegDireccion.test(dirEmpleado) == false)
+	{
+		if(bCliente)
+		{
+			bCliente = false;
+			formulario.txtDireccionCliente.focus();
+		}
+		claseError(formulario, 4);
+		aError.push("Dirección incorrecta");
+	}
+	else
+	{
+		quitarError(formulario, 4);
+	}
+
+	//Localidad
+	var locEmpleado = formulario.txtLocalidadCliente.value.trim();
+	if(oExpRegLocalidad.test(locEmpleado) == false)
+	{
+		if(bCliente)
+		{
+			bCliente = false;
+			formulario.txtDireccionCliente.focus();
+		}
+		claseError(formulario, 5);
+		aError.push("Localidad incorrecta");
+	}
+	else
+	{
+		quitarError(formulario, 5);
+	}
+
 	//CP
 	var cpCliente = formulario.txtCPostalCliente.value.trim();
 	if(oExpRegValidarCP.test(cpCliente) == false)
@@ -197,6 +231,7 @@ function modificarCliente()
 		if(oGestion.modificarCliente(clienteaModificar,oCliente)){
 	    	actualizaCombos("clientes");
 	    	mostrarMensaje("Cliente actualizado",true);
+	    	document.getElementById('frmModClienteSeleccionado').style.display="none";
 	   }
 	}
 }

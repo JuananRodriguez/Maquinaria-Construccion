@@ -38,3 +38,18 @@ table#tablaListada {
     background: aliceblue;
     padding: 30px;
 }
+
+#frmBienvenida h1{
+	max-width: 700px;
+	color: white;
+	position: absolute;
+	bottom: 0;
+	margin-bottom: 50px;
+	margin-left: 25px;
+	text-shadow: 0px 1px 15px rgba(0, 0, 0, 1),0px 1px 15px rgba(0, 0, 0, 1),0px 1px 15px rgba(0, 0, 0, 1),0px 1px 15px rgba(0, 0, 0, 1);
+	font-weight: bold;
+}
+
+#frmBienvenida {
+    margin-left: 8vw;
+}

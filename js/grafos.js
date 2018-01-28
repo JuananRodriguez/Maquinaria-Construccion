@@ -1,6 +1,3 @@
-document.querySelector("#mostrarEstadisticas").addEventListener("click", mostrarEstadisticas, false);
-
-
 
 function grafoBalanceAlquiler(){
     var alquilerTrue =  totalImporteAlquileresActivos();

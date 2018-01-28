@@ -24,7 +24,13 @@ Cliente.prototype.sRowHTML = function()
 	fila.insertCell(-1).appendChild(document.createTextNode(this.dirCliente));
 	fila.insertCell(-1).appendChild(document.createTextNode(this.localidadCliente));
 	fila.insertCell(-1).appendChild(document.createTextNode(this.cpCliente));
-	
+	fila.dataset.cero=this.dniCliente.substr(0,7);
+	fila.dataset.uno=this.nombreCliente;
+	fila.dataset.dos=this.apellidoCliente;
+	fila.dataset.tres=this.telClientes;
+	fila.dataset.cuatro=this.dirCliente;
+	fila.dataset.cinco=this.localidadCliente;
+	fila.dataset.seis=this.cpCliente;
 	if(this.estado)
 	{
 		fila.insertCell(-1).appendChild(document.createTextNode("Activo"));

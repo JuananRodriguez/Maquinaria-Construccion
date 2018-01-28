@@ -6,7 +6,7 @@
 	        <nombre>Fernando</nombre>
 	        <apellidos>Menacho Pantoja</apellidos>
 	        <tlf>654789321</tlf>
-	        <direccion>C/La Pantomima</direccion>
+	        <direccion>C/ La Pantomima</direccion>
 	        <localidad>Dos Hermanas</localidad>
 	        <codPostal>41023</codPostal>
 	    </cliente>
@@ -16,18 +16,27 @@
 	        <nombre>Juan</nombre>
 	        <apellidos>Mallen Unijeje</apellidos>
 	        <tlf>789654123</tlf>
-	        <direccion>C/Faros 33</direccion>
+	        <direccion>C/ Faros 33</direccion>
 	        <localidad>Mairena del Aljarafe</localidad>
 	        <codPostal>45789</codPostal>
 	    </cliente>
-	    
+		
+		<cliente>
+	        <dni>77812141K</dni>
+	        <nombre>Antonio</nombre>
+	        <apellidos>Lopez</apellidos>
+	        <tlf>954124687</tlf>
+	        <direccion>Avda Monte 33</direccion>
+	        <localidad>Bellavista</localidad>
+	        <codPostal>42022</codPostal>
+	    </cliente>
 	</clientes>
 
 	<empleados>
 		<empleado>
 	        <dni>47852369G</dni>
-	        <nombre>Marcelino</nombre>
-	        <apellidos>Pan y Vino</apellidos>
+	        <nombre>Laura</nombre>
+	        <apellidos>Rodriguez Martin</apellidos>
 	        <tlf>612542378</tlf>
 	        <direccion>C/La Vendimia 45</direccion>
 	        <localidad>La Rioja</localidad>
@@ -37,35 +46,182 @@
 	    <empleado>
 	        <dni>84591263J</dni>
 	        <nombre>Dolores</nombre>
-	        <apellidos>Fuertes Barriga</apellidos>
+	        <apellidos>Diaz </apellidos>
 	        <tlf>612542378</tlf>
 	        <direccion>C/Hambre 75</direccion>
-	        <localidad>La Roja</localidad>
+	        <localidad>Huelva</localidad>
 	        <codPostal>54786</codPostal>
+	    </empleado>
+		
+		<empleado>
+	        <dni>77774565J</dni>
+	        <nombre>Jennifer</nombre>
+	        <apellidos>Martinez </apellidos>
+	        <tlf>612542378</tlf>
+	        <direccion>Avda Adolfo Suarez 30</direccion>
+	        <localidad>Dos Hermanas</localidad>
+	        <codPostal>41089</codPostal>
 	    </empleado>
 	</empleados>
 
 	<proveedores>
 		<proveedor>
-	        <dni>47852369G</dni>
+	        <dni>41452562Y</dni>
 	        <nombre>Marcelino</nombre>
-	        <apellidos>Pan y Vino</apellidos>
+	        <apellidos>Gil Lopez</apellidos>
 	        <empresa>Toldos y Carpas QuitaSol</empresa>
 	        <tlf>612542378</tlf>
-	        <direccion>C/La Vendimia 45</direccion>
-	        <localidad>La Rioja</localidad>
+	        <direccion>C/Almar 4</direccion>
+	        <localidad>Sevilla</localidad>
 	        <codPostal>84756</codPostal>
+	    </proveedor>
+		<proveedor>
+	        <dni>77841362G</dni>
+	        <nombre>Saul</nombre>
+	        <apellidos>Sanchez Rivas</apellidos>
+	        <empresa>Distribuciones SL</empresa>
+	        <tlf>645687623</tlf>
+	        <direccion>C/ Berhamo 5</direccion>
+	        <localidad>Sevilla</localidad>
+	        <codPostal>41089</codPostal>
+	    </proveedor>
+		<proveedor>
+	        <dni>97845161U</dni>
+	        <nombre>Virginia</nombre>
+	        <apellidos>Diaz Montiel</apellidos>
+	        <empresa>Abastecimientos y Saneaminetos SA</empresa>
+	        <tlf>621654687</tlf>
+	        <direccion>C/La Verdad 89</direccion>
+	        <localidad>Cadiz</localidad>
+	        <codPostal>56056</codPostal>
 	    </proveedor>
 	</proveedores>
 
 	<maquinaria>
 		<maquina>
-	        <modelo>47852369G</modelo>
+	        <modelo>RK101</modelo>
 	        <id>2000</id>
-	        <nombre>Pan y Vino</nombre>
-	        <descripcion>Toldos y Carpas QuitaSol</descripcion>
-	        <precio>612542378</precio>
-	        <averia>C/La Vendimia 45</averia>
+	        <nombre>Excavadora</nombre>
+	        <descripcion>Retroexcavador diesel con 250 caballos de potencia y 20 metros cubicos de capacidad</descripcion>
+	        <precio>300.25</precio>
+	        <averia>Ninguna</averia>
+	    </maquina>
+		<maquina>
+	        <modelo>PS102</modelo>
+	        <id>2500</id>
+	        <nombre>Tractor</nombre>
+	        <descripcion>Tractor de alta potencia y gran capacidad</descripcion>
+	        <precio>250.50</precio>
+	        <averia>Ninguna</averia>
+	    </maquina>
+		<maquina>
+	        <modelo>BL103</modelo>
+	        <id>124</id>
+	        <nombre>Camion transporte</nombre>
+	        <descripcion>Camion de seis ejes adecuado para el trasnporte de grandes volumenes</descripcion>
+	        <precio>1200</precio>
+	        <averia>Ninguna</averia>
 	    </maquina>
 	</maquinaria>
+
+	<compras>
+		<compra>
+	        <id>T-1</id>
+	        <fecha>2018-04-01</fecha>
+	        <coste>1500.34</coste>
+	        <idMaquina>2000</idMaquina>
+	        <empleado>47852369G</empleado>
+	        <proveedor>41452562Y</proveedor>
+	    </compra>
+
+	    <compra>
+	        <id>T-2</id>
+	        <fecha>2016-06-14</fecha>
+	        <coste>2100.05</coste>
+	        <idMaquina>2500</idMaquina>
+	        <empleado>47852369G</empleado>
+	        <proveedor>97845161U</proveedor>
+	    </compra>
+
+	    <compra>
+	        <id>T-3</id>
+	        <fecha>2016-07-22</fecha>
+	        <coste>1000.99</coste>
+	        <idMaquina>124</idMaquina>
+	        <empleado>77774565J</empleado>
+	        <proveedor>77841362G</proveedor>
+	    </compra>
+	</compras>
+
+	<ventas>
+		<venta>
+	        <id>T-51</id>
+	        <fecha>2018-04-01</fecha>
+	        <coste>1000.12</coste>
+	        <idMaquina>2500</idMaquina>
+	        <empleado>47852369G</empleado>
+	        <cliente>78946264V</cliente>
+	    </venta>	
+
+		<venta>
+	        <id>T-52</id>
+	        <fecha>2018-05-01</fecha>
+	        <coste>2000.65</coste>
+	        <idMaquina>2000</idMaquina>
+	        <empleado>47852369G</empleado>
+	        <cliente>25465466H</cliente>
+	    </venta>
+
+		<venta>
+	        <id>T-53</id>
+	        <fecha>2018-06-01</fecha>
+	        <coste>1500.33</coste>
+	        <idMaquina>124</idMaquina>
+	        <empleado>47852369G</empleado>
+	        <cliente>77812141K</cliente>
+	    </venta>
+	</ventas>
+	
+
+	<alquileres>
+		<alquiler>
+	        <id>A-101</id>
+	        <fechaInicio>2017-01-01</fechaInicio>
+			<fechaFinal>2017-01-05</fechaFinal>
+	        <importe>100</importe>
+			<cliente>77812141K</cliente>
+	        <idMaquina>2500</idMaquina>
+	        <empleado>47852369G</empleado>
+	    </alquiler>
+
+		<alquiler>
+	        <id>A-102</id>
+	        <fechaInicio>2017-02-01</fechaInicio>
+			<fechaFinal>2017-02-05</fechaFinal>
+	        <importe>100</importe>
+			<cliente>77812141K</cliente>
+	        <idMaquina>2000</idMaquina>
+	        <empleado>47852369G</empleado>
+	    </alquiler>
+
+		<alquiler>
+	        <id>A-103</id>
+	        <fechaInicio>2017-03-01</fechaInicio>
+			<fechaFinal>2017-03-05</fechaFinal>
+	        <importe>100</importe>
+			<cliente>77812141K</cliente>
+	        <idMaquina>2000</idMaquina>
+	        <empleado>25465466H</empleado>
+	    </alquiler>
+	</alquileres>
+
+	<devoluciones>
+
+		<devolucion>
+	        <id>A-103</id>
+	        <fechaDevolucion>2017-03-04</fechaDevolucion>
+			<motivo>El cliente no necesita la máquina durante más tiempo</motivo>
+	    </devolucion>
+	    
+	</devoluciones>
 </gestion>

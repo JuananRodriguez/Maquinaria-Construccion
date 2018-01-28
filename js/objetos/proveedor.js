@@ -26,6 +26,14 @@ Proveedor.prototype.sRowHTML = function()
 	fila.insertCell(-1).appendChild(document.createTextNode(this.direccion));
 	fila.insertCell(-1).appendChild(document.createTextNode(this.localidad));
 	fila.insertCell(-1).appendChild(document.createTextNode(this.cPostal));
+	fila.dataset.cero=this.dni.substr(0,7);
+	fila.dataset.uno=this.nombre;
+	fila.dataset.dos=this.apellido;
+	fila.dataset.tres=this.empresa;
+	fila.dataset.cuatro=this.telefono;
+	fila.dataset.cinco=this.direccion;
+	fila.dataset.seis=this.localidad;
+	fila.dataset.siete=this.cPostal;
 	if(this.estado)
 	{
 		fila.insertCell(-1).appendChild(document.createTextNode("Activo"));
