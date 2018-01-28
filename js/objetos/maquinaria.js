@@ -6,7 +6,7 @@ function Maquina(sModelo,iIdMaquina, sNombreMaquina, sDescMaquina, iAlquiler, sA
     this.iIdMaquina = iIdMaquina;
     this.sNombreMaquina = sNombreMaquina;
     this.sDescMaquina = sDescMaquina;
-    this.iAlquiler =  iAlquiler;
+    this.iAlquiler =  parseFloat(iAlquiler);
     this.sAveria = sAveria;
     this.estado = true;
 }
@@ -21,8 +21,15 @@ Maquina.prototype.sRowHTML = function()
 	fila.insertCell(-1).appendChild(document.createTextNode(this.iIdMaquina));
 	fila.insertCell(-1).appendChild(document.createTextNode(this.sNombreMaquina));
 	fila.insertCell(-1).appendChild(document.createTextNode(this.sDescMaquina));
-	fila.insertCell(-1).appendChild(document.createTextNode(this.iAlquiler));
+	fila.insertCell(-1).appendChild(document.createTextNode(this.iAlquiler.toLocaleString('de-DE', {  style: 'currency', currency: 'EUR'  })));
 	fila.insertCell(-1).appendChild(document.createTextNode(this.sAveria));
+	fila.dataset.cero=this.sModelo;
+	fila.dataset.uno=this.iIdMaquina;
+	fila.dataset.dos=this.sNombreMaquina;
+	fila.dataset.tres=this.sDescMaquina;
+	fila.dataset.cuatro=this.iAlquiler;
+	fila.dataset.cinco=this.sAveria;
+	
 	if(this.estado)
 	{
 		fila.insertCell(-1).appendChild(document.createTextNode("Activo"));

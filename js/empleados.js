@@ -79,6 +79,40 @@ function validarEmpleados(formulario)
 		quitarError(formulario, 3);
 	}
 
+	//Dirección
+	var dirEmpleado = formulario.txtDireccionEmpleado.value.trim();
+	if(oExpRegDireccion.test(dirEmpleado) == false)
+	{
+		if(bEmpleado)
+		{
+			bEmpleado = false;
+			formulario.txtDireccionEmpleado.focus();
+		}
+		claseError(formulario, 4);
+		aError.push("Dirección incorrecta");
+	}
+	else
+	{
+		quitarError(formulario, 4);
+	}
+
+	//Localidad
+	var locEmpleado = formulario.txtLocalidadEmpleado.value.trim();
+	if(oExpRegLocalidad.test(locEmpleado) == false)
+	{
+		if(bEmpleado)
+		{
+			bEmpleado = false;
+			formulario.txtLocalidadEmpleado.focus();
+		}
+		claseError(formulario, 5);
+		aError.push("Localidad incorrecta");
+	}
+	else
+	{
+		quitarError(formulario, 5);
+	}
+
 	//CP
 	var cpEmpleado = formulario.txtCPostalEmpleado.value.trim();
 	if(oExpRegValidarCP.test(cpEmpleado) == false)
@@ -125,7 +159,6 @@ function anadirEmpleado()
 		if (bAltaEmpleado) 
 		{
 			actualizaCombos("empleados");
-			actualizaCombosTodos("empleados");
 			sMensaje = "Empleado dado de alta";
 			mostrarMensaje(sMensaje, true);
 			document.frmAltaEmpleado.reset();			
@@ -146,7 +179,6 @@ function eliminarEmpleado()
     if(oGestion.eliminarEmpleado(empleadoEliminar))
     {
     	actualizaCombos("empleados");
-    	actualizaCombosTodos("empleados");
     	mostrarMensaje("Empleado eliminado",true);
     }
     else
@@ -200,9 +232,10 @@ function modificarEmpleado()
 
 		if(oGestion.modificarEmpleado(EmpleadoaModificar,oEmpleado))
 		{
-	    	actualizaCombos("empleados");
-	    	actualizaCombosTodos("empleados");
+	    	actualizaCombos("todosEmpleados");
 	    	mostrarMensaje("Empleado actualizado",true);
+	    	document.getElementById('frmModEmpleadoSeleccionado').style.display="none";
+
 	   }
 	}
 }

@@ -26,9 +26,26 @@ function datosDePrueba(){
 	cargarEmpleados();
 	cargarProveedores();
 	cargarMaquinaria();
+	cargarAlquileres();
+	cargarCompras();
+	cargarVentas();
+	cargarDevoluciones();
+
+	function cargarDevoluciones(){
+		aDevolucion = oXML.getElementsByTagName("devoluciones")[0].children;
+		for (var i = 0; i < aDevolucion.length; i++) {
+			var id = aDevolucion[i].getElementsByTagName("id")[0].textContent;
+			var fechaDevolucion = new Date(aDevolucion[i].getElementsByTagName("fechaDevolucion")[0].textContent);
+			var motivo = aDevolucion[i].getElementsByTagName("motivo")[0].textContent;
+			
+
+			oGestion.altaDevolucion(new Devolucion(id,fechaDevolucion,motivo));
+		}
+
+	}
 
 	function cargarClientes(){
-		aClientes = oXML.getElementsByTagName("cliente");
+		aClientes = oXML.getElementsByTagName("clientes")[0].children;
 		for (var i = 0; i < aClientes.length; i++) {
 			var dni = aClientes[i].getElementsByTagName("dni")[0].textContent;
 			var nombre = aClientes[i].getElementsByTagName("nombre")[0].textContent;
@@ -43,7 +60,7 @@ function datosDePrueba(){
 	}
 
 	function cargarEmpleados(){
-		aEmpleados = oXML.getElementsByTagName("empleado");
+		aEmpleados = oXML.getElementsByTagName("empleados")[0].children;
 		for (var i = 0; i < aEmpleados.length; i++) {
 			var dni = aEmpleados[i].getElementsByTagName("dni")[0].textContent;
 			var nombre = aEmpleados[i].getElementsByTagName("nombre")[0].textContent;
@@ -58,7 +75,7 @@ function datosDePrueba(){
 	}
 
 	function cargarProveedores(){
-		aProveedores = oXML.getElementsByTagName("proveedor");
+		aProveedores = oXML.getElementsByTagName("proveedores")[0].children;
 		for (var i = 0; i < aProveedores.length; i++) {
 			var dni = aProveedores[i].getElementsByTagName("dni")[0].textContent;
 			var nombre = aProveedores[i].getElementsByTagName("nombre")[0].textContent;
@@ -74,29 +91,62 @@ function datosDePrueba(){
 	}
 
 	function cargarMaquinaria(){
-		aMaquinaria = oXML.getElementsByTagName("maquina");
+		aMaquinaria = oXML.getElementsByTagName("maquinaria")[0].children;
 		for (var i = 0; i < aMaquinaria.length; i++) {
 			var modelo = aMaquinaria[i].getElementsByTagName("modelo")[0].textContent;
 			var id = parseInt(aMaquinaria[i].getElementsByTagName("id")[0].textContent);
 			var nombre = aMaquinaria[i].getElementsByTagName("nombre")[0].textContent;
 			var descripcion = aMaquinaria[i].getElementsByTagName("descripcion")[0].textContent;
-			var precio = parseInt(aMaquinaria[i].getElementsByTagName("precio")[0].textContent);
+			var precio = parseFloat(aMaquinaria[i].getElementsByTagName("precio")[0].textContent);
 			var averia = aMaquinaria[i].getElementsByTagName("averia")[0].textContent;
 
-			oGestion.altaMaquina(new Maquina(modelo,id,descripcion,precio,averia));
+			oGestion.altaMaquina(new Maquina(modelo,id,nombre,descripcion,precio,averia));
+		}
+	}
+
+	function cargarAlquileres(){
+		aAlquiler = oXML.getElementsByTagName("alquileres")[0].children;
+		for (var i = 0; i < aAlquiler.length; i++) {
+			var id = aAlquiler[i].getElementsByTagName("id")[0].textContent;
+			var fechaInicio = new Date(aAlquiler[i].getElementsByTagName("fechaInicio")[0].textContent);
+			var fechaFinal = new Date(aAlquiler[i].getElementsByTagName("fechaFinal")[0].textContent);
+			var importe = parseFloat(aAlquiler[i].getElementsByTagName("importe")[0].textContent);
+			var cliente = aAlquiler[i].getElementsByTagName("cliente")[0].textContent;
+			var idMaquina =  parseInt(aAlquiler[i].getElementsByTagName("idMaquina")[0].textContent);
+			var empleado = aAlquiler[i].getElementsByTagName("empleado")[0].textContent;
+
+			oGestion.altaAlquiler(new Alquiler(id,fechaInicio,fechaFinal,importe,cliente,idMaquina,empleado));
+		}
+	}
+
+	function cargarCompras(){
+		aCompra = oXML.getElementsByTagName("compras")[0].children;
+		for (var i = 0; i < aCompra.length; i++) {
+			var id = aCompra[i].getElementsByTagName("id")[0].textContent;
+			var fecha = new Date(aCompra[i].getElementsByTagName("fecha")[0].textContent);
+			var coste = parseFloat(aCompra[i].getElementsByTagName("coste")[0].textContent);
+			var idMaquina = parseInt(aCompra[i].getElementsByTagName("idMaquina")[0].textContent);
+			var empleado = aCompra[i].getElementsByTagName("empleado")[0].textContent;
+			var proveedor =  aCompra[i].getElementsByTagName("proveedor")[0].textContent;
+
+			oGestion.altaCompra(new Compra(id,fecha,coste,idMaquina,empleado,proveedor));
+		}
+	}
+
+	function cargarVentas(){
+		aVenta = oXML.getElementsByTagName("ventas")[0].children;
+		for (var i = 0; i < aVenta.length; i++) {
+			var id = aVenta[i].getElementsByTagName("id")[0].textContent;
+			var fecha = new Date(aVenta[i].getElementsByTagName("fecha")[0].textContent);
+			var coste = parseFloat(aVenta[i].getElementsByTagName("coste")[0].textContent);
+			var idMaquina = parseInt(aVenta[i].getElementsByTagName("idMaquina")[0].textContent);
+			var empleado = aVenta[i].getElementsByTagName("empleado")[0].textContent;
+			var cliente =  aVenta[i].getElementsByTagName("cliente")[0].textContent;
+
+			oGestion.altaCompra(new Venta(id,fecha,coste,idMaquina,empleado,cliente));
 		}
 	}
 
 
 
-	// oGestion.altaEmpleado(new Empleado("48954566V","DOS", "Rodriguez Martinez", 685097696, "C/Paris", "Montequinto", "41089"));
-
-	// oGestion.altaProveedor(new Proveedor("48954566V","DOS", "Rodriguez Martinez","empresa", 685097696, "C/Paris", "Montequinto", "41089"));
-	// oGestion.altaProveedor(new Proveedor("48951566V","DOS", "Rodriguez Martinez","empresa", 685097696, "C/Paris", "Montequinto", "41089"));
-
-	// oGestion.altaCliente(new Cliente("48959266V","UNO", "Rodriguez Martinez", 685097696, "C/Paris", "Montequinto", "41089"));
-	// oGestion.altaCliente(new Cliente("48954566V","DOS", "Rodriguez Martinez", 685097696, "C/Paris", "Montequinto", "41089"));
-	// oGestion.altaCliente(new Cliente("48955436V","TRES", "Rodriguez Martinez", 685097696, "C/Paris", "Montequinto", "41089"));
-
-	// oGestion.altaMaquina(new Maquina("ROBOCOCA","200", "ROBOCOCA 2000", "oh blanca navidad", 75, "ninguna"));
 }
